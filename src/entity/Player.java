@@ -33,10 +33,10 @@ public class Player extends Entity {
 	public void getPlayerImage()
 	{
 		try {
-			up1 = ImageIO.read(getClass().getResourceAsStream("/player/up1.png"));
-			up2 = ImageIO.read(getClass().getResourceAsStream("/player/up2.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("/player/down1.png"));
-			down2 = ImageIO.read(getClass().getResourceAsStream("/player/down2.png"));
+			up1 = ImageIO.read(getClass().getResourceAsStream("/player/down1.png"));
+			up2 = ImageIO.read(getClass().getResourceAsStream("/player/down2.png"));
+			down1 = ImageIO.read(getClass().getResourceAsStream("/player/up1.png"));
+			down2 = ImageIO.read(getClass().getResourceAsStream("/player/up2.png"));
 			left1 = ImageIO.read(getClass().getResourceAsStream("/player/left1.png"));
 			left2 = ImageIO.read(getClass().getResourceAsStream("/player/left2.png"));
 			right1 = ImageIO.read(getClass().getResourceAsStream("/player/right1.png"));
@@ -55,17 +55,17 @@ public class Player extends Entity {
 			direction="up";
 			dy-=speed;
 		}
-		if(keyH.downPressed == true)
+		else if(keyH.downPressed == true)
 		{
 			direction="down";
 			dy+=speed;
 		}
-		if(keyH.leftPressed == true)
+		else if(keyH.leftPressed == true)
 		{
 			direction="left";
 			dx-=speed;
 		}
-		if(keyH.rightPressed == true)
+		else if(keyH.rightPressed == true)
 		{
 			direction="right";
 			dx+=speed;

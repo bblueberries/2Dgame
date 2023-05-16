@@ -34,7 +34,7 @@ public class GamePanel extends StackPane {
 	KeyHandler keyH	= new KeyHandler();
 	Thread gameThread;
 	Player player = new Player(this);
-	
+	TileManager tilemanager = new TileManager(this);
 	
 	public GamePanel()
 	{
@@ -143,6 +143,8 @@ public class GamePanel extends StackPane {
 
 	    private void draw() {
 	        gc.clearRect(0, 0, screenWidth, screenHeight);
+	       
+	        tilemanager.draw(gc); 
 	        player.draw(gc);
 	    }
 }

@@ -1,8 +1,8 @@
 package tile;
 
-import java.awt.image.BufferedImage;
+import javafx.scene.image.Image;
 
 public class Tile {
-	public BufferedImage image;
+	public Image image;
 	public boolean collision =false;
 }

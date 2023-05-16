@@ -1,57 +1,27 @@
 package main;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
 
-public class KeyHandler implements KeyListener {
 
-	public boolean upPressed,downPressed,leftPressed,rightPressed;
-	@Override
-	public void keyTyped(KeyEvent e) {}
+import javafx.scene.input.KeyCode;
 
-	@Override
-	public void keyPressed(KeyEvent e) {
-		int code = e.getKeyCode();
-		if(code == KeyEvent.VK_W)
-		{
-			upPressed=true;
-		}
-		if(code == KeyEvent.VK_S)
-		{
-			downPressed=true;
-		}
-		if(code == KeyEvent.VK_A)
-		{
-			leftPressed=true;
-		}
-		if(code == KeyEvent.VK_D)
-		{
-			rightPressed=true;
-		}
 
+public class KeyHandler{
+
+	private static ArrayList<KeyCode> keyPressed = new ArrayList<>(); 
+	
+	public static boolean getKeyPressed(KeyCode keycode) {
+		return keyPressed.contains(keycode);
 	}
-
-	@Override
-	public void keyReleased(KeyEvent e) {
-		int code = e.getKeyCode();
-		if(code == KeyEvent.VK_W)
-		{
-			upPressed=false;
+	public static void setKeyPressed(KeyCode keycode,boolean pressed) {
+		if(pressed){
+			if(!keyPressed.contains(keycode)){
+				keyPressed.add(keycode);
+			}
 		}
-		if(code == KeyEvent.VK_S)
-		{
-			downPressed=false;
+		else{
+			keyPressed.remove(keycode);
 		}
-		if(code == KeyEvent.VK_A)
-		{
-			leftPressed=false;
-		}
-		if(code == KeyEvent.VK_D)
-		{
-			rightPressed=false;
-		}
+//		System.out.println(keyPressed);
 	}
-
 }

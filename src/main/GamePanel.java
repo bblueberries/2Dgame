@@ -1,6 +1,8 @@
 package main;
 
 
+
+
 import entity.Player;
 import tile.TileManager;
 import javafx.animation.AnimationTimer;
@@ -31,19 +33,28 @@ public class GamePanel extends StackPane {
     
 	KeyHandler keyH	= new KeyHandler();
 	Thread gameThread;
-	Player player = new Player(this,keyH);
+	Player player = new Player(this);
 	
 	
 	public GamePanel()
 	{
 		 canvas = new Canvas(screenWidth, screenHeight);
+		 gc = canvas.getGraphicsContext2D();
 		 getChildren().add(canvas);
+		 
 		 setBackground(new javafx.scene.layout.Background(new javafx.scene.layout.BackgroundFill(Color.DARKBLUE, null, null)));
 		 setFocusTraversable(true);
-		 gc = canvas.getGraphicsContext2D();
-		 this.frameTimeNano = (long) (1_000_000_000 / targetFPS);
-//		 setOnKeyPressed(keyH::handleKeyPress);
-//		 setOnKeyReleased(keyH::handleKeyRelease);
+		 
+		 this.frameTimeNano = (long) (1000000000 / targetFPS);
+		 
+		 this.setOnKeyPressed( event -> {
+			KeyHandler.setKeyPressed(event.getCode(), true);
+		 });
+		 this.setOnKeyReleased( event -> {
+			 KeyHandler.setKeyPressed(event.getCode(), false);	
+		 });
+//		
+		 this.startGameLoop();
 		
 	}
 
@@ -116,7 +127,9 @@ public class GamePanel extends StackPane {
 	                if (now - lastUpdate >= frameTimeNano) {
 	                    update();
 	                    draw();
+//	                     System.out.println(now-lastUpdate);
 	                    lastUpdate = now;
+	                  
 	                }
 	            }
 	        };
@@ -125,10 +138,11 @@ public class GamePanel extends StackPane {
 
 	    private void update() {
 	        // Update your game logic here
+	    	player.update();
 	    }
 
 	    private void draw() {
 	        gc.clearRect(0, 0, screenWidth, screenHeight);
-	        // Draw your game components using the GraphicsContext (gc) here
+	        player.draw(gc);
 	    }
 }

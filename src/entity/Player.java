@@ -140,6 +140,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import java.lang.Math;
 import main.GamePanel;
 import main.KeyHandler;
 
@@ -168,6 +169,7 @@ public class Player extends Entity {
     	WorldX = gp.tileSize*23;
         WorldY = gp.tileSize*21; 
         speed = 6;
+        diaSpeed = (int) (this.speed/Math.sqrt(2.0));
         direction = "up";
     }
 	  private void getPlayerImage()
@@ -187,40 +189,71 @@ public class Player extends Entity {
     	
 
     	if(KeyHandler.getKeyPressed(KeyCode.W)||KeyHandler.getKeyPressed(KeyCode.S)||KeyHandler.getKeyPressed(KeyCode.A)||KeyHandler.getKeyPressed(KeyCode.D)) {
-        if (KeyHandler.getKeyPressed(KeyCode.W)) {
-        	
-            direction="up"; 
+    		
+    		if (KeyHandler.getKeyPressed(KeyCode.D) && KeyHandler.getKeyPressed(KeyCode.W)) {
+//            	System.out.println("wd");
+                direction="right and up";
+                
+            }
+            else if (KeyHandler.getKeyPressed(KeyCode.D) && KeyHandler.getKeyPressed(KeyCode.S)) {
+                direction="right and down";
+                
+            }
+            else if (KeyHandler.getKeyPressed(KeyCode.A) && KeyHandler.getKeyPressed(KeyCode.S)) {
+                direction="left and down";
+                
+            }
+            else if (KeyHandler.getKeyPressed(KeyCode.A) && KeyHandler.getKeyPressed(KeyCode.W)) {
+                direction="left and up";
+                
+            }
+            else if (KeyHandler.getKeyPressed(KeyCode.W)) {
+//	        	System.out.println("W");
+	            direction="up"; 
             
-        }
-        else if (KeyHandler.getKeyPressed(KeyCode.S)) {
-            direction="down";
-           
-        }
-        else if (KeyHandler.getKeyPressed(KeyCode.A)) {
-            direction="left";
-            
-        } 
-        else if (KeyHandler.getKeyPressed(KeyCode.D)) {
-            direction="right";
-            
-        }
+	        }
+	        else if (KeyHandler.getKeyPressed(KeyCode.S)) {
+	            direction="down";
+	           
+	        }
+	        else if (KeyHandler.getKeyPressed(KeyCode.A)) {
+	            direction="left";
+	            
+	        } 
+	        else if (KeyHandler.getKeyPressed(KeyCode.D)) {
+//	        	System.out.println("D");
+	            direction="right";
+	            
+	        }
         
-        collisionOn = false;
-        gp.getCollisionChecker().checkTile(this);
         
-        if(!collisionOn)
-        {
-        switch(direction) {
-        case "up" :
-    		WorldY = WorldY-speed;break;
-    	case "down" :
-    		 WorldY = WorldY+speed;break;
-    	case "left" :
-    		WorldX = WorldX-speed;break;
-    	case "right" :
-    		WorldX = WorldX+speed;break;		
-        }
-        }
+	        isCollide = false;
+	        gp.getCollisionChecker().checkTile(this);
+	        
+	        if(!isCollide) {
+		        switch(direction) {
+		        case "up" :
+		    		WorldY = WorldY-speed;break;
+		    	case "down" :
+		    		 WorldY = WorldY+speed;break;
+		    	case "left" :
+		    		WorldX = WorldX-speed;break;
+		    	case "right" :
+		    		WorldX = WorldX+speed;break;
+		    	case "right and up" :
+		    		WorldX = WorldX+diaSpeed;
+		    		WorldY = WorldY-diaSpeed;break;
+		    	case "right and down" :
+		    		WorldX = WorldX+diaSpeed;
+		    		WorldY = WorldY+diaSpeed;break;
+		    	case "left and up" :
+		    		WorldX = WorldX-diaSpeed;
+		    		WorldY = WorldY-diaSpeed;break;
+		    	case "left and down" :
+		    		WorldX = WorldX-diaSpeed;
+		    		WorldY = WorldY+diaSpeed;break;
+		        }
+	        }
     	}
         spriteCounter++;
         if(spriteCounter>=12)
@@ -252,12 +285,24 @@ public class Player extends Entity {
     		break;
     	case "left" :
     		imagetofill = ((spriteNum == 1)? left1:left2);
-    		
     		break;
     	case "right" :
     		imagetofill = ((spriteNum == 1)? right1:right2);
+    		break;
+    	case "right and up" :
+    		imagetofill = ((spriteNum == 1)? right1:right2);
     		break;	
-    	}
+		case "right and down" :
+			imagetofill = ((spriteNum == 1)? right1:right2);
+			break;	
+		case "left and up" :
+			imagetofill = ((spriteNum == 1)? left1:left2);
+			break;	
+		case "left and down" :
+			imagetofill = ((spriteNum == 1)? left1:left2);
+			break;	
+		}
+    	
     	
     	gc.drawImage(imagetofill,ScreenX,ScreenY ,gp.tileSize, gp.tileSize);
 //    	gc.fillRect(ScreenX, ScreenX, 32, 32);

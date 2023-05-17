@@ -19,6 +19,7 @@ import javafx.scene.shape.Rectangle;
 public class Entity {
     public int WorldX, WorldY;
     public int speed;
+    public int diaSpeed;
 
     public Image up1, up2, down1, down2, left1, left2, right1, right2;
     public String direction;
@@ -27,5 +28,5 @@ public class Entity {
     public int spriteNum = 1;
     
     public Rectangle solidArea;
-    public boolean collisionOn = false;
+    public boolean isCollide = false;
 }

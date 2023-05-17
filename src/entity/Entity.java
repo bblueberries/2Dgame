@@ -29,4 +29,23 @@ public class Entity {
     
     public Rectangle solidArea;
     public boolean isCollide = false;
+    
+    //CHARACTER STATUS
+    private int maxLife;
+    private int life;
+    
+    
+    
+	public int getMaxLife() {
+		return maxLife;
+	}
+	public void setMaxLife(int maxLife) {
+		this.maxLife = maxLife;
+	}
+	public int getLife() {
+		return life;
+	}
+	public void setLife(int life) {
+		this.life = life;
+	}
 }

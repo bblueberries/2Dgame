@@ -11,6 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeLineCap;
+import object.Heart;
 
 public class GamePanel extends StackPane {
   //SCREEN SETTING
@@ -41,6 +42,7 @@ public class GamePanel extends StackPane {
 	Thread gameThread;
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
+	private Heart heart = new Heart(this);
 	
 
 
@@ -138,6 +140,7 @@ public class GamePanel extends StackPane {
 	       
 	        tilemanager.draw(gc); 
 	        player.draw(gc);
+	        heart.draw(gc);
 	    }
 	    public Player getPlayer() 
 	    {

@@ -171,6 +171,10 @@ public class Player extends Entity {
         speed = 6;
         diaSpeed = (int) (this.speed/Math.sqrt(2.0));
         direction = "up";
+        
+        //PLAYER STATUS
+        this.setMaxLife(5);
+        this.setLife(getMaxLife());
     }
 	  private void getPlayerImage()
 	  {

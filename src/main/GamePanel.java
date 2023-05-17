@@ -39,6 +39,7 @@ public class GamePanel extends StackPane {
     
 	KeyHandler keyH	= new KeyHandler();
 	Thread gameThread;
+	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
 	
 
@@ -142,4 +143,17 @@ public class GamePanel extends StackPane {
 	    {
 		return player;
 	    }
+
+
+		public CollisionChecker getCollisionChecker() {
+			return collisionChecker;
+		}
+
+
+		public void setCollisionChecker(CollisionChecker collisionChecker) {
+			this.collisionChecker = collisionChecker;
+		}
+
+
+		
 }

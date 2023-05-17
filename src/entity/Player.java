@@ -139,11 +139,12 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import main.GamePanel;
 import main.KeyHandler;
 
 public class Player extends Entity {
-    private final GamePanel gamePanel;
+    private final GamePanel gp;
    
     // Player properties and variables
 //    private int x;
@@ -153,18 +154,19 @@ public class Player extends Entity {
     private final int ScreenY;
     
     public Player(GamePanel gamePanel) {
-        this.gamePanel = gamePanel;
+        this.gp = gamePanel;
 		this.ScreenX =	gamePanel.screenWidth/2 - (gamePanel.tileSize/2);
 		this.ScreenY =  gamePanel.screenHeight/2-(gamePanel.tileSize/2);
         
-      
+		solidArea = new Rectangle(8,16,32,32);
+		
         this.getPlayerImage();
         this.setDefaultValue();
     }
     private void setDefaultValue()
     {
-    	WorldX = gamePanel.tileSize*23;
-        WorldY = gamePanel.tileSize*21; 
+    	WorldX = gp.tileSize*23;
+        WorldY = gp.tileSize*21; 
         speed = 6;
         direction = "up";
     }
@@ -181,37 +183,45 @@ public class Player extends Entity {
 	
 	  	}
     public void update() {
-        // Update player position based on input from keyHandler
+        // Update player position based on input from keyHandler 
+    	
+
+    	if(KeyHandler.getKeyPressed(KeyCode.W)||KeyHandler.getKeyPressed(KeyCode.S)||KeyHandler.getKeyPressed(KeyCode.A)||KeyHandler.getKeyPressed(KeyCode.D)) {
         if (KeyHandler.getKeyPressed(KeyCode.W)) {
-        	 WorldY -= speed;
-            direction="up";
+        	
+            direction="up"; 
+            
         }
         else if (KeyHandler.getKeyPressed(KeyCode.S)) {
-        	WorldY += speed;
             direction="down";
+           
         }
         else if (KeyHandler.getKeyPressed(KeyCode.A)) {
-        	 WorldX -= speed;
             direction="left";
+            
         } 
         else if (KeyHandler.getKeyPressed(KeyCode.D)) {
-        	 WorldX += speed;
             direction="right";
+            
         }
-
-//        // Keep the player within the gamePanel boundaries
-//        if ( WorldX < 0 ) {
-//        	 WorldX = 0 ;
-//        } 
-//        if ( WorldX > gamePanel.screenWidth - gamePanel.tileSize) {
-//        	 WorldX = gamePanel.screenWidth-gamePanel.tileSize;
-//        }
-//        if (WorldY  < 0) {
-//        	WorldY  = 0;
-//        }
-//        if (WorldY  > gamePanel.screenHeight - gamePanel.tileSize) {
-//        	WorldY  = gamePanel.screenHeight-gamePanel.tileSize;
-//        }
+        
+        collisionOn = false;
+        gp.getCollisionChecker().checkTile(this);
+        
+        if(!collisionOn)
+        {
+        switch(direction) {
+        case "up" :
+    		WorldY = WorldY-speed;break;
+    	case "down" :
+    		 WorldY = WorldY+speed;break;
+    	case "left" :
+    		WorldX = WorldX-speed;break;
+    	case "right" :
+    		WorldX = WorldX+speed;break;		
+        }
+        }
+    	}
         spriteCounter++;
         if(spriteCounter>=12)
         {
@@ -220,7 +230,7 @@ public class Player extends Entity {
         	
         }
     }
-
+    
     public void draw(GraphicsContext gc) {
 //      if(spriteNum==0)
 //      {
@@ -249,7 +259,8 @@ public class Player extends Entity {
     		break;	
     	}
     	
-    	gc.drawImage(imagetofill,ScreenX,ScreenY ,gamePanel.tileSize, gamePanel.tileSize);
+    	gc.drawImage(imagetofill,ScreenX,ScreenY ,gp.tileSize, gp.tileSize);
+//    	gc.fillRect(ScreenX, ScreenX, 32, 32);
     	
     }
 	public int getScreenX() {

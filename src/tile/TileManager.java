@@ -27,10 +27,11 @@ public class TileManager {
         try {
             tile[0] = new Tile();
             tile[0].image = new Image(getClass().getResourceAsStream("/tiles/grass01.png"));
-
+            
             tile[1] = new Tile();
             tile[1].image = new Image(getClass().getResourceAsStream("/tiles/wall.png"));
-
+            tile[1].collision = true;
+            
             tile[2] = new Tile();
             tile[2].image = new Image(getClass().getResourceAsStream("/tiles/water00.png"));
 
@@ -80,4 +81,44 @@ public class TileManager {
             }
         }
     }
+
+	public GamePanel getGp() {
+		return gp;
+	}
+
+	public void setGp(GamePanel gp) {
+		this.gp = gp;
+	}
+
+	public Tile[] getTile() {
+		return tile;
+	}
+
+	public void setTile(Tile[] tile) {
+		this.tile = tile;
+	}
+
+	public int[][] getMapTileNum() {
+		return mapTileNum;
+	}
+
+	public void setMapTileNum(int[][] mapTileNum) {
+		this.mapTileNum = mapTileNum;
+	}
+
+	public int getScreenX() {
+		return screenX;
+	}
+
+	public void setScreenX(int screenX) {
+		this.screenX = screenX;
+	}
+
+	public int getScreenY() {
+		return screenY;
+	}
+
+	public void setScreenY(int screenY) {
+		this.screenY = screenY;
+	}
 }

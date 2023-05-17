@@ -158,7 +158,7 @@ public class Player extends Entity {
 		this.ScreenX =	gamePanel.screenWidth/2 - (gamePanel.tileSize/2);
 		this.ScreenY =  gamePanel.screenHeight/2-(gamePanel.tileSize/2);
         
-		solidArea = new Rectangle(8,16,32,32);
+		solidArea = new Rectangle(10,18,28,30);
 		
         this.getPlayerImage();
         this.setDefaultValue();
@@ -172,14 +172,14 @@ public class Player extends Entity {
     }
 	  private void getPlayerImage()
 	  {
-		  	up1 = new Image(getClass().getResourceAsStream("/player/down1.png"));
-	  		up2 =  new Image(getClass().getResourceAsStream("/player/down2.png"));
-	  		down1 = new Image(getClass().getResourceAsStream("/player/up1.png"));
-	  		down2 = new Image(getClass().getResourceAsStream("/player/up2.png"));
-	  		left1 = new Image(getClass().getResourceAsStream("/player/left1.png"));
-	  		left2 = new Image(getClass().getResourceAsStream("/player/left2.png"));
-	  		right1 = new Image(getClass().getResourceAsStream("/player/right1.png"));
-	  		right2 = new Image(getClass().getResourceAsStream("/player/right2.png"));
+		  	up1 = new Image(getClass().getResourceAsStream("/player/boy_up_1.png"));
+	  		up2 =  new Image(getClass().getResourceAsStream("/player/boy_up_2.png"));
+	  		down1 = new Image(getClass().getResourceAsStream("/player/boy_down_1.png"));
+	  		down2 = new Image(getClass().getResourceAsStream("/player/boy_down_2.png"));
+	  		left1 = new Image(getClass().getResourceAsStream("/player/boy_left_1.png"));
+	  		left2 = new Image(getClass().getResourceAsStream("/player/boy_left_2.png"));
+	  		right1 = new Image(getClass().getResourceAsStream("/player/boy_right_1.png"));
+	  		right2 = new Image(getClass().getResourceAsStream("/player/boy_right_2.png"));
 	
 	  	}
     public void update() {

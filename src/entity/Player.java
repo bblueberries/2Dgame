@@ -136,6 +136,7 @@
 //
 package entity;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import main.GamePanel;
@@ -156,21 +157,38 @@ public class Player extends Entity {
         x = gamePanel.screenWidth / 2;
         y = gamePanel.screenHeight / 2;
         speed = 5;
+        direction = "up";
+        this.getPlayerImage();
     }
-
+	  private void getPlayerImage()
+	  {
+		  	up1 = new Image(getClass().getResourceAsStream("/player/down1.png"));
+	  		up2 =  new Image(getClass().getResourceAsStream("/player/down2.png"));
+	  		down1 = new Image(getClass().getResourceAsStream("/player/up1.png"));
+	  		down2 = new Image(getClass().getResourceAsStream("/player/up2.png"));
+	  		left1 = new Image(getClass().getResourceAsStream("/player/left1.png"));
+	  		left2 = new Image(getClass().getResourceAsStream("/player/left2.png"));
+	  		right1 = new Image(getClass().getResourceAsStream("/player/right1.png"));
+	  		right2 = new Image(getClass().getResourceAsStream("/player/right2.png"));
+	
+	  	}
     public void update() {
         // Update player position based on input from keyHandler
         if (KeyHandler.getKeyPressed(KeyCode.W)) {
             y -= speed;
+            direction="up";
         }
         else if (KeyHandler.getKeyPressed(KeyCode.S)) {
             y += speed;
+            direction="down";
         }
         else if (KeyHandler.getKeyPressed(KeyCode.A)) {
             x -= speed;
+            direction="left";
         } 
         else if (KeyHandler.getKeyPressed(KeyCode.D)) {
             x += speed;
+            direction="right";
         }
 
         // Keep the player within the gamePanel boundaries
@@ -194,14 +212,35 @@ public class Player extends Entity {
     }
 
     public void draw(GraphicsContext gc) {
-      if(spriteNum==0)
-      {
-    	gc.setFill(Color.RED);
-        gc.fillRect(x, y, gamePanel.tileSize, gamePanel.tileSize);}
-      if(spriteNum==1)
-      {
-    	gc.setFill(Color.DARKRED);
-        gc.fillRect(x, y, gamePanel.tileSize, gamePanel.tileSize);}
+//      if(spriteNum==0)
+//      {
+//    	gc.setFill(Color.RED);
+//        gc.fillRect(x, y, gamePanel.tileSize, gamePanel.tileSize);}
+//      if(spriteNum==1)
+//      {
+//    	gc.setFill(Color.DARKRED);
+//        gc.fillRect(x, y, gamePanel.tileSize, gamePanel.tileSize);}
+    	Image imagetofill = null;
+    	
+    	switch(direction) 
+    	{
+    	case "up" :
+    		imagetofill = ((spriteNum == 1)? up1:up2);
+    		break;
+    	case "down" :
+    		imagetofill = ((spriteNum == 1)? down1:down2);
+    		break;
+    	case "left" :
+    		imagetofill = ((spriteNum == 1)? left1:left2);
+    		
+    		break;
+    	case "right" :
+    		imagetofill = ((spriteNum == 1)? right1:right2);
+    		break;	
+    	}
+    	
+    	gc.drawImage(imagetofill,x,y,gamePanel.tileSize, gamePanel.tileSize);
+    	
     }
 }
 //public class Player extends Entity {

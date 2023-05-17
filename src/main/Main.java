@@ -37,7 +37,7 @@ public class Main extends Application {
 
 		   StackPane root = new StackPane(gamePanel);
 		   Scene scene = new Scene(root);
-		   
+		   System.setProperty("prism.forceGPU", "true");
 		   primaryStage.setScene(scene);
 		   primaryStage.show();
 

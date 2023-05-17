@@ -156,7 +156,7 @@ public class Player extends Entity {
         // Initialize player properties and variables
         x = gamePanel.screenWidth / 2;
         y = gamePanel.screenHeight / 2;
-        speed = 5;
+        speed = 6;
         direction = "up";
         this.getPlayerImage();
     }

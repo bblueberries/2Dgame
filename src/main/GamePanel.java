@@ -10,6 +10,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.StrokeLineCap;
 
 public class GamePanel extends StackPane {
   //SCREEN SETTING
@@ -24,7 +25,7 @@ public class GamePanel extends StackPane {
 	
 	//FPS
 
-	 private static final double targetFPS=60;
+	 private static final double targetFPS=90;
 	 private final long frameTimeNano;
 	
 	private Canvas canvas;
@@ -40,6 +41,9 @@ public class GamePanel extends StackPane {
 	{
 		 canvas = new Canvas(screenWidth, screenHeight);
 		 gc = canvas.getGraphicsContext2D();
+		 gc.setImageSmoothing(false);
+//		 gc.setMiterLimit(2.0);
+//		 gc.setLineCap(StrokeLineCap.SQUARE);
 		 getChildren().add(canvas);
 		 
 		 setBackground(new javafx.scene.layout.Background(new javafx.scene.layout.BackgroundFill(Color.DARKBLUE, null, null)));
@@ -54,15 +58,12 @@ public class GamePanel extends StackPane {
 			 KeyHandler.setKeyPressed(event.getCode(), false);	
 		 });
 //		
+		 
 		 this.startGameLoop();
 		
 	}
 
-//	public void StartGameThread() {
-//		gameThread = new Thread(this);
-//		gameThread.start();
-//	}
-//
+
 //	@Override
 //	public void run() {
 //		
@@ -95,29 +96,7 @@ public class GamePanel extends StackPane {
 //				timer=0;
 //			}
 //			
-//			
-//			
-//		
-//		}
-//	}
-//	
-//	public void update()
-//	{	
-//		player.update();
-//		
-//	}
-//	public void paintComponent(Graphics g) {
-//		
-//		 super.paintComponent(g);
-//		
-//		 Graphics2D g2 = (Graphics2D)g;
-//		 
-////		 TileM.draw(g2);
-//		 player.draw(g2);
-//		 
-//		 g2.dispose();
-//	}
-//	
+
 	  private void startGameLoop() {
 	        gameLoop = new AnimationTimer() {
 	            private long lastUpdate = 0;

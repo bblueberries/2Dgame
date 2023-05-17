@@ -23,9 +23,14 @@ public class GamePanel extends StackPane {
 	public final int screenWidth= maxScreenCol*tileSize;
 	public final int screenHeight= maxScreenRow*tileSize;
 	
-	//FPS
-
+   //WORLD SETTING
+	 public final int maxWorldCol = 50;
+	 public final int maxWorldRow = 50;
+	 public final int worldWidth = tileSize*maxWorldCol;
+	 public final int worldHeight = tileSize*maxWorldRow;
+   //FPS
 	 private static final double targetFPS=90;
+   //Time for run FPS
 	 private final long frameTimeNano;
 	
 	private Canvas canvas;
@@ -34,7 +39,14 @@ public class GamePanel extends StackPane {
     
 	KeyHandler keyH	= new KeyHandler();
 	Thread gameThread;
-	Player player = new Player(this);
+	private Player player = new Player(this);
+	
+
+
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
 	TileManager tilemanager = new TileManager(this);
 	
 	public GamePanel()
@@ -125,5 +137,9 @@ public class GamePanel extends StackPane {
 	       
 	        tilemanager.draw(gc); 
 	        player.draw(gc);
+	    }
+	    public Player getPlayer() 
+	    {
+		return player;
 	    }
 }

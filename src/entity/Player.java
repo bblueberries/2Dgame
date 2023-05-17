@@ -146,19 +146,27 @@ public class Player extends Entity {
     private final GamePanel gamePanel;
    
     // Player properties and variables
-    private int x;
-    private int y;
-    private int speed;
+//    private int x;
+//    private int y;
+//    private int speed;
+    private final int ScreenX;
+    private final int ScreenY;
     
     public Player(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-
-        // Initialize player properties and variables
-        x = gamePanel.screenWidth / 2;
-        y = gamePanel.screenHeight / 2;
+		this.ScreenX =	gamePanel.screenWidth/2 - (gamePanel.tileSize/2);
+		this.ScreenY =  gamePanel.screenHeight/2-(gamePanel.tileSize/2);
+        
+      
+        this.getPlayerImage();
+        this.setDefaultValue();
+    }
+    private void setDefaultValue()
+    {
+    	WorldX = gamePanel.tileSize*23;
+        WorldY = gamePanel.tileSize*21; 
         speed = 6;
         direction = "up";
-        this.getPlayerImage();
     }
 	  private void getPlayerImage()
 	  {
@@ -175,33 +183,35 @@ public class Player extends Entity {
     public void update() {
         // Update player position based on input from keyHandler
         if (KeyHandler.getKeyPressed(KeyCode.W)) {
-            y -= speed;
+        	 WorldY -= speed;
             direction="up";
         }
         else if (KeyHandler.getKeyPressed(KeyCode.S)) {
-            y += speed;
+        	WorldY += speed;
             direction="down";
         }
         else if (KeyHandler.getKeyPressed(KeyCode.A)) {
-            x -= speed;
+        	 WorldX -= speed;
             direction="left";
         } 
         else if (KeyHandler.getKeyPressed(KeyCode.D)) {
-            x += speed;
+        	 WorldX += speed;
             direction="right";
         }
 
-        // Keep the player within the gamePanel boundaries
-        if (x < 0) {
-            x = 0;
-        } else if (x > gamePanel.screenWidth) {
-            x = gamePanel.screenWidth;
-        }
-        if (y < 0) {
-            y = 0;
-        } else if (y > gamePanel.screenHeight) {
-            y = gamePanel.screenHeight;
-        }
+//        // Keep the player within the gamePanel boundaries
+//        if ( WorldX < 0 ) {
+//        	 WorldX = 0 ;
+//        } 
+//        if ( WorldX > gamePanel.screenWidth - gamePanel.tileSize) {
+//        	 WorldX = gamePanel.screenWidth-gamePanel.tileSize;
+//        }
+//        if (WorldY  < 0) {
+//        	WorldY  = 0;
+//        }
+//        if (WorldY  > gamePanel.screenHeight - gamePanel.tileSize) {
+//        	WorldY  = gamePanel.screenHeight-gamePanel.tileSize;
+//        }
         spriteCounter++;
         if(spriteCounter>=12)
         {
@@ -239,9 +249,15 @@ public class Player extends Entity {
     		break;	
     	}
     	
-    	gc.drawImage(imagetofill,x,y,gamePanel.tileSize, gamePanel.tileSize);
+    	gc.drawImage(imagetofill,ScreenX,ScreenY ,gamePanel.tileSize, gamePanel.tileSize);
     	
     }
+	public int getScreenX() {
+		return ScreenX;
+	}
+	public int getScreenY() {
+		return ScreenY;
+	}
 }
 //public class Player extends Entity {
 //

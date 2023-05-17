@@ -9,16 +9,18 @@ import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import main.GamePanel;
 public class TileManager {
-    GamePanel gp;
-    Tile[] tile;
-    int[][] mapTileNum;
-
+    private GamePanel gp;
+    private Tile[] tile;
+    private int[][] mapTileNum;
+    private int screenX;
+    private int screenY;
+    
     public TileManager(GamePanel gp) {
         this.gp = gp;
         tile = new Tile[10];
         getTileImage();
-        mapTileNum = new int[gp.maxScreenCol][gp.maxScreenRow];
-        loadMap();
+        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+        loadMap("/maps/maptest.txt");
     }
 
     public void getTileImage() {
@@ -37,15 +39,15 @@ public class TileManager {
         }
     }
 
-    public void loadMap() {
+    public void loadMap(String filePath) {
         try {
-            InputStream is = getClass().getResourceAsStream("/maps/maptest.txt");
+            InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            for (int row = 0; row < gp.maxScreenRow; row++) {
+            for (int row = 0; row < gp.maxWorldRow; row++) {
                 String line = br.readLine();
                 String[] numbers = line.split(" ");
-                for (int col = 0; col < gp.maxScreenCol; col++) {
+                for (int col = 0; col < gp.maxWorldCol; col++) {
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
                 }
@@ -56,9 +58,25 @@ public class TileManager {
     }
 
     public void draw(GraphicsContext gc) {
-        for (int row = 0; row < gp.maxScreenRow; row++) {
-            for (int col = 0; col < gp.maxScreenCol; col++) {
-                gc.drawImage(tile[mapTileNum[col][row]].image, col * 48, row * 48, gp.tileSize, gp.tileSize);
+        for (int row = 0; row < gp.maxWorldRow; row++) {
+        	
+        
+        	
+            for (int col = 0; col < gp.maxWorldCol; col++) 
+            {	
+            	int drawY = row*gp.tileSize;
+        		int drawX = col*gp.tileSize;
+            	this.screenY=drawY + gp.getPlayer().getScreenY() - gp.getPlayer().WorldY;
+            	this.screenX=drawX + gp.getPlayer().getScreenX() - gp.getPlayer().WorldX;
+            	
+            	if( drawX + gp.tileSize > gp.getPlayer().WorldX - gp.getPlayer().getScreenX()&&
+            		drawX - gp.tileSize< gp.getPlayer().WorldX + gp.getPlayer().getScreenX()&&
+            		drawY + gp.tileSize > gp.getPlayer().WorldY - gp.getPlayer().getScreenY()&&
+            		drawY - gp.tileSize< gp.getPlayer().WorldY + gp.getPlayer().getScreenY()
+            			)
+            	{
+                gc.drawImage(tile[mapTileNum[col][row]].image, screenX, screenY, gp.tileSize, gp.tileSize);
+            	}
             }
         }
     }

@@ -16,7 +16,8 @@ package entity;
 import javafx.scene.image.Image;
 
 public class Entity {
-    public int x, y;
+    public int WorldX, WorldY;
+//    public int 
     public int speed;
 
     public Image up1, up2, down1, down2, left1, left2, right1, right2;

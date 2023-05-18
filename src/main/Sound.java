@@ -1,36 +1,28 @@
 package main;
 
-import java.net.URL;
-
-import javax.sound.sampled.AudioInputStream;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class Sound {
-	Clip clip;
-	URL soundURL[] = new URL[30];
-	
-	public Sound() {
-		
-		soundURL[0] = getClass().getResource("/sound/BlueBoyAdventure.wav");
-	}
-	
-	public void setFile(int i) {
-		try {
-			AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
-			clip = AudioSystem.getClip();
-			clip.open(ais);
-		} catch(Exception e) {
-			System.out.println(e);
-		}
-	}
-	public void play() {
-		clip.start();
-	}
-	public void loop() {
-		clip.loop(Clip.LOOP_CONTINUOUSLY);
-	}
-	public void stop() {
-		clip.stop();
-	}
+    MediaPlayer mediaPlayer;
+    String soundFile;
+
+    public Sound(String soundFile) {
+        this.soundFile = soundFile;
+        Media media = new Media(getClass().getResource(soundFile).toString());
+        mediaPlayer = new MediaPlayer(media);
+    }
+
+    public void play() {
+        mediaPlayer.play();
+    }
+
+    public void loop() {
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+    }
+
+    public void stop() {
+        mediaPlayer.stop();
+    }
 }

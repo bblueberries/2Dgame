@@ -39,6 +39,7 @@ public class GamePanel extends StackPane {
     private GraphicsContext gc;
     private AnimationTimer gameLoop;
     
+    private Sound sound = new Sound();
 	private KeyHandler keyH	= new KeyHandler();
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
@@ -113,6 +114,7 @@ public class GamePanel extends StackPane {
 //			
 
 	  private void startGameLoop() {
+		  playMusic(0);
 	        gameLoop = new AnimationTimer() {
 	            private long lastUpdate = 0;
 
@@ -157,7 +159,22 @@ public class GamePanel extends StackPane {
 			this.collisionChecker = collisionChecker;
 		}
 
-
+		// For bg sound
+		public void playMusic(int i) {
+			sound.setFile(i);
+			sound.play();
+			sound.loop();
+		}
+				
+		public void stopMusic() {
+			sound.stop();
+		}
+		// For sound effect
+		public void playSE(int i) {
+			sound.setFile(i);
+			sound.play();
+		}
+		
 		public int getMaxWorldCol() {
 			return maxWorldCol;
 		}
@@ -181,7 +198,12 @@ public class GamePanel extends StackPane {
 		public int getTileSize() {
 			return tileSize;
 		}
+		
+		
+		public Sound getSound() {
+			return sound;
+		}
 
-
+		
 		
 }

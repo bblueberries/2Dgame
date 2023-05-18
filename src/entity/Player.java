@@ -141,6 +141,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import java.lang.Math;
+import java.util.ArrayList;
+
 import main.GamePanel;
 import main.KeyHandler;
 
@@ -154,23 +156,25 @@ public class Player extends Entity {
     private final int ScreenX;
     private final int ScreenY;
     
-    public Player(GamePanel gamePanel) {
-        this.gp = gamePanel;
-		this.ScreenX =	gamePanel.screenWidth/2 - (gamePanel.tileSize/2);
-		this.ScreenY =  gamePanel.screenHeight/2-(gamePanel.tileSize/2);
+    public Player(GamePanel gp) {
+        this.gp = gp;
+		this.ScreenX =	this.gp.screenWidth/2 - (this.gp.tileSize/2);
+		this.ScreenY =  this.gp.screenHeight/2-(this.gp.tileSize/2);
         
-		solidArea = new Rectangle(10,18,28,30);
+		this.getSolidArea().setX(10);
+		this.getSolidArea().setY(18);
+		this.getSolidArea().setWidth(30);
+		this.getSolidArea().setHeight(28);//= new Rectangle(10,18,28,30);
 		
         this.getPlayerImage();
         this.setDefaultValue();
     }
     private void setDefaultValue()
     {
-    	WorldX = gp.tileSize*23;
-        WorldY = gp.tileSize*21; 
-        speed = 6;
-        diaSpeed = (int) (this.speed/Math.sqrt(2.0));
-        direction = "up";
+    	setPosition(gp.tileSize*23,gp.tileSize*21);
+        setSpeed(6);
+        setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));
+        setDirection("up");
         
         //PLAYER STATUS
         this.setMaxLife(5);
@@ -178,14 +182,14 @@ public class Player extends Entity {
     }
 	  private void getPlayerImage()
 	  {
-		  	up1 = new Image(getClass().getResourceAsStream("/player/boy_up_1.png"));
-	  		up2 =  new Image(getClass().getResourceAsStream("/player/boy_up_2.png"));
-	  		down1 = new Image(getClass().getResourceAsStream("/player/boy_down_1.png"));
-	  		down2 = new Image(getClass().getResourceAsStream("/player/boy_down_2.png"));
-	  		left1 = new Image(getClass().getResourceAsStream("/player/boy_left_1.png"));
-	  		left2 = new Image(getClass().getResourceAsStream("/player/boy_left_2.png"));
-	  		right1 = new Image(getClass().getResourceAsStream("/player/boy_right_1.png"));
-	  		right2 = new Image(getClass().getResourceAsStream("/player/boy_right_2.png"));
+		  	getImages().add( new Image(getClass().getResourceAsStream("/player/boy_up_1.png"))) ;
+		  	getImages().add( new Image(getClass().getResourceAsStream("/player/boy_up_2.png")));
+		  	getImages().add( new Image(getClass().getResourceAsStream("/player/boy_down_1.png")));
+		  	getImages().add(  new Image(getClass().getResourceAsStream("/player/boy_down_2.png")));
+		  	getImages().add(  new Image(getClass().getResourceAsStream("/player/boy_left_1.png")));
+		  	getImages().add(  new Image(getClass().getResourceAsStream("/player/boy_left_2.png")));
+		  	getImages().add(  new Image(getClass().getResourceAsStream("/player/boy_right_1.png")));
+		  	getImages().add(  new Image(getClass().getResourceAsStream("/player/boy_right_2.png")));
 	
 	  	}
     public void update() {
@@ -196,74 +200,74 @@ public class Player extends Entity {
     		
     		if (KeyHandler.getKeyPressed(KeyCode.D) && KeyHandler.getKeyPressed(KeyCode.W)) {
 //            	System.out.println("wd");
-                direction="right and up";
+                setDirection("right and up");
                 
             }
             else if (KeyHandler.getKeyPressed(KeyCode.D) && KeyHandler.getKeyPressed(KeyCode.S)) {
-                direction="right and down";
+            	setDirection("right and down");
                 
             }
             else if (KeyHandler.getKeyPressed(KeyCode.A) && KeyHandler.getKeyPressed(KeyCode.S)) {
-                direction="left and down";
+            	setDirection("left and down");
                 
             }
             else if (KeyHandler.getKeyPressed(KeyCode.A) && KeyHandler.getKeyPressed(KeyCode.W)) {
-                direction="left and up";
+            	setDirection("left and up");
                 
             }
             else if (KeyHandler.getKeyPressed(KeyCode.W)) {
 //	        	System.out.println("W");
-	            direction="up"; 
+            	setDirection("up"); 
             
 	        }
 	        else if (KeyHandler.getKeyPressed(KeyCode.S)) {
-	            direction="down";
+	        	setDirection("down");
 	           
 	        }
 	        else if (KeyHandler.getKeyPressed(KeyCode.A)) {
-	            direction="left";
+	        	setDirection("left");
 	            
 	        } 
 	        else if (KeyHandler.getKeyPressed(KeyCode.D)) {
 //	        	System.out.println("D");
-	            direction="right";
+	        	setDirection("right");
 	            
 	        }
         
         
-	        isCollide = false;
+	        setCollide(false);
 	        gp.getCollisionChecker().checkTile(this);
 	        
-	        if(!isCollide) {
-		        switch(direction) {
+	        if(!isCollide()) {
+		        switch(getDirection()) {
 		        case "up" :
-		    		WorldY = WorldY-speed;break;
+		    		setPosition(getPosition()[0],getPosition()[1] - getSpeed());break;
 		    	case "down" :
-		    		 WorldY = WorldY+speed;break;
+		    		setPosition(getPosition()[0],getPosition()[1] + getSpeed());break;
 		    	case "left" :
-		    		WorldX = WorldX-speed;break;
+		    		setPosition(getPosition()[0] - getSpeed(),getPosition()[1]);break;
 		    	case "right" :
-		    		WorldX = WorldX+speed;break;
+		    		setPosition(getPosition()[0] + getSpeed(),getPosition()[1]);break;
 		    	case "right and up" :
-		    		WorldX = WorldX+diaSpeed;
-		    		WorldY = WorldY-diaSpeed;break;
+		    		setPosition(getPosition()[0] + getDiaSpeed(),getPosition()[1]);
+		    		setPosition(getPosition()[0],getPosition()[1] - getDiaSpeed());break;
 		    	case "right and down" :
-		    		WorldX = WorldX+diaSpeed;
-		    		WorldY = WorldY+diaSpeed;break;
+		    		setPosition(getPosition()[0] + getDiaSpeed(),getPosition()[1]);
+		    		setPosition(getPosition()[0],getPosition()[1] + getDiaSpeed());;break;
 		    	case "left and up" :
-		    		WorldX = WorldX-diaSpeed;
-		    		WorldY = WorldY-diaSpeed;break;
+		    		setPosition(getPosition()[0] - getDiaSpeed(),getPosition()[1]);
+		    		setPosition(getPosition()[0],getPosition()[1] - getDiaSpeed());break;
 		    	case "left and down" :
-		    		WorldX = WorldX-diaSpeed;
-		    		WorldY = WorldY+diaSpeed;break;
+		    		setPosition(getPosition()[0] - getDiaSpeed(),getPosition()[1]);
+		    		setPosition(getPosition()[0],getPosition()[1] + getDiaSpeed());;break;
 		        }
 	        }
     	}
-        spriteCounter++;
-        if(spriteCounter>=12)
+        setSpriteCounter(getSpriteCounter()+1);
+        if(getSpriteCounter()>=12)
         {
-        	spriteCounter=0;
-        	spriteNum=(spriteNum+1)%2;
+        	setSpriteCounter(0);
+        	setSpriteNum((getSpriteNum()+1)%2);
         	
         }
     }
@@ -278,32 +282,33 @@ public class Player extends Entity {
 //    	gc.setFill(Color.DARKRED);
 //        gc.fillRect(x, y, gamePanel.tileSize, gamePanel.tileSize);}
     	Image imagetofill = null;
-    	
-    	switch(direction) 
+    	int spNum = getSpriteNum();
+    	ArrayList<Image> imgs = getImages();
+    	switch(getDirection()) 
     	{
     	case "up" :
-    		imagetofill = ((spriteNum == 1)? up1:up2);
+    		imagetofill = ((spNum == 1)? imgs.get(0):imgs.get(1));
     		break;
     	case "down" :
-    		imagetofill = ((spriteNum == 1)? down1:down2);
+    		imagetofill = ((spNum == 1)? imgs.get(2):imgs.get(3));
     		break;
     	case "left" :
-    		imagetofill = ((spriteNum == 1)? left1:left2);
+    		imagetofill = ((spNum == 1)? imgs.get(4):imgs.get(5));
     		break;
     	case "right" :
-    		imagetofill = ((spriteNum == 1)? right1:right2);
+    		imagetofill = ((spNum == 1)? imgs.get(6):imgs.get(7));
     		break;
     	case "right and up" :
-    		imagetofill = ((spriteNum == 1)? right1:right2);
+    		imagetofill = ((spNum == 1)? imgs.get(6):imgs.get(7)); //right
     		break;	
 		case "right and down" :
-			imagetofill = ((spriteNum == 1)? right1:right2);
+			imagetofill = ((spNum == 1)? imgs.get(6):imgs.get(7)); //right
 			break;	
 		case "left and up" :
-			imagetofill = ((spriteNum == 1)? left1:left2);
+			imagetofill = ((spNum == 1)? imgs.get(4):imgs.get(5)); // left
 			break;	
 		case "left and down" :
-			imagetofill = ((spriteNum == 1)? left1:left2);
+			imagetofill = ((spNum == 1)? imgs.get(4):imgs.get(5)); //left
 			break;	
 		}
     	

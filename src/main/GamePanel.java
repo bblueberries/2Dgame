@@ -15,31 +15,31 @@ import object.Heart;
 
 public class GamePanel extends StackPane {
   //SCREEN SETTING
-	final int originalTileSize = 16 ;//16x16 tile
-	final int scale =3;
+	private final int originalTileSize = 16 ;//16x16 tile
+	private final int scale =3;
 	
-	public final int tileSize= originalTileSize * scale ; //48x48 tile
-	public final int maxScreenCol = 16;
-	public final int maxScreenRow = 12;
-	public final int screenWidth= maxScreenCol*tileSize;
-	public final int screenHeight= maxScreenRow*tileSize;
+	private final int tileSize= originalTileSize * scale ; //48x48 tile
+	private final int maxScreenCol = 16;
+	private final int maxScreenRow = 12;
+	private final int screenWidth= maxScreenCol*tileSize;
+	private final int screenHeight= maxScreenRow*tileSize;
 	
    //WORLD SETTING
-	 public final int maxWorldCol = 50;
-	 public final int maxWorldRow = 50;
-	 public final int worldWidth = tileSize*maxWorldCol;
-	 public final int worldHeight = tileSize*maxWorldRow;
+	 private final int maxWorldCol = 50;
+	 private final int maxWorldRow = 50;
+
    //FPS
 	 private static final double targetFPS=90;
    //Time for run FPS
 	 private final long frameTimeNano;
 	
+	 
+	 
 	private Canvas canvas;
     private GraphicsContext gc;
     private AnimationTimer gameLoop;
     
-	KeyHandler keyH	= new KeyHandler();
-	Thread gameThread;
+	private KeyHandler keyH	= new KeyHandler();
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
 	private Heart heart = new Heart(this);
@@ -155,6 +155,31 @@ public class GamePanel extends StackPane {
 
 		public void setCollisionChecker(CollisionChecker collisionChecker) {
 			this.collisionChecker = collisionChecker;
+		}
+
+
+		public int getMaxWorldCol() {
+			return maxWorldCol;
+		}
+
+
+		public int getMaxWorldRow() {
+			return maxWorldRow;
+		}
+
+
+		public int getScreenWidth() {
+			return screenWidth;
+		}
+
+
+		public int getScreenHeight() {
+			return screenHeight;
+		}
+
+
+		public int getTileSize() {
+			return tileSize;
 		}
 
 

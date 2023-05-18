@@ -158,8 +158,8 @@ public class Player extends Entity {
     
     public Player(GamePanel gp) {
         this.gp = gp;
-		this.ScreenX =	this.gp.screenWidth/2 - (this.gp.tileSize/2);
-		this.ScreenY =  this.gp.screenHeight/2-(this.gp.tileSize/2);
+		this.ScreenX =	this.gp.getScreenWidth()/2 - (this.gp.getTileSize()/2);
+		this.ScreenY =  this.gp.getScreenHeight()/2-(this.gp.getTileSize()/2);
         
 		this.getSolidArea().setX(10);
 		this.getSolidArea().setY(18);
@@ -171,7 +171,7 @@ public class Player extends Entity {
     }
     private void setDefaultValue()
     {
-    	setPosition(gp.tileSize*23,gp.tileSize*21);
+    	setPosition(gp.getTileSize()*23,gp.getTileSize()*21);
         setSpeed(6);
         setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));
         setDirection("up");
@@ -313,7 +313,7 @@ public class Player extends Entity {
 		}
     	
     	
-    	gc.drawImage(imagetofill,ScreenX,ScreenY ,gp.tileSize, gp.tileSize);
+    	gc.drawImage(imagetofill,ScreenX,ScreenY ,gp.getTileSize(), gp.getTileSize());
 //    	gc.fillRect(ScreenX, ScreenX, 32, 32);
     	
     }

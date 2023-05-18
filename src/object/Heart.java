@@ -18,16 +18,16 @@ public class Heart{
 	}
 	public void draw(GraphicsContext gc) {
 		
-		int x = gp.tileSize/2;
-		int y = gp.tileSize/2;
+		int x = gp.getTileSize()/2;
+		int y = gp.getTileSize()/2;
 		
 		for(int i=0;i<3;i++)
 		{
 			gc.drawImage(image3, x, y);
-			x+=gp.tileSize;
+			x+=gp.getTileSize();
 		}
-		x = gp.tileSize/2;
-		y = gp.tileSize/2;
+		x = gp.getTileSize()/2;
+		y = gp.getTileSize()/2;
 		for(int i=0;i<gp.getPlayer().getLife();i++)
 		{
 			gc.drawImage(image2, x, y);
@@ -36,7 +36,7 @@ public class Heart{
 			gc.drawImage(image1, x, y);
 			}
 			
-			x+=gp.tileSize;
+			x+=gp.getTileSize();
 		}
 		
 	}

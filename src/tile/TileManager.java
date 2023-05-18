@@ -19,7 +19,7 @@ public class TileManager {
         this.gp = gp;
         tile = new Tile[10];
         getTileImage();
-        mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+        mapTileNum = new int[gp.getMaxWorldCol()][gp.getMaxWorldRow()];
         loadMap("/maps/maptest.txt");
     }
 
@@ -46,10 +46,10 @@ public class TileManager {
             InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-            for (int row = 0; row < gp.maxWorldRow; row++) {
+            for (int row = 0; row < gp.getMaxWorldRow(); row++) {
                 String line = br.readLine();
                 String[] numbers = line.split(" ");
-                for (int col = 0; col < gp.maxWorldCol; col++) {
+                for (int col = 0; col < gp.getMaxWorldCol(); col++) {
                     int num = Integer.parseInt(numbers[col]);
                     mapTileNum[col][row] = num;
                 }
@@ -60,24 +60,24 @@ public class TileManager {
     }
 
     public void draw(GraphicsContext gc) {
-        for (int row = 0; row < gp.maxWorldRow; row++) {
+        for (int row = 0; row < gp.getMaxWorldRow(); row++) {
         	
         
         	
-            for (int col = 0; col < gp.maxWorldCol; col++) 
+            for (int col = 0; col < gp.getMaxWorldCol(); col++) 
             {	
-            	int drawY = row*gp.tileSize;
-        		int drawX = col*gp.tileSize;
+            	int drawY = row*gp.getTileSize();
+        		int drawX = col*gp.getTileSize();
             	this.screenY=drawY + gp.getPlayer().getScreenY() - gp.getPlayer().getPosition()[1];
             	this.screenX=drawX + gp.getPlayer().getScreenX() - gp.getPlayer().getPosition()[0];
             	
-            	if( drawX + gp.tileSize > gp.getPlayer().getPosition()[0] - gp.getPlayer().getScreenX()&&
-            		drawX - gp.tileSize < gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX()&&
-            		drawY + gp.tileSize > gp.getPlayer().getPosition()[1] - gp.getPlayer().getScreenY()&&
-            		drawY - gp.tileSize < gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY()
+            	if( drawX + gp.getTileSize() > gp.getPlayer().getPosition()[0] - gp.getPlayer().getScreenX()&&
+            		drawX - gp.getTileSize() < gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX()&&
+            		drawY + gp.getTileSize() > gp.getPlayer().getPosition()[1] - gp.getPlayer().getScreenY()&&
+            		drawY - gp.getTileSize() < gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY()
             			)
             	{
-                gc.drawImage(tile[mapTileNum[col][row]].getImage(), screenX, screenY, gp.tileSize, gp.tileSize);
+                gc.drawImage(tile[mapTileNum[col][row]].getImage(), screenX, screenY, gp.getTileSize(), gp.getTileSize());
             	}
             }
         }

@@ -68,3 +68,5 @@ configurations:
 /main/
 /monster/
 /entity/
+/player/
+/dogwalk/

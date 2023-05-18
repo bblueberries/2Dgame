@@ -84,36 +84,17 @@ public class GamePanel extends StackPane {
 				
 				}
 				
-				if(event.getCode().equals(KeyCode.ESCAPE) && (getGameState() == playingState || getGameState()==pauseState) ) // if press ESC change gamestate to pause or to playing
-		    	{	
-					if(getGameState()==playingState) {this.setGameState(pauseState);}
-					else if(getGameState()==pauseState) {this.setGameState(playingState);}
-		    	}
-				
+				keyPressedChangeState();
 				
 				if(getGameState() == titleState)
 				{
-					if(KeyHandler.getKeyPressed(KeyCode.S))
-					{
-						ui.setCursorNum( (ui.getCursorNum()+1)%3);
-					}
-					else if(KeyHandler.getKeyPressed(KeyCode.W))
-					{
-						if(ui.getCursorNum()-1<0) {ui.setCursorNum(ui.getCursorNum()+3);}
-						ui.setCursorNum( (ui.getCursorNum()-1)%3);
-					}
-					
-					if(KeyHandler.getKeyPressed(KeyCode.SPACE))
-					{
-						switch(ui.getCursorNum())
-						{
-						case 0: setGameState(playingState);playMusic(bgSound);break;
-						case 1: break;
-						case 2:	System.exit(0);break;
-						}
-					}
+				keyPressedTitleState();
 				}
 				
+				if(getGameState() == pauseState)
+				{
+					keyPressedPauseState();
+				}
 			 });
 		 this.setOnKeyReleased( event -> {
 			 KeyHandler.setKeyPressed(event.getCode(), false);	
@@ -211,7 +192,7 @@ public class GamePanel extends StackPane {
 	        tilemanager.draw(gc); 
 	        player.draw(gc);
 	        heart.draw(gc);
-//	        testMonster.draw(gc);
+	        testMonster.draw(gc);
 	        if(getGameState()==playingState)
 	        {
 	        	heart.draw(gc);  
@@ -219,16 +200,64 @@ public class GamePanel extends StackPane {
 	        
 	        if(getGameState()==pauseState)
 	    	{
-	        	this.DrawOptionScreen();
+	        	ui.DrawOptionScreen();
 	    	} 
 	        }
 	       
 	    }
 	    
-	    public void DrawOptionScreen()
-	    {
-	    	ui.drawScreen(this.getTileSize()*4,this.getTileSize()*2, this.getTileSize()*8, this.getTileSize()*8);
+	    public void keyPressedTitleState() {
+	    	
+				if(KeyHandler.getKeyPressed(KeyCode.S))
+				{
+					ui.setCursorNum( (ui.getCursorNum()+1)%3);
+				}
+				else if(KeyHandler.getKeyPressed(KeyCode.W))
+				{
+					if(ui.getCursorNum()-1<0) {ui.setCursorNum(ui.getCursorNum()+3);}
+					ui.setCursorNum( (ui.getCursorNum()-1)%3);
+				}
+				
+				if(KeyHandler.getKeyPressed(KeyCode.SPACE))
+				{
+					switch(ui.getCursorNum())
+					{
+					case 0: setGameState(playingState);playMusic(bgSound);break;
+					case 1: break;
+					case 2:	System.exit(0);break;
+					}
+				}
+			}
+	    public void keyPressedChangeState() {
+	    	if(KeyHandler.getKeyPressed(KeyCode.ESCAPE) && (getGameState() == playingState || getGameState()==pauseState) ) // if press ESC change gamestate to pause or to playing
+	    	{	
+				if(getGameState()==playingState) {this.setGameState(pauseState);}
+				else if(getGameState()==pauseState) {this.setGameState(playingState);}
+	    	}
 	    }
+	    
+	    public void keyPressedPauseState() {
+	    	if(KeyHandler.getKeyPressed(KeyCode.S)&&ui.getOptionNum()<4)
+			{
+				ui.setOptionNum( (ui.getOptionNum()+1));
+			}
+			else if(KeyHandler.getKeyPressed(KeyCode.W)&&ui.getOptionNum()>1)
+			{
+				
+				ui.setOptionNum( (ui.getOptionNum()-1));
+			}
+			
+//			if(KeyHandler.getKeyPressed(KeyCode.SPACE))
+//			{
+//				switch(ui.getCursorNum())
+//				{
+//				case 0: setGameState(playingState);playMusic(bgSound);break;
+//				case 1: break;
+//				case 2:	System.exit(0);break;
+//				}
+//			}
+	    }
+	    
 
 
 		public CollisionChecker getCollisionChecker() {

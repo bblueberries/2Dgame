@@ -189,7 +189,15 @@ public class Player extends Entity {
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_left_2.png")));
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_right_1.png")));
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_right_2.png")));
-		 
+//		 getImages().add( new Image(getClass().getResourceAsStream("/dogwalk/up1.png"))) ;
+//		 getImages().add( new Image(getClass().getResourceAsStream("/dogwalk/up2.png")));
+//		 getImages().add( new Image(getClass().getResourceAsStream("/dogwalk/down1.png")));
+//		 getImages().add( new Image(getClass().getResourceAsStream("/dogwalk/down2.png")));
+//		 getImages().add( new Image(getClass().getResourceAsStream("/dogwalk/left1.png")));
+//		 getImages().add( new Image(getClass().getResourceAsStream("/dogwalk/left2.png")));
+//		 getImages().add( new Image(getClass().getResourceAsStream("/dogwalk/right1.png")));
+//		 getImages().add( new Image(getClass().getResourceAsStream("/dogwalk/right2.png")));
+//		 
 	  }
     public void update() {
         // Update player position based on input from keyHandler 

@@ -16,6 +16,8 @@ public class UI {
 	private GamePanel gp;
 	private GraphicsContext gc;
 	private int cursorNum=0;
+	private int optionState=1;
+	private int optionNum=1;
 	
 	public UI(GamePanel gp,GraphicsContext gc) {
 		this.gp = gp;
@@ -56,7 +58,8 @@ public class UI {
 			y+=gp.getTileSize()*5;
 			gc.fillText(text, x, y);
 			if(cursorNum==0) {
-				gc.fillText("‣", x-gp.getTileSize(), y);
+				gc.fillText("‣", x-gp.getTileSize(), y+4);
+				
 			}
 			
 			
@@ -65,7 +68,7 @@ public class UI {
 			y+=gp.getTileSize();
 			gc.fillText(text,x, y);
 			if(cursorNum==1) {
-				gc.fillText("‣", x-gp.getTileSize(), y);
+				gc.fillText("‣", x-gp.getTileSize(), y+4);
 			}
 			
 			
@@ -74,14 +77,60 @@ public class UI {
 			y+=gp.getTileSize();
 			gc.fillText(text, x, y);
 			if(cursorNum==2) {
-				gc.fillText("‣", x-gp.getTileSize(), y);
+				gc.fillText("‣", x-gp.getTileSize(), y+4);
 			}
 			
 			
 	}	
 
-	
-	public void drawScreen(int x,int y,int width,int height){
+	public void DrawOptionScreen()
+    {
+    	this.DrawScreen(gp.getTileSize()*4,gp.getTileSize()*2, gp.getTileSize()*8, gp.getTileSize()*8);
+    	int X = gp.getTileSize()*4;
+    	int Y =gp.getTileSize()*2;
+    	
+    	switch(optionState) {
+    	case 1:Option(X,Y);break;
+    	case 2:break;
+    	case 3:break;
+    	}
+    }
+	public void Option (int X,int Y) {
+		
+		int textX;
+		int textY;
+		
+		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,30));
+		gc.setFill(Color.WHITE);
+		
+		//option1
+		String text = "option1";
+		textX = X +gp.getTileSize();
+		textY  = gp.getTileSize()*4 +14;
+		gc.fillText(text, textX, textY);
+		if(optionNum==1) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);}
+		
+		//option2
+		text = "option2";
+		textY  += gp.getTileSize()+10;
+		gc.fillText(text, textX, textY);
+		if(optionNum==2) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);}
+		
+		//option3
+		text = "option3";
+		textY  += gp.getTileSize()+10;
+		gc.fillText(text, textX, textY);
+		if(optionNum==3) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);}
+		
+		//back
+		text = "BACK";
+		textY  += gp.getTileSize()*2 +24;
+		gc.fillText(text, textX, textY);
+		if(optionNum==4) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);}
+		
+		
+	}
+	public void DrawScreen(int x,int y,int width,int height){
 			
 		Color color = Color.rgb(0,0,0,0.8);
 
@@ -117,6 +166,18 @@ public class UI {
 	}
 	public void setCursorNum(int cursorNum) {
 		this.cursorNum = cursorNum;
+	}
+	public int getOptionState() {
+		return optionState;
+	}
+	public void setOptionState(int optionState) {
+		this.optionState = optionState;
+	}
+	public int getOptionNum() {
+		return optionNum;
+	}
+	public void setOptionNum(int optionNum) {
+		this.optionNum = optionNum;
 	}
 	
 }

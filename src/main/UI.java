@@ -1,4 +1,5 @@
 
+
 package main;
 
 import javafx.geometry.Bounds;
@@ -25,10 +26,10 @@ public class UI {
 	}
 	public void draw(GraphicsContext gc) {
 		
-		if(gp.getGameState()==GamePanel.titleState)
-		{
+//		if(gp.getGameState()==GamePanel.titleState)
+//		{
 			drawTitleScreen();
-		}
+//		}
 	}
 	public void drawTitleScreen()
 	{
@@ -181,3 +182,4 @@ public class UI {
 	}
 	
 }
+

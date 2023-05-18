@@ -22,6 +22,9 @@ import main.GamePanel;
 public class Entity {
 	private GamePanel gp;
 	private int[] Position; // world position
+
+	private int[] screenPos;
+
     private int speed;
     private int diaSpeed;
 
@@ -42,6 +45,9 @@ public class Entity {
     	images = new ArrayList<Image>();   //index up:0,1  | down:2,3 | left:4,5 | right:6,7 
     	solidArea = new Rectangle();
     	Position = new int[2];
+
+    	screenPos = new int[2];
+
     }  
     
 	public int getMaxLife() {

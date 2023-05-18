@@ -46,6 +46,7 @@ public class GamePanel extends StackPane {
 	private KeyHandler keyH	= new KeyHandler();
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
+
 	private Monster monsters[] = new Monster[10];
 	private Monster testMonster = new Monster(this);
 	private Heart heart = new Heart(this);
@@ -60,7 +61,17 @@ public class GamePanel extends StackPane {
 		this.player = player;
 	}
 
-	TileManager tilemanager = new TileManager(this);
+
+	private Entity monster[] = new Entity[10];
+	private TileManager tileManager = new TileManager(this);
+	public TileManager tilemanager = new TileManager(this);
+	
+//	public void setPlayer(Player player) {
+//		this.player = player;
+//	}
+
+	
+
 	
 	public GamePanel()
 	{
@@ -68,8 +79,7 @@ public class GamePanel extends StackPane {
 		 gc = canvas.getGraphicsContext2D();
 		 ui = new UI(this,gc);
 		 gc.setImageSmoothing(false);
-//		 gc.setMiterLimit(2.0);
-//		 gc.setLineCap(StrokeLineCap.SQUARE);
+
 		 getChildren().add(canvas);
 		 
 		 setBackground(new javafx.scene.layout.Background(new javafx.scene.layout.BackgroundFill(Color.BLACK, null, null)));
@@ -100,50 +110,17 @@ public class GamePanel extends StackPane {
 			 KeyHandler.setKeyPressed(event.getCode(), false);	
 		 });
 //		
-		 
-		 this.startGameLoop();
 		
+		 this.startGameLoop();
+		 
 	}
+	
 
-
-//	@Override
-//	public void run() {
-//		
-//		double drawInterval =1000000000/FPS; // time for drawing one frame which = 1sec/fps (framePerSec)
-//		double dT =0;
-//		long lastT=System.nanoTime();
-//		long currentT;
-//		long timer =0;
-//		int drawCount=0;
-//		
-//		while(gameThread != null)
-//		{
-//			currentT=System.nanoTime();
-//			dT += (currentT - lastT) / drawInterval;// [sec]
-//			timer += (currentT - lastT);
-//			lastT=currentT;
-//			
-//			if(dT >= 1) // when time past / drawIntervalTime >= 1 means it's time to draw 
-//			{
-//				update();
-//				repaint();
-//				dT-=1;
-//				drawCount++;
-//			}
-//			
-//			if(timer >= 1000000000) //timer = 1 sec
-//			{
-//				System.out.println("FPS :"+drawCount);
-//				drawCount=0;
-//				timer=0;
-//			}
-//			
-
-	  private void startGameLoop() {
-		  playMusic(bgSound);
+	  private void startGameLoop() 
+	  {
+		//  playMusic(bgSound);
 	      gameLoop = new AnimationTimer() {
 	    	  private long lastUpdate = 0;
-
 	          @Override
 	          public void handle(long now) {
 	              if (now - lastUpdate >= frameTimeNano) {
@@ -151,15 +128,20 @@ public class GamePanel extends StackPane {
 	                  draw();
 //	                     System.out.println(now-lastUpdate);
 	                  lastUpdate = now;
-	                  
+
 	              }
 	          }
-	      };
-	        gameLoop.start();
-	  }
+	          };
+	          gameLoop.start(); 
+//		  playMusic(BGsound);
+		 // playMusic();
+
+	      }
+	
 
 	    private void update() {
 	        // Update your game logic here
+
 	    	
 	    	//PLAYING
 	    	if(getGameState()==playingState)
@@ -175,15 +157,14 @@ public class GamePanel extends StackPane {
 	    	
 	    }
 
+
 	
-	    public Player getPlayer() 
-	    {
-		return player;
-	    }
+
+
 	    private void draw() {
 	        gc.clearRect(0, 0, screenWidth, screenHeight);
 	       
-	        ui.draw(gc);
+//	        ui.draw(gc);
 	        if(getGameState()==titleState)
 	        {
 	        	ui.draw(gc);
@@ -260,6 +241,8 @@ public class GamePanel extends StackPane {
 	    
 
 
+	    
+	    
 		public CollisionChecker getCollisionChecker() {
 			return collisionChecker;
 		}
@@ -270,6 +253,7 @@ public class GamePanel extends StackPane {
 		}
 
 		// For bg sound
+
 		public void playMusic(Sound sound) {
 			sound.play();
 			sound.loop();
@@ -308,9 +292,10 @@ public class GamePanel extends StackPane {
 		}
 
 
-		public Monster[] getMonster() {
-			return monsters;
-		}
+
+//		public Monster[] getMonster() {
+//			return monsters;
+//		}
 
 
 		public int getGameState() {
@@ -322,7 +307,18 @@ public class GamePanel extends StackPane {
 			this.gameState = gameState;
 		}
 		
+		public Entity[] getMonster()
+		{
+			return monster;
+
+		}
+
+
+		public Player getPlayer() {
+			return player;
+		}
+	}
+		
+
 
 		
-		
-}

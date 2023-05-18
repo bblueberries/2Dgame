@@ -12,7 +12,7 @@ public class Sound {
     // 1 : ???
     // 2 : ???
     public Sound(int i) {
-    	this.soundPath[0] = "/sound/BlueBoyAdventure.wav";
+    	this.soundPath[0] = "/sound/themesong.mp3";
     	Media media = new Media(getClass().getResource(this.soundPath[i]).toString());
         mediaPlayer = new MediaPlayer(media);
     }

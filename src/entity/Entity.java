@@ -17,9 +17,12 @@ import java.util.ArrayList;
 
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
+import main.GamePanel;
 
 public class Entity {
-	private int[] Position;
+	private GamePanel gp;
+	private int[] Position; // world position
+	private int[] screenPos;
     private int speed;
     private int diaSpeed;
 
@@ -40,8 +43,8 @@ public class Entity {
     	images = new ArrayList<Image>();   //index up:0,1  | down:2,3 | left:4,5 | right:6,7 
     	solidArea = new Rectangle();
     	Position = new int[2];
-    }
-    
+    	screenPos = new int[2];
+    }  
     
 	public int getMaxLife() {
 		return maxLife;
@@ -107,5 +110,9 @@ public class Entity {
 	public void setPosition(int x,int y) {
 		Position[0] = x;
 		Position[1] = y;
+	}
+
+	public GamePanel getGp() {
+		return gp;
 	}
 }

@@ -3,6 +3,8 @@ package main;
 
 
 
+import entity.Entity;
+import entity.Monster;
 import entity.Player;
 import tile.TileManager;
 import javafx.animation.AnimationTimer;
@@ -39,10 +41,12 @@ public class GamePanel extends StackPane {
     private GraphicsContext gc;
     private AnimationTimer gameLoop;
     
-    private Sound BGsound = new Sound(0);
+    private Sound bgSound = new Sound(0);
 	private KeyHandler keyH	= new KeyHandler();
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
+	private Entity monster[] = new Entity[10];
+	private Monster testMonster = new Monster(this);
 	private Heart heart = new Heart(this);
 	
 
@@ -114,7 +118,7 @@ public class GamePanel extends StackPane {
 //			
 
 	  private void startGameLoop() {
-		  playMusic(BGsound);
+		  playMusic(bgSound);
 	        gameLoop = new AnimationTimer() {
 	            private long lastUpdate = 0;
 
@@ -135,6 +139,7 @@ public class GamePanel extends StackPane {
 	    private void update() {
 	        // Update your game logic here
 	    	player.update();
+	    	testMonster.update();
 	    }
 
 	    private void draw() {
@@ -142,6 +147,7 @@ public class GamePanel extends StackPane {
 	       
 	        tilemanager.draw(gc); 
 	        player.draw(gc);
+	        testMonster.draw(gc);
 	        heart.draw(gc);
 	    }
 	    public Player getPlayer() 
@@ -195,6 +201,11 @@ public class GamePanel extends StackPane {
 
 		public int getTileSize() {
 			return tileSize;
+		}
+
+
+		public Entity[] getMonster() {
+			return monster;
 		}
 		
 

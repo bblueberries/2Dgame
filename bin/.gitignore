@@ -66,3 +66,5 @@ configurations:
 .DS_Store
 /sound/
 /main/
+/monster/
+/entity/

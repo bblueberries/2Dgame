@@ -160,11 +160,10 @@ public class Player extends Entity {
         this.gp = gp;
 		this.ScreenX =	this.gp.getScreenWidth()/2 - (this.gp.getTileSize()/2);
 		this.ScreenY =  this.gp.getScreenHeight()/2-(this.gp.getTileSize()/2);
-        
 		this.getSolidArea().setX(10);
 		this.getSolidArea().setY(18);
-		this.getSolidArea().setWidth(30);
-		this.getSolidArea().setHeight(28);//= new Rectangle(10,18,28,30);
+		this.getSolidArea().setWidth(28);
+		this.getSolidArea().setHeight(28);//= new Rectangle(10,18,28,28);
 		
         this.getPlayerImage();
         this.setDefaultValue();
@@ -180,18 +179,18 @@ public class Player extends Entity {
         this.setMaxLife(5);
         this.setLife(getMaxLife());
     }
-	  private void getPlayerImage()
-	  {
-		  	getImages().add( new Image(getClass().getResourceAsStream("/player/boy_up_1.png"))) ;
-		  	getImages().add( new Image(getClass().getResourceAsStream("/player/boy_up_2.png")));
-		  	getImages().add( new Image(getClass().getResourceAsStream("/player/boy_down_1.png")));
-		  	getImages().add(  new Image(getClass().getResourceAsStream("/player/boy_down_2.png")));
-		  	getImages().add(  new Image(getClass().getResourceAsStream("/player/boy_left_1.png")));
-		  	getImages().add(  new Image(getClass().getResourceAsStream("/player/boy_left_2.png")));
-		  	getImages().add(  new Image(getClass().getResourceAsStream("/player/boy_right_1.png")));
-		  	getImages().add(  new Image(getClass().getResourceAsStream("/player/boy_right_2.png")));
-	
-	  	}
+	 private void getPlayerImage() {
+		 
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_up_1.png"))) ;
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_up_2.png")));
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_down_1.png")));
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_down_2.png")));
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_left_1.png")));
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_left_2.png")));
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_right_1.png")));
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_right_2.png")));
+		 
+	  }
     public void update() {
         // Update player position based on input from keyHandler 
     	
@@ -253,13 +252,13 @@ public class Player extends Entity {
 		    		setPosition(getPosition()[0],getPosition()[1] - getDiaSpeed());break;
 		    	case "right and down" :
 		    		setPosition(getPosition()[0] + getDiaSpeed(),getPosition()[1]);
-		    		setPosition(getPosition()[0],getPosition()[1] + getDiaSpeed());;break;
+		    		setPosition(getPosition()[0],getPosition()[1] + getDiaSpeed());break;
 		    	case "left and up" :
 		    		setPosition(getPosition()[0] - getDiaSpeed(),getPosition()[1]);
 		    		setPosition(getPosition()[0],getPosition()[1] - getDiaSpeed());break;
 		    	case "left and down" :
 		    		setPosition(getPosition()[0] - getDiaSpeed(),getPosition()[1]);
-		    		setPosition(getPosition()[0],getPosition()[1] + getDiaSpeed());;break;
+		    		setPosition(getPosition()[0],getPosition()[1] + getDiaSpeed());break;
 		        }
 	        }
     	}

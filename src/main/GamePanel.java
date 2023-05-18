@@ -46,7 +46,7 @@ public class GamePanel extends StackPane {
 	private KeyHandler keyH	= new KeyHandler();
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
-	private Entity monster[] = new Entity[10];
+	private Monster monsters[] = new Monster[10];
 	private Monster testMonster = new Monster(this);
 	private Heart heart = new Heart(this);
 	private UI ui;
@@ -140,23 +140,23 @@ public class GamePanel extends StackPane {
 //			
 
 	  private void startGameLoop() {
-//		  playMusic(bgSound);
-	        gameLoop = new AnimationTimer() {
-	            private long lastUpdate = 0;
+		  playMusic(bgSound);
+	      gameLoop = new AnimationTimer() {
+	    	  private long lastUpdate = 0;
 
-	            @Override
-	            public void handle(long now) {
-	                if (now - lastUpdate >= frameTimeNano) {
-	                    update();
-	                    draw();
+	          @Override
+	          public void handle(long now) {
+	              if (now - lastUpdate >= frameTimeNano) {
+	                  update();
+	                  draw();
 //	                     System.out.println(now-lastUpdate);
-	                    lastUpdate = now;
+	                  lastUpdate = now;
 	                  
-	                }
-	            }
-	        };
+	              }
+	          }
+	      };
 	        gameLoop.start();
-	    }
+	  }
 
 	    private void update() {
 	        // Update your game logic here
@@ -183,7 +183,7 @@ public class GamePanel extends StackPane {
 	    private void draw() {
 	        gc.clearRect(0, 0, screenWidth, screenHeight);
 	       
-//	        ui.draw(gc);
+	        ui.draw(gc);
 	        if(getGameState()==titleState)
 	        {
 	        	ui.draw(gc);
@@ -308,8 +308,8 @@ public class GamePanel extends StackPane {
 		}
 
 
-		public Entity[] getMonster() {
-			return monster;
+		public Monster[] getMonster() {
+			return monsters;
 		}
 
 

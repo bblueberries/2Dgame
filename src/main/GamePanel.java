@@ -39,7 +39,7 @@ public class GamePanel extends StackPane {
     private GraphicsContext gc;
     private AnimationTimer gameLoop;
     
-    private Sound sound = new Sound("/sound/BlueBoyAdventure.wav");
+    private Sound sound = new Sound("/sound/themesong.mp3");
 	private KeyHandler keyH	= new KeyHandler();
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);

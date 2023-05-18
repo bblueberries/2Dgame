@@ -45,7 +45,7 @@ public class GamePanel extends StackPane {
 	private KeyHandler keyH	= new KeyHandler();
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
-	private Entity monster[] = new Entity[10];
+	private Monster monsters[] = new Monster[10];
 	private Monster testMonster = new Monster(this);
 	private Heart heart = new Heart(this);
 	
@@ -204,8 +204,8 @@ public class GamePanel extends StackPane {
 		}
 
 
-		public Entity[] getMonster() {
-			return monster;
+		public Monster[] getMonster() {
+			return monsters;
 		}
 		
 

@@ -10,6 +10,7 @@ import tile.TileManager;
 import javafx.animation.AnimationTimer;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeLineCap;
@@ -48,9 +49,13 @@ public class GamePanel extends StackPane {
 	private Entity monster[] = new Entity[10];
 	private Monster testMonster = new Monster(this);
 	private Heart heart = new Heart(this);
+	private UI ui;
 	
-
-
+	private int gameState=0;
+	public static final int titleState=0;
+	public static final int playingState=1;
+	public static final int pauseState=2;
+	
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
@@ -61,19 +66,55 @@ public class GamePanel extends StackPane {
 	{
 		 canvas = new Canvas(screenWidth, screenHeight);
 		 gc = canvas.getGraphicsContext2D();
+		 ui = new UI(this,gc);
 		 gc.setImageSmoothing(false);
 //		 gc.setMiterLimit(2.0);
 //		 gc.setLineCap(StrokeLineCap.SQUARE);
 		 getChildren().add(canvas);
 		 
-		 setBackground(new javafx.scene.layout.Background(new javafx.scene.layout.BackgroundFill(Color.DARKBLUE, null, null)));
+		 setBackground(new javafx.scene.layout.Background(new javafx.scene.layout.BackgroundFill(Color.BLACK, null, null)));
 		 setFocusTraversable(true);
 		 
 		 this.frameTimeNano = (long) (1000000000 / targetFPS);
 		 
 		 this.setOnKeyPressed( event -> {
-			KeyHandler.setKeyPressed(event.getCode(), true);
-		 });
+				KeyHandler.setKeyPressed(event.getCode(), true);
+				if(getGameState() == playingState) 
+				{
+				
+				}
+				
+				if(event.getCode().equals(KeyCode.ESCAPE) && (getGameState() == playingState || getGameState()==pauseState) ) // if press ESC change gamestate to pause or to playing
+		    	{	
+					if(getGameState()==playingState) {this.setGameState(pauseState);}
+					else if(getGameState()==pauseState) {this.setGameState(playingState);}
+		    	}
+				
+				
+				if(getGameState() == titleState)
+				{
+					if(KeyHandler.getKeyPressed(KeyCode.S))
+					{
+						ui.setCursorNum( (ui.getCursorNum()+1)%3);
+					}
+					else if(KeyHandler.getKeyPressed(KeyCode.W))
+					{
+						if(ui.getCursorNum()-1<0) {ui.setCursorNum(ui.getCursorNum()+3);}
+						ui.setCursorNum( (ui.getCursorNum()-1)%3);
+					}
+					
+					if(KeyHandler.getKeyPressed(KeyCode.SPACE))
+					{
+						switch(ui.getCursorNum())
+						{
+						case 0: setGameState(playingState);playMusic(bgSound);break;
+						case 1: break;
+						case 2:	System.exit(0);break;
+						}
+					}
+				}
+				
+			 });
 		 this.setOnKeyReleased( event -> {
 			 KeyHandler.setKeyPressed(event.getCode(), false);	
 		 });
@@ -118,7 +159,7 @@ public class GamePanel extends StackPane {
 //			
 
 	  private void startGameLoop() {
-		  playMusic(bgSound);
+//		  playMusic(bgSound);
 	        gameLoop = new AnimationTimer() {
 	            private long lastUpdate = 0;
 
@@ -138,21 +179,55 @@ public class GamePanel extends StackPane {
 
 	    private void update() {
 	        // Update your game logic here
-	    	player.update();
-	    	testMonster.update();
+	    	
+	    	//PLAYING
+	    	if(getGameState()==playingState)
+	    	{
+	    		player.update();
+	    		testMonster.update();
+	    	}
+	    	//PAUSE
+	    	if(getGameState() ==pauseState)
+	    	{
+	    		
+	    	}
+	    	
 	    }
 
-	    private void draw() {
-	        gc.clearRect(0, 0, screenWidth, screenHeight);
-	       
-	        tilemanager.draw(gc); 
-	        player.draw(gc);
-	        testMonster.draw(gc);
-	        heart.draw(gc);
-	    }
+	
 	    public Player getPlayer() 
 	    {
 		return player;
+	    }
+	    private void draw() {
+	        gc.clearRect(0, 0, screenWidth, screenHeight);
+	       
+//	        ui.draw(gc);
+	        if(getGameState()==titleState)
+	        {
+	        	ui.draw(gc);
+	         }
+	        else {
+	        tilemanager.draw(gc); 
+	        player.draw(gc);
+	        heart.draw(gc);
+//	        testMonster.draw(gc);
+	        if(getGameState()==playingState)
+	        {
+	        	heart.draw(gc);  
+	        }
+	        
+	        if(getGameState()==pauseState)
+	    	{
+	        	this.DrawOptionScreen();
+	    	} 
+	        }
+	       
+	    }
+	    
+	    public void DrawOptionScreen()
+	    {
+	    	ui.drawScreen(this.getTileSize()*4,this.getTileSize()*2, this.getTileSize()*8, this.getTileSize()*8);
 	    }
 
 
@@ -206,6 +281,16 @@ public class GamePanel extends StackPane {
 
 		public Entity[] getMonster() {
 			return monster;
+		}
+
+
+		public int getGameState() {
+			return gameState;
+		}
+
+
+		public void setGameState(int gameState) {
+			this.gameState = gameState;
 		}
 		
 

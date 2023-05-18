@@ -39,7 +39,7 @@ public class GamePanel extends StackPane {
     private GraphicsContext gc;
     private AnimationTimer gameLoop;
     
-    private Sound sound = new Sound("/sound/BlueBoyAdventure.wav");
+    private Sound BGsound = new Sound(0);
 	private KeyHandler keyH	= new KeyHandler();
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
@@ -114,7 +114,7 @@ public class GamePanel extends StackPane {
 //			
 
 	  private void startGameLoop() {
-		  playMusic(0);
+		  playMusic(BGsound);
 	        gameLoop = new AnimationTimer() {
 	            private long lastUpdate = 0;
 
@@ -160,16 +160,16 @@ public class GamePanel extends StackPane {
 		}
 
 		// For bg sound
-		public void playMusic(int i) {
+		public void playMusic(Sound sound) {
 			sound.play();
 			sound.loop();
 		}
 				
-		public void stopMusic() {
+		public void stopMusic(Sound sound) {
 			sound.stop();
 		}
 		// For sound effect
-		public void playSE(int i) {
+		public void playSE(Sound sound) {
 			sound.play();
 		}
 		
@@ -197,10 +197,6 @@ public class GamePanel extends StackPane {
 			return tileSize;
 		}
 		
-		
-		public Sound getSound() {
-			return sound;
-		}
 
 		
 		

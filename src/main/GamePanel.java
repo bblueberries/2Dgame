@@ -128,6 +128,7 @@ public class GamePanel extends StackPane {
 		
 		for(int i=0;i<maxMonster;i++) {
 			monster[i] = new Monster(this);
+			monster[i].setIndex(i);
 		}
 	}
 	
@@ -303,12 +304,6 @@ public class GamePanel extends StackPane {
 		public int getTileSize() {
 			return tileSize;
 		}
-
-
-
-//		public Monster[] getMonster() {
-//			return monsters;
-//		}
 
 
 		public int getGameState() {

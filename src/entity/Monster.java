@@ -13,6 +13,7 @@ public class Monster extends Entity{
 	private final GamePanel gp;
     private int ScreenX;
     private int ScreenY;
+    private int index;
 	
 	public Monster(GamePanel gp) {
         this.gp = gp;
@@ -109,10 +110,11 @@ public class Monster extends Entity{
 		Entity player[] = new Entity[1];
 		player[0] = gp.getPlayer();
 		gp.getCollisionChecker().checkOtherEntity(this, player);
+//		System.out.println(otherMonster.toString());
+//		gp.getCollisionChecker().checkOtherEntity(this, otherMonster);
 //		System.out.println("isCollide = "+isCollide());
 		if(!isCollide()) {
 			gp.getCollisionChecker().checkTile(this);
-			System.out.println("isTileCollide = "+isCollide());
 		}
 		        
 		if(!isCollide()) {	
@@ -210,5 +212,11 @@ public class Monster extends Entity{
 //	    	gc.fillRect(ScreenX, ScreenX, 32, 32);
 	    	
 	    }
+		public int getIndex() {
+			return index;
+		}
+		public void setIndex(int index) {
+			this.index = index;
+		}
 	 
 }

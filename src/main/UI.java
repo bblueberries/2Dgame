@@ -100,8 +100,8 @@ public class UI {
     	
     	switch(getState()) {
     	case 0:Option(X,Y);break;
-    	case 1:Option1(X,Y);break;
-    	case 2:Option2(X,Y);break;
+    	case 1:Control(X,Y);break;
+    	case 2:Info(X,Y);break;
     	case 3:OptionEndGame(X,Y);break;
     	}
     }
@@ -112,20 +112,31 @@ public class UI {
 //		setState(0);
 //		setOptionNum(1);
 		
-		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,30));
+		
+	
+		
+		Text header = new Text("OPTION");
+		Font font = Font.font("Arial",FontWeight.BOLD,40);
+		Color textColor = Color.WHITE;
+		gc.setFont(font);
+		gc.setFill(textColor);
+		textX = (int) getCenteredTextX(header,40);
+		textY= Y+gp.getTileSize()+10;
+		
+		gc.fillText(header.getText(),textX,textY );
+	
+		gc.setFont(Font.font("Courier New",FontWeight.SEMI_BOLD,30));
 		gc.setFill(Color.WHITE);
-		
-		
 		//option1
-		String text = "option1";
+		String text = "CONTROL";
 		textX = X +gp.getTileSize();
-		textY  = gp.getTileSize()*4 +14;
+		textY  = gp.getTileSize()*4 +25;
 		gc.fillText(text, textX, textY);
 		if(optionNum==1) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);
 		}
 		
 		//option2
-		text = "option2";
+		text = "INFO";
 		textY  += gp.getTileSize()+10;
 		gc.fillText(text, textX, textY);
 		if(optionNum==2) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);
@@ -141,7 +152,7 @@ public class UI {
 		
 		//back
 		text = "BACK";
-		textY  += gp.getTileSize()*2 +24;
+		textY  += gp.getTileSize()*2 +10;
 		gc.fillText(text, textX, textY);
 		if(optionNum==4) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);
 		}
@@ -150,22 +161,65 @@ public class UI {
 		
 		
 	}
-	public void Option1(int X,int Y) {
+	public void Control(int X,int Y) {
 		
-		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,30));
+		gc.setFont(Font.font("Courier New",FontWeight.BOLD,30));
 		gc.setFill(Color.WHITE);
-		String text = "this is option 1";
-		int textX = X +gp.getTileSize();
-		int textY  = Y+gp.getTileSize()*4;
+		String text = "Control";
+		int textX = X +gp.getTileSize()*5/2 +10;
+		int textY  = Y+gp.getTileSize()*1;
+		gc.fillText(text, textX, textY);
+		
+		gc.setFont(Font.font("Courier New",FontWeight.BOLD,25));
+		text = "MOVE";
+		textX = X +gp.getTileSize()-20;
+		textY  += gp.getTileSize()+20;
+		gc.fillText(text, textX, textY);
+		
+		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,25));
+		text = "                 WASD";
+		gc.fillText(text, textX+8, textY);
+		
+		gc.setFont(Font.font("Courier New",FontWeight.BOLD,25));
+		text = "CONFIRM";
+		textY  += gp.getTileSize()+5;
+		gc.fillText(text, textX, textY);
+		
+		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,25));
+		text = "                 SPACE";
+		gc.fillText(text, textX, textY);
+		
+		gc.setFont(Font.font("Courier New",FontWeight.BOLD,25));
+		text = "OPTION/BACK";
+		textY  += gp.getTileSize()+5;
+		gc.fillText(text, textX, textY);
+		
+		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,25));
+		text = "                  ESC";
 		gc.fillText(text, textX, textY);
 	}
-	public void Option2(int X,int Y) {
+	public void Info(int X,int Y) {
 		
-		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,30));
+		gc.setFont(Font.font("Courier New",FontWeight.LIGHT,15));
 		gc.setFill(Color.WHITE);
-		String text = "this is option2";
-		int textX = X +gp.getTileSize()-8;
-		int textY  = Y+gp.getTileSize()*4;
+		String text = "This is ProgMeth's Final Project";
+		int textX = X +gp.getTileSize();
+		int textY  = Y+gp.getTileSize()*2;
+		gc.fillText(text, textX, textY);
+		
+		text = "By Atsawin Sungsuwan";
+		textX+=gp.getTileSize();
+		textY+=gp.getTileSize();
+		gc.fillText(text, textX, textY);
+		
+		text = "& Navanon Neknhum";
+		textX+=gp.getTileSize()/2 - 16;
+		textY+=gp.getTileSize();
+		gc.fillText(text, textX, textY);
+		
+		text = "Hope you enjoy the game<3";
+		textX-=gp.getTileSize()/2;
+		textY+=gp.getTileSize()*2.5;
 		gc.fillText(text, textX, textY);
 
 	}
@@ -209,16 +263,7 @@ public class UI {
 		gc.setFill(color);
 		gc.fillRoundRect(x+3, y+3, width-6, height-6, 34,34);
 		
-		Text text = new Text("OPTION");
-		Font font = Font.font("Courier New",40);
-		Color textColor = Color.WHITE;
-		int textX = (int) getCenteredTextX(text,40);
-		int textY= y+gp.getTileSize();
 		
-		gc.setFont(font);
-		gc.setFill(textColor);
-		gc.fillText(text.getText(),textX,textY );
-	
 	}
 	private double measureStringWidth(Text text) {
         text.applyCss();

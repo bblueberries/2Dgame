@@ -268,22 +268,22 @@ public class CollisionChecker {
 	    		predOtherEnRightEdge = otherEnRightEdge;
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 1");
+	    		//	System.out.println("true 1");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 2");
+	    			//System.out.println("true 2");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 3");
+	    			//System.out.println("true 3");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 4");
+	    			//System.out.println("true 4");
 	    			return true;
 	    		}
 	    		
@@ -295,22 +295,22 @@ public class CollisionChecker {
 	    		predOtherEnRightEdge = otherEnRightEdge;
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 1");
+	    			//System.out.println("true 1");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 2");
+	    			//System.out.println("true 2");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 3");
+	    			//System.out.println("true 3");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 4");
+	    			//System.out.println("true 4");
 	    			return true;
 	    		}
 	    		
@@ -322,22 +322,22 @@ public class CollisionChecker {
 	    		predOtherEnRightEdge = otherEnRightEdge - otherEnSpeed;
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 1");
+	    			//System.out.println("true 1");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 2");
+	    		//	System.out.println("true 2");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 3");
+	    			//System.out.println("true 3");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 4");
+	    			//System.out.println("true 4");
 	    			return true;
 	    		}
 	    		
@@ -349,22 +349,22 @@ public class CollisionChecker {
 	    		predOtherEnRightEdge = otherEnRightEdge + otherEnSpeed;
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 1");
+	    			//System.out.println("true 1");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 2");
+	    			//System.out.println("true 2");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 3");
+	    		//	System.out.println("true 3");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 4");
+	    		//	System.out.println("true 4");
 	    			return true;
 	    		}
 	    		
@@ -376,22 +376,22 @@ public class CollisionChecker {
 	    		predOtherEnRightEdge = otherEnRightEdge + otherEnSpeed;
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 1");
+	    			//System.out.println("true 1");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 2");
+	    			//System.out.println("true 2");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 3");
+	    		//	System.out.println("true 3");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 4");
+	    			//System.out.println("true 4");
 	    			return true;
 	    		}
 	    		
@@ -403,22 +403,22 @@ public class CollisionChecker {
 	    		predOtherEnRightEdge = otherEnRightEdge + otherEnSpeed;
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 1");
+	    			//System.out.println("true 1");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 2");
+	    			//System.out.println("true 2");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 3");
+	    			//System.out.println("true 3");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 4");
+	    		//	System.out.println("true 4");
 	    			return true;
 	    		}
 	    		
@@ -430,22 +430,22 @@ public class CollisionChecker {
 	    		predOtherEnRightEdge = otherEnRightEdge - otherEnSpeed;
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 1");
+	    		//	System.out.println("true 1");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 2");
+	    		//	System.out.println("true 2");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 3");
+	    		//	System.out.println("true 3");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 4");
+	    		//	System.out.println("true 4");
 	    			return true;
 	    		}
 	    		
@@ -457,22 +457,22 @@ public class CollisionChecker {
 	    		predOtherEnRightEdge = otherEnRightEdge - otherEnSpeed;
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 1");
+	    		//	System.out.println("true 1");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 2");
+	    			//System.out.println("true 2");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 3");
+	    		//	System.out.println("true 3");
 	    			return true;
 	    		}
 	    		
 	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
-	    			System.out.println("true 4");
+	    		//	System.out.println("true 4");
 	    			return true;
 	    		}
 	    		

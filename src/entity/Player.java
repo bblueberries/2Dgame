@@ -206,7 +206,6 @@ public class Player extends Entity {
 	        setCollide(false);
 	        gp.getCollisionChecker().checkOtherEntity(this, gp.getMonster());
 	        gp.getCollisionChecker().checkTile(this);
-//	        System.out.println(this.isCollide());
 
 	        //character walk
 	        if(!isCollide()) {

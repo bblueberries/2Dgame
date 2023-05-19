@@ -36,7 +36,18 @@ public class KeyHandler{
 		}}
 	
 	public void keyPressedChangeState() {
-	    		if(gp.getUi().getState()==0)
+	    		
+		
+				if(gp.getGameState()==GamePanel.endingState)
+				{
+					if(getKeyPressed(KeyCode.ESCAPE))
+					{
+						gp.setFirstTimeStart(true);
+						gp.setGameState(GamePanel.titleState);
+						
+					}
+				}
+				if(gp.getUi().getState()==0)
 	    		{
 		    	// toggle option screen(pauseState)
 				if(getKeyPressed(KeyCode.ESCAPE))
@@ -140,7 +151,7 @@ public class KeyHandler{
 				{
 					switch(gp.getUi().getTitleNum())
 					{
-					case 0: newGame();break; //Play
+					case 0: newGame();gp.playMusic(gp.getBgSound());break; //Play
 					case 1: loadGame();break; //
 					case 2:	System.exit(0);break; //Exit
 					}

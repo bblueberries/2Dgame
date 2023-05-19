@@ -56,7 +56,7 @@ public class GamePanel extends StackPane {
 	public static final int titleState=0;
 	public static final int playingState=1;
 	public static final int pauseState=2;
-//	public static final int optionState=3;
+	public static final int endingState=3;
 	
 	
 
@@ -86,9 +86,9 @@ public class GamePanel extends StackPane {
 		 
 		 this.setOnKeyPressed( event -> {
 				keyHandler.setKeyPressed(event.getCode(), true);
-				if(getGameState() == playingState) 
+				if(getGameState() == endingState) 
 				{
-					
+					keyHandler.keyPressedChangeState();
 				}
 				
 				// To toggle option Screen
@@ -135,6 +135,7 @@ public class GamePanel extends StackPane {
 	  public void resetGame()
 	  {
 		  setPlayer(new Player(this));
+		  
 		  setGameState(GamePanel.titleState);
 	  }
 	  public void startNewGameLoop() 
@@ -145,7 +146,7 @@ public class GamePanel extends StackPane {
 		 {
 			 gameLoop.stop();
 		 }
-		 playMusic(bgSound);
+		// playMusic(bgSound);
 
 	      gameLoop = new AnimationTimer() {
 	    	  private long lastUpdate = 0;
@@ -173,7 +174,14 @@ public class GamePanel extends StackPane {
 	    	if(getGameState()==playingState)
 	    	{
 	    		player.update();
-//	    		testMonster.update();
+	    		if(getMonsterAlive(monster)==0)
+	    		{
+	    			getUi().setGameFinished(true);
+	    			stopMusic(bgSound);
+	    			setGameState(endingState);
+	    		}
+
+	    		
 	    		for(int i=0;i<monster.length;i++) {
 	    			if(monster[i] != null) {
 	    				monster[i].update();
@@ -205,10 +213,10 @@ public class GamePanel extends StackPane {
 	         }
 	        
 	        else {
+	        	
 	        tilemanager.draw(gc); 
 	        player.draw(gc);
-	        heart.draw(gc);
-//	        testMonster.draw(gc);
+	      //  heart.draw(gc);
 	        for(int i=0;i<monster.length;i++) {
     			if(monster[i] != null) {
     				monster[i].draw(gc);
@@ -218,7 +226,7 @@ public class GamePanel extends StackPane {
 	        //Drawing HP only when playing
 	        if(getGameState()==playingState)
 	        {
-	        	heart.draw(gc);  
+//	        	getUi().draw(gc);
 	        }
 	        
 	        //Drawing Option screen when pausing
@@ -226,6 +234,12 @@ public class GamePanel extends StackPane {
 	    	{
 	        	ui.draw(gc);
 	    	} 
+	        //Drawing Congratulation
+	        if(getGameState()==endingState)
+	        {
+
+	        	getUi().draw(gc);
+	        }
 	        }
 	       
 	    }
@@ -234,7 +248,14 @@ public class GamePanel extends StackPane {
 	    
 
 
-	    
+	    public int getMonsterAlive(Monster[] monster) {
+	    	int monsterCounter=0;
+	    	for(Monster x:monster)
+	    	{
+	    		if(x!=null) monsterCounter++;
+	    	}
+	    	return monsterCounter;
+	    }
 	    
 		public CollisionChecker getCollisionChecker() {
 			return collisionChecker;

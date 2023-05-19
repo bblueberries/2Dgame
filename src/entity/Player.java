@@ -181,7 +181,7 @@ public class Player extends Entity {
     }
 	 private void getPlayerImage() {
 
-		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger6.png"))) ;
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger6.png")));
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger7.png")));
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger4.png")));
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger5.png")));

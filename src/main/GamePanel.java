@@ -320,12 +320,7 @@ public class GamePanel extends StackPane {
 			this.gameState = gameState;
 		}
 		
-		public Entity[] getMonster()
-		{
-			return monster;
-
-		}
-
+	
 
 		public Player getPlayer() {
 			return player;
@@ -400,6 +395,14 @@ public class GamePanel extends StackPane {
 
 		public TileManager getTileManager() {
 			return tileManager;
+		}
+
+		public void setMonster(Monster[] monster) {
+			this.monster = monster;
+		}
+
+		public Monster[] getMonster() {
+			return monster;
 		}
 	}
 		

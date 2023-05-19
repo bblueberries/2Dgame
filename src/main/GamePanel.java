@@ -47,7 +47,6 @@ public class GamePanel extends StackPane {
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
 
-	private Monster monsters[] = new Monster[10];
 	private Monster testMonster = new Monster(this);
 	private Heart heart = new Heart(this);
 	private UI ui;
@@ -63,16 +62,14 @@ public class GamePanel extends StackPane {
 	}
 
 
-	private Entity monster[] = new Entity[10];
+	private Monster monster[] = new Monster[10];
 	private TileManager tileManager = new TileManager(this);
 	public TileManager tilemanager = new TileManager(this);
 	
 //	public void setPlayer(Player player) {
 //		this.player = player;
 //	}
-
 	
-
 	
 	public GamePanel()
 	{
@@ -125,9 +122,16 @@ public class GamePanel extends StackPane {
 	}
 	
 
+	private void genMonster(int maxMonster) {
+		for(int i=0;i<maxMonster;i++) {
+			monster[i] = new Monster(this);
+		}
+	}
+	
 	  private void startGameLoop() 
 	  {
-		//  playMusic(bgSound);
+		  playMusic(bgSound);
+		  genMonster(5);
 	      gameLoop = new AnimationTimer() {
 	    	  private long lastUpdate = 0;
 	          @Override
@@ -152,7 +156,12 @@ public class GamePanel extends StackPane {
 	    	if(getGameState()==playingState)
 	    	{
 	    		player.update();
-	    		testMonster.update();
+//	    		testMonster.update();
+	    		for(int i=0;i<monster.length;i++) {
+	    			if(monster[i] != null) {
+	    				monster[i].update();
+	    			}
+	    		}
 	    	}
 	    	//PAUSE
 	    	if(getGameState() ==pauseState)
@@ -179,7 +188,12 @@ public class GamePanel extends StackPane {
 	        tilemanager.draw(gc); 
 	        player.draw(gc);
 	        heart.draw(gc);
-	        testMonster.draw(gc);
+//	        testMonster.draw(gc);
+	        for(int i=0;i<monster.length;i++) {
+    			if(monster[i] != null) {
+    				monster[i].draw(gc);
+    			}
+    		}
 	        
 	        //Drawing HP only when playing
 	        if(getGameState()==playingState)

@@ -123,7 +123,6 @@ public class CollisionChecker {
 		
 		int EnSpeed = entity.getSpeed();
 		int predictTopEdge,predictBottomEdge,predictLeftEdge,predictRightEdge;
-		int predictTopRow,predictBottomRow,predictLeftCol,predictRightCol;
 		switch(entity.getDirection()) 
     	{
     	case "up" :
@@ -131,8 +130,10 @@ public class CollisionChecker {
     		predictBottomEdge = EnBottomEdge - EnSpeed;
     		predictLeftEdge = EnLeftEdge;
     		predictRightEdge = EnRightEdge;
-    		predictTopRow = (EnTopEdge - EnSpeed)/gp.getTileSize();
     		for(int i=0;i<entities.length;i++) {
+    			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
+    				entities[i] = null;
+    			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
     			}
@@ -144,6 +145,9 @@ public class CollisionChecker {
     		predictLeftEdge = EnLeftEdge;
     		predictRightEdge = EnRightEdge;
     		for(int i=0;i<entities.length;i++) {
+    			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
+    				entities[i] = null;
+    			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
     			}
@@ -155,6 +159,9 @@ public class CollisionChecker {
     		predictLeftEdge = EnLeftEdge - EnSpeed;
     		predictRightEdge = EnRightEdge - EnSpeed;
     		for(int i=0;i<entities.length;i++) {
+    			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
+    				entities[i] = null;
+    			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
     			}
@@ -166,6 +173,9 @@ public class CollisionChecker {
     		predictLeftEdge = EnLeftEdge + EnSpeed;
     		predictRightEdge = EnRightEdge + EnSpeed;
     		for(int i=0;i<entities.length;i++) {
+    			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
+    				entities[i] = null;
+    			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
     			}
@@ -177,6 +187,9 @@ public class CollisionChecker {
     		predictLeftEdge = EnLeftEdge + EnSpeed;
     		predictRightEdge = EnRightEdge + EnSpeed;
     		for(int i=0;i<entities.length;i++) {
+    			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
+    				entities[i] = null;
+    			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
     			}
@@ -188,6 +201,9 @@ public class CollisionChecker {
     		predictLeftEdge = EnLeftEdge + EnSpeed;
     		predictRightEdge = EnRightEdge + EnSpeed;
     		for(int i=0;i<entities.length;i++) {
+    			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
+    				entities[i] = null;
+    			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
     			}
@@ -199,6 +215,9 @@ public class CollisionChecker {
     		predictLeftEdge = EnLeftEdge - EnSpeed;
     		predictRightEdge = EnRightEdge - EnSpeed;
     		for(int i=0;i<entities.length;i++) {
+    			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
+    				entities[i] = null;
+    			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
     			}
@@ -210,6 +229,9 @@ public class CollisionChecker {
     		predictLeftEdge = EnLeftEdge - EnSpeed;
     		predictRightEdge = EnRightEdge - EnSpeed;
     		for(int i=0;i<entities.length;i++) {
+    			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
+    				entities[i] = null;
+    			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
     			}
@@ -220,40 +242,246 @@ public class CollisionChecker {
 	}
 	
 	private boolean checkCollide(Entity otherEntity, int predLeftEdge, int predRightEdge, int predTopEdge, int predBottomEdge) {
-		// Entity attribute
-		int EnX = otherEntity.getPosition()[0];
-		int EnY = otherEntity.getPosition()[1];
-		int EnSolidX = (int) otherEntity.getSolidArea().getX();
-		int EnSolidY = (int) otherEntity.getSolidArea().getY();
-		int EnSolidW = (int) otherEntity.getSolidArea().getWidth();
-		int EnSolidH = (int) otherEntity.getSolidArea().getHeight();
-		
-		int otherEnLeftEdge = EnX + EnSolidX;
-		int otherEnRightEdge = EnX + EnSolidX + EnSolidW;
-		int otherEnTopEdge = EnY + EnSolidY;
-		int otherEnBottomEdge = EnY + EnSolidY +EnSolidH;
-		int otherEnSpeed = otherEntity.getSpeed();
-		
-		if((otherEnLeftEdge < predRightEdge && predRightEdge < otherEnRightEdge) && (otherEnBottomEdge >= predTopEdge && predTopEdge >= otherEnTopEdge)) {
-			System.out.println("true 1");
-			return true;
+		if(otherEntity != null) {
+			// Entity attribute
+			int EnX = otherEntity.getPosition()[0];
+			int EnY = otherEntity.getPosition()[1];
+			int EnSolidX = (int) otherEntity.getSolidArea().getX();
+			int EnSolidY = (int) otherEntity.getSolidArea().getY();
+			int EnSolidW = (int) otherEntity.getSolidArea().getWidth();
+			int EnSolidH = (int) otherEntity.getSolidArea().getHeight();
+			
+			int otherEnLeftEdge = EnX + EnSolidX;
+			int otherEnRightEdge = EnX + EnSolidX + EnSolidW;
+			int otherEnTopEdge = EnY + EnSolidY;
+			int otherEnBottomEdge = EnY + EnSolidY +EnSolidH;
+			int otherEnSpeed = otherEntity.getSpeed();
+			
+			int predOtherEnLeftEdge, predOtherEnRightEdge, predOtherEnTopEdge, predOtherEnBottomEdge;
+			
+			switch(otherEntity.getDirection()) 
+	    	{
+	    	case "up" :
+	    		predOtherEnTopEdge = otherEnTopEdge - otherEnSpeed;
+	    		predOtherEnBottomEdge = otherEnBottomEdge - otherEnSpeed;
+	    		predOtherEnLeftEdge = otherEnLeftEdge;
+	    		predOtherEnRightEdge = otherEnRightEdge;
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 1");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 2");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 3");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 4");
+	    			return true;
+	    		}
+	    		
+	    		return false;	
+	    	case "down" :
+	    		predOtherEnTopEdge = otherEnTopEdge + otherEnSpeed;
+	    		predOtherEnBottomEdge = otherEnBottomEdge + otherEnSpeed;
+	    		predOtherEnLeftEdge = otherEnLeftEdge;
+	    		predOtherEnRightEdge = otherEnRightEdge;
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 1");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 2");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 3");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 4");
+	    			return true;
+	    		}
+	    		
+	    		return false;	
+	    	case "left" :
+	    		predOtherEnTopEdge = otherEnTopEdge;
+	    		predOtherEnBottomEdge = otherEnBottomEdge;
+	    		predOtherEnLeftEdge = otherEnLeftEdge - otherEnSpeed;
+	    		predOtherEnRightEdge = otherEnRightEdge - otherEnSpeed;
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 1");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 2");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 3");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 4");
+	    			return true;
+	    		}
+	    		
+	    		return false;	
+	    	case "right" :
+	    		predOtherEnTopEdge = otherEnTopEdge;
+	    		predOtherEnBottomEdge = otherEnBottomEdge;
+	    		predOtherEnLeftEdge = otherEnLeftEdge + otherEnSpeed;
+	    		predOtherEnRightEdge = otherEnRightEdge + otherEnSpeed;
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 1");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 2");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 3");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 4");
+	    			return true;
+	    		}
+	    		
+	    		return false;	
+	    	case "right and up" :
+	    		predOtherEnTopEdge = otherEnTopEdge - otherEnSpeed;
+	    		predOtherEnBottomEdge = otherEnBottomEdge - otherEnSpeed;
+	    		predOtherEnLeftEdge = otherEnLeftEdge + otherEnSpeed;
+	    		predOtherEnRightEdge = otherEnRightEdge + otherEnSpeed;
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 1");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 2");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 3");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 4");
+	    			return true;
+	    		}
+	    		
+	    		return false;	
+	    	case "right and down" :
+	    		predOtherEnTopEdge = otherEnTopEdge + otherEnSpeed;
+	    		predOtherEnBottomEdge = otherEnBottomEdge + otherEnSpeed;
+	    		predOtherEnLeftEdge = otherEnLeftEdge + otherEnSpeed;
+	    		predOtherEnRightEdge = otherEnRightEdge + otherEnSpeed;
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 1");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 2");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 3");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 4");
+	    			return true;
+	    		}
+	    		
+	    		return false;	
+	    	case "left and up" :
+	    		predOtherEnTopEdge = otherEnTopEdge - otherEnSpeed;
+	    		predOtherEnBottomEdge = otherEnBottomEdge - otherEnSpeed;
+	    		predOtherEnLeftEdge = otherEnLeftEdge - otherEnSpeed;
+	    		predOtherEnRightEdge = otherEnRightEdge - otherEnSpeed;
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 1");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 2");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 3");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 4");
+	    			return true;
+	    		}
+	    		
+	    		return false;	
+	    	case "left and down" :
+	    		predOtherEnTopEdge = otherEnTopEdge + otherEnSpeed;
+	    		predOtherEnBottomEdge = otherEnBottomEdge + otherEnSpeed;
+	    		predOtherEnLeftEdge = otherEnLeftEdge - otherEnSpeed;
+	    		predOtherEnRightEdge = otherEnRightEdge - otherEnSpeed;
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 1");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predTopEdge && predTopEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 2");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predRightEdge && predRightEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 3");
+	    			return true;
+	    		}
+	    		
+	    		if((predOtherEnLeftEdge < predLeftEdge && predLeftEdge < predOtherEnRightEdge) && (predOtherEnBottomEdge >= predBottomEdge && predBottomEdge >= predOtherEnTopEdge)) {
+	    			System.out.println("true 4");
+	    			return true;
+	    		}
+	    		
+	    		return false;	
+	    	}
+			
+			return false;
+		} else {
+			return false;
 		}
-		
-		if((otherEnLeftEdge < predLeftEdge && predLeftEdge < otherEnRightEdge) && (otherEnBottomEdge >= predBottomEdge && predBottomEdge >= otherEnTopEdge)) {
-			System.out.println("true 2");
-			return true;
-		}
-		
-		if((otherEnLeftEdge < predRightEdge && predRightEdge < otherEnRightEdge) && (otherEnBottomEdge >= predTopEdge && predTopEdge >= otherEnTopEdge)) {
-			System.out.println("true 3");
-			return true;
-		}
-		
-		if((otherEnLeftEdge < predLeftEdge && predLeftEdge < otherEnRightEdge) && (otherEnBottomEdge >= predBottomEdge && predBottomEdge >= otherEnTopEdge)) {
-			System.out.println("true 4");
-			return true;
-		}
-		
-		return false;	
 	}
 }

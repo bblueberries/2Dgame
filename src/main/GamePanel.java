@@ -124,7 +124,7 @@ public class GamePanel extends StackPane {
 
 	private void startGameLoop() {
 		playMusic(bgSound);
-		genMonster();
+		genMonster(1);
 	    gameLoop = new AnimationTimer() {
 	    	private long lastUpdate = 0;
 
@@ -138,11 +138,14 @@ public class GamePanel extends StackPane {
 	            }
 	        }
 	    };
-	      gameLoop.start();
+	    gameLoop.start();
 	}
-	// generate monster in map
-	public void genMonster() {
-		for(int i=0;i<3;i++) {
+	// Generate monster in map
+	public void genMonster(int maxMonster) {
+		if(maxMonster >= 10) {
+			maxMonster = 10;
+		}
+		for(int i=0;i<maxMonster;i++) {
 			this.monsters[i] = new Monster(this);
 		}
 	}
@@ -153,7 +156,7 @@ public class GamePanel extends StackPane {
 		//PLAYING
 	    if(getGameState()==playingState) {
 	    	player.update();
-	    	testMonster.update();
+//	    	testMonster.update();
 	    	for(int i=0;i<monsters.length;i++) {
 	    		if(monsters[i] != null) {
 	    			monsters[i].update();
@@ -180,7 +183,7 @@ public class GamePanel extends StackPane {
 	    	tilemanager.draw(gc); 
 	        player.draw(gc);
 	        heart.draw(gc);
-	        testMonster.draw(gc);
+//	        testMonster.draw(gc);
 	        for(int i=0;i<monsters.length;i++) {
 	    		if(monsters[i] != null) {
 	    			monsters[i].draw(gc);

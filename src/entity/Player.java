@@ -198,7 +198,6 @@ public class Player extends Entity {
     	if(KeyHandler.getKeyPressed(KeyCode.W)||KeyHandler.getKeyPressed(KeyCode.S)||KeyHandler.getKeyPressed(KeyCode.A)||KeyHandler.getKeyPressed(KeyCode.D)) {
     		
     		if (KeyHandler.getKeyPressed(KeyCode.D) && KeyHandler.getKeyPressed(KeyCode.W)) {
-//            	System.out.println("wd");
                 setDirection("right and up");
                 
             }
@@ -215,7 +214,6 @@ public class Player extends Entity {
                 
             }
             else if (KeyHandler.getKeyPressed(KeyCode.W)) {
-//	        	System.out.println("W");
             	setDirection("up"); 
             
 	        }
@@ -228,16 +226,15 @@ public class Player extends Entity {
 	            
 	        } 
 	        else if (KeyHandler.getKeyPressed(KeyCode.D)) {
-//	        	System.out.println("D");
 	        	setDirection("right");
 	            
 	        }
         
         
 	        setCollide(false);
-	        gp.getCollisionChecker().checkTile(this);
 	        gp.getCollisionChecker().checkOtherEntity(this, gp.getMonsters());
-	        
+	        gp.getCollisionChecker().checkTile(this);
+	        System.out.println(this.isCollide());
 	        if(!isCollide()) {
 		        switch(getDirection()) {
 		        case "up" :

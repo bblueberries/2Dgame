@@ -47,7 +47,7 @@ public class GamePanel extends StackPane {
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
 
-	private Monster testMonster = new Monster(this);
+//	private Monster testMonster = new Monster(this);
 	private Heart heart = new Heart(this);
 	private UI ui;
 	private boolean FirstTimeStart= true;
@@ -61,7 +61,7 @@ public class GamePanel extends StackPane {
 	
 
 
-	private Monster monster[] = new Monster[10];
+	private Monster monster[] = new Monster[20];
 	private TileManager tileManager = new TileManager(this);
 	public TileManager tilemanager = new TileManager(this);
 	
@@ -122,8 +122,13 @@ public class GamePanel extends StackPane {
 	}
 	
 	private void genMonster(int maxMonster) {
+		if(maxMonster > monster.length) {
+			maxMonster = monster.length;
+		}
+		
 		for(int i=0;i<maxMonster;i++) {
 			monster[i] = new Monster(this);
+			System.out.println("from gp "+this.getTileManager());
 		}
 	}
 	
@@ -134,7 +139,7 @@ public class GamePanel extends StackPane {
 	  }
 	  public void startNewGameLoop() 
 	  {
-		 genMonster(5);
+		 genMonster(7);
 		 resetGame();
 		 if(gameLoop != null)
 		 {
@@ -371,6 +376,10 @@ public class GamePanel extends StackPane {
 
 		public void setFirstTimeStartWarning(boolean firstTimeStartWarning) {
 			FirstTimeStartWarning = firstTimeStartWarning;
+		}
+
+		public TileManager getTileManager() {
+			return tileManager;
 		}
 	}
 		

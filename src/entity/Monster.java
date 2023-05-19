@@ -32,8 +32,26 @@ public class Monster extends Entity{
     }
     private void setDefaultValue()
     {
-    	setPosition(gp.getTileSize()*21,gp.getTileSize()*23);
-        setSpeed(3);
+    	boolean checkSpawn = false;
+    	Random random = new Random();
+    	int xPos = random.nextInt(10)+18;
+    	int yPos = random.nextInt(10)+16;
+    	System.out.println(xPos+" "+yPos);
+    	System.out.println("this is "+gp.getTileManager());
+    	System.out.println("this is "+gp.getTileManager().getMapTileNum()[xPos][yPos]);
+    	while(!checkSpawn){
+        	int spawnTile = this.gp.tilemanager.getMapTileNum()[xPos][yPos];
+        	if(gp.tilemanager.getTile()[spawnTile].isCollision() == true) {
+        		checkSpawn = false;
+        		xPos = random.nextInt(20)+13;
+        		yPos = random.nextInt(20)+11;
+        	} else {
+        		checkSpawn = true;
+        	}
+    	}
+    	
+    	setPosition(gp.getTileSize()*xPos,gp.getTileSize()*yPos);
+        setSpeed(4);
         setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));
         setDirection("down");
         

@@ -78,29 +78,29 @@ public class Monster extends Entity{
 	    	Random random = new Random();
 	    	i = random.nextInt(800)+1;
 	    	
-//	    	if(i <= 100) {
-//	    		this.setDirection("up");
-//	    	} else if(i <= 200) {
-//	    		this.setDirection("down");
-//	    	} else if(i <= 300) {
-//	    		this.setDirection("left");
-//	    	} else if(i <= 400) {
-//	    		this.setDirection("right");
-//	    	} else if(i <= 500) {
-//	    		this.setDirection("right and up");
-//	    	} else if(i <= 600) {
-//	    		this.setDirection("right and down");
-//	    	} else if(i <= 700) {
-//	    		this.setDirection("left and up");
-//	    	} else if(i <= 800) {
-//	    		this.setDirection("left and down");
-//	    	}
-	    	
-	    	if(i <= 400) {
+	    	if(i <= 100) {
 	    		this.setDirection("up");
-	    	} else if(i <= 800) {
+	    	} else if(i <= 200) {
 	    		this.setDirection("down");
+	    	} else if(i <= 300) {
+	    		this.setDirection("left");
+	    	} else if(i <= 400) {
+	    		this.setDirection("right");
+	    	} else if(i <= 500) {
+	    		this.setDirection("right and up");
+	    	} else if(i <= 600) {
+	    		this.setDirection("right and down");
+	    	} else if(i <= 700) {
+	    		this.setDirection("left and up");
+	    	} else if(i <= 800) {
+	    		this.setDirection("left and down");
 	    	}
+	    	
+//	    	if(i <= 400) {
+//	    		this.setDirection("up");
+//	    	} else if(i <= 800) {
+//	    		this.setDirection("down");
+//	    	}
 	    	
 	    	dirCounter = 0;
 	    }

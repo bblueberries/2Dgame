@@ -21,58 +21,101 @@ public class KeyHandler{
 	}
 	
 	public void setKeyPressed(KeyCode keycode,boolean pressed) {
+		//Add key Press to Array list for use later
 		if(pressed){
 			if(!keyPressed.contains(keycode)){
 				keyPressed.add(keycode);
 			}
 		}
+		//Remove key from Array list
 		else{
 			keyPressed.remove(keycode);
 		}}
 	
 	public void keyPressedChangeState() {
-	    	
-		    	if(gp.getUi().getOptionNum()==4) 
-		    	{if(getKeyPressed(KeyCode.SPACE)) {gp.getUi().setOptionNum(1);gp.setGameState(GamePanel.playingState);}}
-		    	
-		    	
-		    	else if(getKeyPressed(KeyCode.ESCAPE)) // toggle option screen(pauseState)
+	    		if(gp.getUi().getState()==0)
+	    		{
+		    	// toggle option screen(pauseState)
+				if(getKeyPressed(KeyCode.ESCAPE))
 		    	{	
 					if(gp.getGameState()==GamePanel.playingState) {gp.setGameState(GamePanel.pauseState);}
 					else if(gp.getGameState()==GamePanel.pauseState) {gp.setGameState(GamePanel.playingState);}
 		    	}
-		    }
-		    
-		    public void keyPressedPauseState() {
-		    	//select option 
-		    	if(getKeyPressed(KeyCode.S)&&gp.getUi().getOptionNum()<4)
-				{
-					
-		    		// select option in EndGame's option
-					if(gp.getUi().getState()==3)
-					{
-						if(gp.getUi().getOptionNum()<2) gp.getUi().setOptionNum( (gp.getUi().getOptionNum()+1));
-					}
-					else gp.getUi().setOptionNum( (gp.getUi().getOptionNum()+1));
-				}
-				else if(getKeyPressed(KeyCode.W)&&gp.getUi().getOptionNum()>1)
-				{
-					
-					gp.getUi().setOptionNum( (gp.getUi().getOptionNum()-1));
-				}
-		    }
-		    	
-		    public void backPressed() {
-		    	
-		    	if(gp.getUi().getState()!=0) // back to option screen
-		    	{
-		    		if(getKeyPressed(KeyCode.ESCAPE) || (gp.getUi().getState()==3&&gp.getUi().getOptionNum()==2&&getKeyPressed(KeyCode.SPACE))) 
+	    		}
+				
+	    		else
+		    	{	
+	    			
+	    			// back to option screen (ESC)
+		    		if(getKeyPressed(KeyCode.ESCAPE)) 
 		    		{
 		    			gp.getUi().setState(0);
 		    		}
 		    	}
 		    }
-		    public void keyPressedTitleState() {
+
+	public void keyPressedPauseState() {
+		    	//select option 
+				if(gp.getUi().getState()==0)
+				{
+					if(getKeyPressed(KeyCode.S)&&gp.getUi().getOptionNum()<4)
+						gp.getUi().setOptionNum( (gp.getUi().getOptionNum()+1));
+					else if(getKeyPressed(KeyCode.W)&&gp.getUi().getOptionNum()>1)	
+						gp.getUi().setOptionNum( (gp.getUi().getOptionNum()-1));
+				}
+		  		//select option in EndGame's option
+				if(gp.getUi().getState()==3)
+				{
+					if(getKeyPressed(KeyCode.S)&&gp.getUi().getOptionNum()<2)
+					{
+						gp.getUi().setOptionNum( (gp.getUi().getOptionNum()+1));
+					}
+					else if(getKeyPressed(KeyCode.W)&&gp.getUi().getOptionNum()>1)
+						{gp.getUi().setOptionNum( (gp.getUi().getOptionNum()-1));}
+				}
+	  }
+	public void optionPressed(int optionNum) {
+		//in Option screen
+		if(gp.getUi().getState()==0)
+		{
+		if(gp.getUi().getOptionNum()==4)
+		{
+			if(getKeyPressed(KeyCode.SPACE)) 
+				{
+				gp.getUi().setOptionNum(1);
+				gp.setGameState(GamePanel.playingState);
+				}
+		}
+		else if(getKeyPressed(KeyCode.SPACE)) { 
+				gp.getUi().setState(optionNum);
+				gp.getUi().setOptionNum(1);
+		}
+		}
+		//in Exist Option screen
+		else if(gp.getUi().getState()==3)
+		{	
+			if(getKeyPressed(KeyCode.SPACE)) 
+			{	//confirm YES
+				if(gp.getUi().getOptionNum()==1)
+				{
+					gp.getUi().setOptionNum(1);
+					gp.getUi().setState(0);
+					gp.stopMusic(gp.getBgSound());
+					gp.setGameState(GamePanel.titleState);
+				}
+				//confirm NO
+				else if(gp.getUi().getOptionNum()==2)
+				{	
+					gp.getUi().setState(0);
+					gp.getUi().setOptionNum(1);
+				}
+			}
+			
+		}
+	}
+	
+
+	public void keyPressedTitleState() {
 	    		
 	    		//Choosing Option in Title Screen
 				if(getKeyPressed(KeyCode.S))
@@ -96,7 +139,7 @@ public class KeyHandler{
 					}
 				}
 			}
-		    public String playerUpdate() {
+	public String playerUpdate() {
 		    
 		    		//Set player direction to walk
 		    		if (getKeyPressed(KeyCode.D) && getKeyPressed(KeyCode.W)) {
@@ -133,7 +176,7 @@ public class KeyHandler{
 		    	
 		    	return gp.getPlayer().getDirection();
 		    }
-		    public boolean isWalkPressed()
+	public boolean isWalkPressed()
 		    {
 		    	//Check if user press walking button (W A S D)
 		    	if(getKeyPressed(KeyCode.W)||getKeyPressed(KeyCode.S)||getKeyPressed(KeyCode.A)||getKeyPressed(KeyCode.D)) return true;

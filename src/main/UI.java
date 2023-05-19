@@ -153,7 +153,7 @@ public class UI {
 		
 		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,30));
 		gc.setFill(Color.WHITE);
-		String text = "dawdwadawdadwa";
+		String text = "this is option 1";
 		int textX = X +gp.getTileSize();
 		int textY  = Y+gp.getTileSize()*4;
 		gc.fillText(text, textX, textY);
@@ -162,15 +162,39 @@ public class UI {
 		
 		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,30));
 		gc.setFill(Color.WHITE);
-		String text = "dawdwadawdadwa";
-		int textX = X +gp.getTileSize();
+		String text = "this is option2";
+		int textX = X +gp.getTileSize()-8;
 		int textY  = Y+gp.getTileSize()*4;
 		gc.fillText(text, textX, textY);
 
 	}
 	public void OptionEndGame(int X,int Y) {
 		
+		gc.setFont(Font.font("Courier New",FontWeight.LIGHT,20));
+		gc.setFill(Color.WHITE);
 		
+		String text = "Do you want to quit game";
+		int textX = X+gp.getTileSize()-6;
+		int textY  = (int) (Y+gp.getTileSize()*2);
+		gc.fillText(text, textX, textY);
+		
+		text = "and return to title screen?";
+		textX -= 12;
+		textY  += gp.getTileSize();
+		gc.fillText(text, textX, textY);
+			
+		text = "YES";
+		textX = X+ gp.getTileSize()*3 +25;
+		textY  += gp.getTileSize()*3;
+		gc.fillText(text, textX, textY);
+		if(optionNum==1) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+2);}
+		
+		text = "NO";
+		textX += 5;
+		textY  += gp.getTileSize();
+		gc.fillText(text, textX, textY);
+		if(optionNum==2) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+2);}
+	
 	}
 	
 	public void DrawScreen(int x,int y,int width,int height){

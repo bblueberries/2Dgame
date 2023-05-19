@@ -110,8 +110,9 @@ public class GamePanel extends StackPane {
 				// option Screen
 				if(getGameState() == pauseState){ 
 				
-					keyHandler.backPressed();
+					
 					keyHandler.keyPressedPauseState();
+					keyHandler.optionPressed(ui.getOptionNum());
 				}
 			 });
 		 

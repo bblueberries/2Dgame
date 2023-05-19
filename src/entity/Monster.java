@@ -105,11 +105,15 @@ public class Monster extends Entity{
 	    }
 
 			 
-		setCollide(false);
+		setCollide(true);
 		Entity player[] = new Entity[1];
 		player[0] = gp.getPlayer();
 		gp.getCollisionChecker().checkOtherEntity(this, player);
-		gp.getCollisionChecker().checkTile(this);
+//		System.out.println("isCollide = "+isCollide());
+		if(!isCollide()) {
+			gp.getCollisionChecker().checkTile(this);
+			System.out.println("isTileCollide = "+isCollide());
+		}
 		        
 		if(!isCollide()) {	
 			switch(getDirection()) {

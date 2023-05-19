@@ -181,14 +181,14 @@ public class Player extends Entity {
     }
 	 private void getPlayerImage() {
 
-		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_up_1.png"))) ;
-		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_up_2.png")));
-		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_down_1.png")));
-		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_down_2.png")));
-		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_left_1.png")));
-		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_left_2.png")));
-		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_right_1.png")));
-		 getImages().add( new Image(getClass().getResourceAsStream("/player/boy_right_2.png")));
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger6.png"))) ;
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger7.png")));
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger4.png")));
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger5.png")));
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger2.png")));
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger3.png")));
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger0.png")));
+		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger1.png")));
 		 
 
 	  }

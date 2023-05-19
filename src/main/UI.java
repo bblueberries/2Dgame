@@ -65,7 +65,14 @@ public class UI {
 		
 		x+= gp.getTileSize();
 		y+=gp.getTileSize() -20;
-		gc.setFont(Font.font("Courier New",FontWeight.NORMAL,25));
+		gc.setFont(Font.font("Courier New",FontWeight.BOLD,25));
+		gc.setFill(Color.BLACK);
+		text="PRESS ESC TO GO BACK TO TITLE SCREEN..";
+		gc.fillText(text, x, y);
+		
+		x+= 2;
+		y+= 2;
+		gc.setFont(Font.font("Courier New",FontWeight.BOLD,25));
 		gc.setFill(Color.LEMONCHIFFON);
 		text="PRESS ESC TO GO BACK TO TITLE SCREEN..";
 		gc.fillText(text, x, y);

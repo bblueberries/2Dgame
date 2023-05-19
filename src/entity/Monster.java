@@ -35,14 +35,14 @@ public class Monster extends Entity{
     {
     	boolean checkSpawn = false;
     	Random random = new Random();
-    	int xPos = random.nextInt(10)+18;
-    	int yPos = random.nextInt(10)+16;
+    	int xPos = random.nextInt(20)+18;
+    	int yPos = random.nextInt(20)+16;
     	while(!checkSpawn){
         	int spawnTile = this.gp.tilemanager.getMapTileNum()[xPos][yPos];
         	if(gp.tilemanager.getTile()[spawnTile].isCollision() == true) {
         		checkSpawn = false;
-        		xPos = random.nextInt(20)+13;
-        		yPos = random.nextInt(20)+11;
+        		xPos = random.nextInt(40)+5;
+        		yPos = random.nextInt(40)+5;
         	} else {
         		checkSpawn = true;
         	}

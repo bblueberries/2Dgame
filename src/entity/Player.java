@@ -155,9 +155,13 @@ public class Player extends Entity {
 //    private int speed;
     private final int ScreenX;
     private final int ScreenY;
+    private int xPos;
+    private int yPos;
     
     public Player(GamePanel gp) {
         this.gp = gp;
+        this.xPos = 23;
+        this.yPos = 21;
 		this.ScreenX =	this.gp.getScreenWidth()/2 - (this.gp.getTileSize()/2);
 		this.ScreenY =  this.gp.getScreenHeight()/2-(this.gp.getTileSize()/2);
 		this.getSolidArea().setX(10);
@@ -170,7 +174,7 @@ public class Player extends Entity {
     }
     private void setDefaultValue()
     {
-    	setPosition(gp.getTileSize()*23,gp.getTileSize()*21);
+    	setPosition(gp.getTileSize()*xPos,gp.getTileSize()*yPos);
         setSpeed(6);
         setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));
         setDirection("up");
@@ -288,5 +292,17 @@ public class Player extends Entity {
 	}
 	public int getScreenY() {
 		return ScreenY;
+	}
+	public int getxPos() {
+		return xPos;
+	}
+	public void setxPos(int xPos) {
+		this.xPos = xPos;
+	}
+	public int getyPos() {
+		return yPos;
+	}
+	public void setyPos(int yPos) {
+		this.yPos = yPos;
 	}
 }

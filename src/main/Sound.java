@@ -13,6 +13,7 @@ public class Sound {
     // 2 : ???
     public Sound(int i) {
     	this.soundPath[0] = "/sound/themesong.mp3";
+    	this.soundPath[1] = "/sound/hitmonster.wav";
     	Media media = new Media(getClass().getResource(this.soundPath[i]).toString());
         mediaPlayer = new MediaPlayer(media);
     }

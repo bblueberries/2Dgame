@@ -45,11 +45,14 @@ public class GamePanel extends StackPane {
     private AnimationTimer gameLoop;
     
     private Sound bgSound = new Sound(0);
+    private Sound hitSound = new Sound(1);
 	private KeyHandler keyHandler	= new KeyHandler(this);
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
 
 //	private Monster testMonster = new Monster(this);
+	Random random = new Random();
+	private int maxMons = random.nextInt(5)+5;;
 	private Heart heart = new Heart(this);
 	private UI ui;
 	private boolean FirstTimeStart= true;
@@ -62,7 +65,7 @@ public class GamePanel extends StackPane {
 	
 	
 
-
+	private int currentMonster = this.getMaxMons();
 	private Monster monster[] = new Monster[20];
 	private TileManager tileManager = new TileManager(this);
 	public TileManager tilemanager = new TileManager(this);
@@ -142,8 +145,8 @@ public class GamePanel extends StackPane {
 	  }
 	  public void startNewGameLoop() 
 	  {
-		 Random random = new Random();
-		 int maxMons = random.nextInt(5)+5;
+//		 Random random = new Random();
+//		 maxMons = random.nextInt(5)+5;
 		 genMonster(maxMons);
 //		 genMonster(7);
 		 resetGame();
@@ -178,7 +181,14 @@ public class GamePanel extends StackPane {
 	    	//PLAYING
 	    	if(getGameState()==playingState)
 	    	{
+//	    		System.out.println(currentMonster);
 	    		player.update();
+	    		if(getMonsterAlive(monster) != currentMonster) {
+	    			this.getHitSound().play();
+	    			this.getHitSound().stop();
+	    			this.getHitSound().play();
+    				currentMonster = getMonsterAlive(monster);
+	    		}
 	    		if(getMonsterAlive(monster)==0)
 	    		{
 	    			getUi().setGameFinished(true);
@@ -401,6 +411,15 @@ public class GamePanel extends StackPane {
 		public TileManager getTileManager() {
 			return tileManager;
 		}
+
+		public Sound getHitSound() {
+			return hitSound;
+		}
+
+		public int getMaxMons() {
+			return maxMons;
+		}
+
 	}
 		
 

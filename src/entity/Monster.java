@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import main.GamePanel;
 import main.KeyHandler;
+import main.Sound;
 
 public class Monster extends Entity{
 	private final GamePanel gp;
@@ -35,11 +36,15 @@ public class Monster extends Entity{
     {
     	boolean checkSpawn = false;
     	Random random = new Random();
-    	int xPos = random.nextInt(20)+18;
-    	int yPos = random.nextInt(20)+16;
+    	int xPos = random.nextInt(40)+5;
+    	int yPos = random.nextInt(40)+5;
     	while(!checkSpawn){
         	int spawnTile = this.gp.tilemanager.getMapTileNum()[xPos][yPos];
         	if(gp.tilemanager.getTile()[spawnTile].isCollision() == true) {
+        		checkSpawn = false;
+        		xPos = random.nextInt(40)+5;
+        		yPos = random.nextInt(40)+5;
+        	} else if(gp.getPlayer().getxPos() == xPos && gp.getPlayer().getyPos() == yPos){
         		checkSpawn = false;
         		xPos = random.nextInt(40)+5;
         		yPos = random.nextInt(40)+5;

@@ -134,6 +134,9 @@ public class CollisionChecker {
     		for(int i=0;i<entities.length;i++) {
     			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
     				entities[i] = null;
+//    				System.out.println("this is null");
+//    				Sound hitSound = gp.getHitSound();
+//    				gp.playSE(hitSound);
     			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
@@ -148,6 +151,9 @@ public class CollisionChecker {
     		for(int i=0;i<entities.length;i++) {
     			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
     				entities[i] = null;
+//    				System.out.println("this is null");
+//    				Sound hitSound = gp.getHitSound();
+//    				gp.playSE(hitSound);
     			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
@@ -162,6 +168,9 @@ public class CollisionChecker {
     		for(int i=0;i<entities.length;i++) {
     			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
     				entities[i] = null;
+//    				System.out.println("this is null");
+//    				Sound hitSound = gp.getHitSound();
+//    				gp.playSE(hitSound);
     			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
@@ -176,6 +185,9 @@ public class CollisionChecker {
     		for(int i=0;i<entities.length;i++) {
     			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
     				entities[i] = null;
+//    				System.out.println("this is null");
+//    				Sound hitSound = gp.getHitSound();
+//    				gp.playSE(hitSound);
     			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
@@ -190,6 +202,9 @@ public class CollisionChecker {
     		for(int i=0;i<entities.length;i++) {
     			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
     				entities[i] = null;
+//    				System.out.println("this is null");
+//    				Sound hitSound = gp.getHitSound();
+//    				gp.playSE(hitSound);
     			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
@@ -204,6 +219,9 @@ public class CollisionChecker {
     		for(int i=0;i<entities.length;i++) {
     			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
     				entities[i] = null;
+//    				System.out.println("this is null");
+//    				Sound hitSound = gp.getHitSound();
+//    				gp.playSE(hitSound);
     			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
@@ -218,6 +236,9 @@ public class CollisionChecker {
     		for(int i=0;i<entities.length;i++) {
     			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
     				entities[i] = null;
+//    				System.out.println("this is null");
+//    				Sound hitSound = gp.getHitSound();
+//    				gp.playSE(hitSound);
     			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));
@@ -232,6 +253,9 @@ public class CollisionChecker {
     		for(int i=0;i<entities.length;i++) {
     			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
     				entities[i] = null;
+//    				System.out.println("this is null");
+//    				Sound hitSound = gp.getHitSound();
+//    				gp.playSE(hitSound);
     			}
     			if(entities[i] != null) {
     				entity.setCollide(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge));

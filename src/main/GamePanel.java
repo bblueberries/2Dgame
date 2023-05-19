@@ -225,13 +225,13 @@ public class GamePanel extends StackPane {
 	        //Drawing HP only when playing
 	        if(getGameState()==playingState)
 	        {
-//	        	getUi().draw(gc);
+	        	getUi().draw(gc);
 	        }
 	        
 	        //Drawing Option screen when pausing
 	        if(getGameState()==pauseState)
 	    	{
-	        	ui.draw(gc);
+	        	getUi().draw(gc);
 	    	} 
 	        //Drawing Congratulation
 	        if(getGameState()==endingState)

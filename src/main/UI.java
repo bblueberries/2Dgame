@@ -17,6 +17,7 @@ public class UI {
 	private GamePanel gp;
 	private GraphicsContext gc;
 	private int titleNum=0;
+	private int titleState=0;
 	private int state=0;
 	private int optionNum=1;
 	
@@ -173,7 +174,7 @@ public class UI {
 		gc.setFont(Font.font("Courier New",FontWeight.LIGHT,20));
 		gc.setFill(Color.WHITE);
 		
-		String text = "Do you want to quit game";
+		String text = "Do you want to save game";
 		int textX = X+gp.getTileSize()-6;
 		int textY  = (int) (Y+gp.getTileSize()*2);
 		gc.fillText(text, textX, textY);
@@ -223,10 +224,26 @@ public class UI {
         text.applyCss();
         return text.getLayoutBounds().getWidth();
     }
-	private double getCenteredTextX(Text text,int fontSize) {
+	public double getCenteredTextX(Text text,int fontSize) {
 	    double screenWidth = gp.getScreenWidth();
 	    double textWidth = measureStringWidth(text);
 	    return (gp.getScreenWidth() - textWidth/text.getFont().getSize()*fontSize) / 2   ;
+	}
+	
+	public void LoadGameDraw()
+	{
+	
+		int y = (5*gp.getTileSize());
+		
+		Text text = new Text("PLEASE NEW GAME FIRST..");
+		Font font = Font.font("Courier New",40);
+		Color textColor = Color.WHITE;
+		int textX = (int) gp.getUi().getCenteredTextX(text,40)-gp.getTileSize()+5;
+		int textY= y+gp.getTileSize();
+		
+		gc.setFont(font);
+		gc.setFill(textColor);
+		gc.fillText(text.getText(),textX,textY );
 	}
 	public int getTitleNum() {
 		return titleNum;
@@ -245,6 +262,12 @@ public class UI {
 	}
 	public void setOptionNum(int optionNum) {
 		this.optionNum = optionNum;
+	}
+	public int getTitleState() {
+		return titleState;
+	}
+	public void setTitleState(int titleState) {
+		this.titleState = titleState;
 	}
 	
 }

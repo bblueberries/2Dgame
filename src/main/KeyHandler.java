@@ -4,6 +4,9 @@ import java.util.ArrayList;
 
 
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
 
 public class KeyHandler{
@@ -116,7 +119,10 @@ public class KeyHandler{
 	
 
 	public void keyPressedTitleState() {
-	    		
+	    	
+			//in Title Screen
+	    	if(gp.getUi().getTitleState()==0)
+				{
 	    		//Choosing Option in Title Screen
 				if(getKeyPressed(KeyCode.S))
 				{
@@ -129,16 +135,54 @@ public class KeyHandler{
 				}
 				
 				//Select the option
+				
 				if(getKeyPressed(KeyCode.SPACE))
 				{
 					switch(gp.getUi().getTitleNum())
 					{
-					case 0: gp.setGameState(GamePanel.playingState);gp.playMusic(gp.getBgSound());break; //Play
-					case 1: break; //
+					case 0: newGame();break; //Play
+					case 1: loadGame();break; //
 					case 2:	System.exit(0);break; //Exit
 					}
 				}
+				}
+	    	//In Warning Screen
+	    	 if(gp.getUi().getTitleState()==1)
+	    	 {
+	    		 if(getKeyPressed(KeyCode.ESCAPE))
+	    		 {
+	    			 gp.getUi().setTitleState(0);
+	    			 gp.setFirstTimeStartWarning(false);
+	    			 
+				}
+	    	 }
 			}
+	public void newGame() {
+		//Create new Game
+		gp.startNewGameLoop();
+		gp.playMusic(gp.getBgSound());
+		gp.setGameState(GamePanel.playingState);
+		gp.setFirstTimeStart(false);
+	}
+	public void loadGame() {
+		
+		//FirstTimeStart (never New Game)
+		if(gp.getFirstTimeStart())
+		{
+			//Take user to Warning Screen
+			gp.getUi().setTitleState(1);
+			gp.setFirstTimeStartWarning(true);
+			
+			
+		}
+		//Load Game
+		else
+		{
+		gp.setGameState(GamePanel.playingState);
+		gp.playMusic(gp.getBgSound());
+		}
+		
+	}
 	public String playerUpdate() {
 		    
 		    		//Set player direction to walk

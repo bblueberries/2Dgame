@@ -51,16 +51,15 @@ public class GamePanel extends StackPane {
 	private Monster testMonster = new Monster(this);
 	private Heart heart = new Heart(this);
 	private UI ui;
-	
+	private boolean FirstTimeStart= true;
+	private boolean FirstTimeStartWarning=false;
 	private int gameState=0;
 	public static final int titleState=0;
 	public static final int playingState=1;
 	public static final int pauseState=2;
 //	public static final int optionState=3;
 	
-	public void setPlayer(Player player) {
-		this.player = player;
-	}
+	
 
 
 	private Entity monster[] = new Entity[10];
@@ -72,7 +71,6 @@ public class GamePanel extends StackPane {
 //	}
 
 	
-
 	
 	public GamePanel()
 	{
@@ -121,13 +119,22 @@ public class GamePanel extends StackPane {
 		 });
 //		
 		
-		 this.startGameLoop();
+		 this.startNewGameLoop();
 		 
 	}
 	
-
-	  private void startGameLoop() 
+	  public void resetGame()
 	  {
+		   setPlayer(new Player(this));
+		   setGameState(GamePanel.titleState);
+	  }
+	  public void startNewGameLoop() 
+	  {
+		 resetGame();
+		 if(gameLoop != null)
+		 {
+			 gameLoop.stop();
+		 }
 		//  playMusic(bgSound);
 	      gameLoop = new AnimationTimer() {
 	    	  private long lastUpdate = 0;
@@ -142,8 +149,10 @@ public class GamePanel extends StackPane {
 	          }
 	          };
 	          gameLoop.start(); 
-
+	          
+	          
 	      }
+	  	
 	
 
 	    private void update() {
@@ -173,7 +182,10 @@ public class GamePanel extends StackPane {
 	        //title Screen
 	        if(getGameState()==titleState)
 	        {
-	        	ui.draw(gc);
+	        	if(isFirstTimeStartWarning())
+	        	{ui.LoadGameDraw();}
+	        	
+	        	else ui.draw(gc);
 	         }
 	        
 	        else {
@@ -306,6 +318,43 @@ public class GamePanel extends StackPane {
 
 		public void setKeyHandler(KeyHandler keyHandler) {
 			this.keyHandler = keyHandler;
+		}
+
+
+		public AnimationTimer getGameLoop() {
+			return gameLoop;
+		}
+
+
+		public void setGameLoop(AnimationTimer gameLoop) {
+			this.gameLoop = gameLoop;
+		}
+
+		public boolean getFirstTimeStart() {
+			return FirstTimeStart;
+		}
+
+		public void setFirstTimeStart(boolean firstTimeStart) {
+			FirstTimeStart = firstTimeStart;
+		}
+		public void setPlayer(Player player) {
+			this.player = player;
+		}
+
+		public GraphicsContext getGc() {
+			return gc;
+		}
+
+		public void setGc(GraphicsContext gc) {
+			this.gc = gc;
+		}
+
+		public boolean isFirstTimeStartWarning() {
+			return FirstTimeStartWarning;
+		}
+
+		public void setFirstTimeStartWarning(boolean firstTimeStartWarning) {
+			FirstTimeStartWarning = firstTimeStartWarning;
 		}
 	}
 		

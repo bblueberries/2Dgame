@@ -94,7 +94,7 @@ public class Monster extends Entity{
 		Entity player[] = new Entity[1];
 		player[0] = gp.getPlayer();
 		gp.getCollisionChecker().checkOtherEntity(this, player);
-		gp.getCollisionChecker().checkOtherEntity(this, gp.getMonsters());
+		gp.getCollisionChecker().checkOtherEntity(this, gp.getMonster());
 		gp.getCollisionChecker().checkTile(this);
 		        
 		if(!isCollide()) {	

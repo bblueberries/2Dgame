@@ -68,3 +68,10 @@ configurations:
 /main/
 /monster/
 /entity/
+<<<<<<< Updated upstream
+/player/
+/dogwalk/
+=======
+>>>>>>> Stashed changes
+/object/
+/tile/

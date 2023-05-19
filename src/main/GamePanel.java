@@ -43,9 +43,10 @@ public class GamePanel extends StackPane {
     private AnimationTimer gameLoop;
     
     private Sound bgSound = new Sound(0);
-	private KeyHandler keyH	= new KeyHandler();
+	private KeyHandler keyHandler	= new KeyHandler(this);
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
+
 	private Monster monsters[] = new Monster[10];
 	private Monster testMonster = new Monster(this);
 	private Heart heart = new Heart(this);
@@ -55,20 +56,31 @@ public class GamePanel extends StackPane {
 	public static final int titleState=0;
 	public static final int playingState=1;
 	public static final int pauseState=2;
+//	public static final int optionState=3;
 	
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
 
-	TileManager tilemanager = new TileManager(this);
+
+	private Entity monster[] = new Entity[10];
+	private TileManager tileManager = new TileManager(this);
+	public TileManager tilemanager = new TileManager(this);
 	
-	public GamePanel() {
+//	public void setPlayer(Player player) {
+//		this.player = player;
+//	}
+
+	
+
+	
+	public GamePanel()
+	{
 		 canvas = new Canvas(screenWidth, screenHeight);
 		 gc = canvas.getGraphicsContext2D();
 		 ui = new UI(this,gc);
 		 gc.setImageSmoothing(false);
-//		 gc.setMiterLimit(2.0);
-//		 gc.setLineCap(StrokeLineCap.SQUARE);
+
 		 getChildren().add(canvas);
 		 
 		 setBackground(new javafx.scene.layout.Background(new javafx.scene.layout.BackgroundFill(Color.BLACK, null, null)));
@@ -77,133 +89,119 @@ public class GamePanel extends StackPane {
 		 this.frameTimeNano = (long) (1000000000 / targetFPS);
 		 
 		 this.setOnKeyPressed( event -> {
-				KeyHandler.setKeyPressed(event.getCode(), true);
+				keyHandler.setKeyPressed(event.getCode(), true);
 				if(getGameState() == playingState) 
 				{
-				
-				}
-				
-				if(event.getCode().equals(KeyCode.ESCAPE) && (getGameState() == playingState || getGameState()==pauseState) ) // if press ESC change gamestate to pause or to playing
-		    	{	
-					if(getGameState()==playingState) {this.setGameState(pauseState);}
-					else if(getGameState()==pauseState) {this.setGameState(playingState);}
-		    	}
-				
-				
-				if(getGameState() == titleState)
-				{
-					if(KeyHandler.getKeyPressed(KeyCode.S))
-					{
-						ui.setCursorNum( (ui.getCursorNum()+1)%3);
-					}
-					else if(KeyHandler.getKeyPressed(KeyCode.W))
-					{
-						if(ui.getCursorNum()-1<0) {ui.setCursorNum(ui.getCursorNum()+3);}
-						ui.setCursorNum( (ui.getCursorNum()-1)%3);
-					}
 					
-					if(KeyHandler.getKeyPressed(KeyCode.SPACE))
-					{
-						switch(ui.getCursorNum())
-						{
-						case 0: setGameState(playingState);playMusic(bgSound);break;
-						case 1: break;
-						case 2:	System.exit(0);break;
-						}
-					}
 				}
 				
+				// To toggle option Screen
+				if(getGameState() == pauseState || getGameState() == playingState) 
+				{
+				keyHandler.keyPressedChangeState();
+				}
+				
+				// title Screen
+				if(getGameState() == titleState){ 
+				
+				keyHandler.keyPressedTitleState();
+				}
+				
+				// option Screen
+				if(getGameState() == pauseState){ 
+				
+					keyHandler.backPressed();
+					keyHandler.keyPressedPauseState();
+				}
 			 });
-		 this.setOnKeyReleased( event -> {
-			 KeyHandler.setKeyPressed(event.getCode(), false);	
-		 });
 		 
-		 this.startGameLoop();
+		 this.setOnKeyReleased( event -> {
+			 keyHandler.setKeyPressed(event.getCode(), false);	
+		 });
+//		
 		
-	}			
-
-	private void startGameLoop() {
-		playMusic(bgSound);
-		genMonster(1);
-	    gameLoop = new AnimationTimer() {
-	    	private long lastUpdate = 0;
-
-	        @Override
-	        public void handle(long now) {
-	        	if (now - lastUpdate >= frameTimeNano) {
-	                update();
-	                draw();
-//	                   System.out.println(now-lastUpdate);
-	                lastUpdate = now;   
-	            }
-	        }
-	    };
-	    gameLoop.start();
+		 this.startGameLoop();
+		 
 	}
-	// Generate monster in map
-	public void genMonster(int maxMonster) {
-		if(maxMonster >= 10) {
-			maxMonster = 10;
-		}
-		for(int i=0;i<maxMonster;i++) {
-			this.monsters[i] = new Monster(this);
-		}
-	}
+	
 
-	private void update() {
-	    // Update your game logic here
+	  private void startGameLoop() 
+	  {
+		//  playMusic(bgSound);
+	      gameLoop = new AnimationTimer() {
+	    	  private long lastUpdate = 0;
+	          @Override
+	          public void handle(long now) {
+	              if (now - lastUpdate >= frameTimeNano) {
+	                  update();
+	                  draw();
+	                  lastUpdate = now;
+
+	              }
+	          }
+	          };
+	          gameLoop.start(); 
+
+	      }
+	
+
+	    private void update() {
+	        // Update your game logic here
 	    	
-		//PLAYING
-	    if(getGameState()==playingState) {
-	    	player.update();
-//	    	testMonster.update();
-	    	for(int i=0;i<monsters.length;i++) {
-	    		if(monsters[i] != null) {
-	    			monsters[i].update();
-	    		}
+	    	//PLAYING
+	    	if(getGameState()==playingState)
+	    	{
+	    		player.update();
+	    		testMonster.update();
 	    	}
-	    }
-	    //PAUSE
-	    if(getGameState() ==pauseState) {
+	    	//PAUSE
+	    	if(getGameState() ==pauseState)
+	    	{
 	    		
+	    	}
+	    	
 	    }
-	}
+
 
 	
-	public Player getPlayer() {
-		return player;
-	}
-	
-	private void draw() {
-	    gc.clearRect(0, 0, screenWidth, screenHeight);
-	    ui.draw(gc);
-	    if(getGameState()==titleState) {
-	        ui.draw(gc);
-	    } else {
-	    	tilemanager.draw(gc); 
+
+
+	    private void draw() {
+	        gc.clearRect(0, 0, screenWidth, screenHeight);
+	        
+	        //title Screen
+	        if(getGameState()==titleState)
+	        {
+	        	ui.draw(gc);
+	         }
+	        
+	        else {
+	        tilemanager.draw(gc); 
 	        player.draw(gc);
 	        heart.draw(gc);
-//	        testMonster.draw(gc);
-	        for(int i=0;i<monsters.length;i++) {
-	    		if(monsters[i] != null) {
-	    			monsters[i].draw(gc);
-	    		}
-	    	}
-	        if(getGameState()==playingState) {
+	        testMonster.draw(gc);
+	        
+	        //Drawing HP only when playing
+	        if(getGameState()==playingState)
+	        {
 	        	heart.draw(gc);  
 	        }
-	        if(getGameState()==pauseState) {
-	        	this.DrawOptionScreen();
+	        
+	        //Drawing Option screen when pausing
+	        if(getGameState()==pauseState)
+	    	{
+	        	ui.draw(gc);
 	    	} 
-	    }
+	        }
 	       
-	}
+	    }
 	    
-	public void DrawOptionScreen() {
-	    ui.drawScreen(this.getTileSize()*4,this.getTileSize()*2, this.getTileSize()*8, this.getTileSize()*8);
-	}
+	    
+	    
 
 
+	    
+	    
 		public CollisionChecker getCollisionChecker() {
 			return collisionChecker;
 		}
@@ -214,6 +212,7 @@ public class GamePanel extends StackPane {
 		}
 
 		// For bg sound
+
 		public void playMusic(Sound sound) {
 			sound.play();
 			sound.loop();
@@ -252,9 +251,10 @@ public class GamePanel extends StackPane {
 		}
 
 
-		public Monster[] getMonsters() {
-			return monsters;
-		}
+
+//		public Monster[] getMonster() {
+//			return monsters;
+//		}
 
 
 		public int getGameState() {
@@ -266,7 +266,44 @@ public class GamePanel extends StackPane {
 			this.gameState = gameState;
 		}
 		
+		public Entity[] getMonster()
+		{
+			return monster;
 
-		
-		
-}
+		}
+
+
+		public Player getPlayer() {
+			return player;
+		}
+
+
+		public UI getUi() {
+			return ui;
+		}
+
+
+		public void setUi(UI ui) {
+			this.ui = ui;
+		}
+
+
+		public Sound getBgSound() {
+			return bgSound;
+		}
+
+
+		public void setBgSound(Sound bgSound) {
+			this.bgSound = bgSound;
+		}
+
+
+		public KeyHandler getKeyHandler() {
+			return keyHandler;
+		}
+
+
+		public void setKeyHandler(KeyHandler keyHandler) {
+			this.keyHandler = keyHandler;
+		}
+	}

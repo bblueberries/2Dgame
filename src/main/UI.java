@@ -1,4 +1,5 @@
 
+
 package main;
 
 import javafx.geometry.Bounds;
@@ -15,7 +16,9 @@ public class UI {
 	
 	private GamePanel gp;
 	private GraphicsContext gc;
-	private int cursorNum=0;
+	private int titleNum=0;
+	private int state=0;
+	private int optionNum=1;
 	
 	public UI(GamePanel gp,GraphicsContext gc) {
 		this.gp = gp;
@@ -25,14 +28,19 @@ public class UI {
 		
 		if(gp.getGameState()==GamePanel.titleState)
 		{
-			drawTitleScreen();
+			DrawTitleScreen();
+		}
+		else if(gp.getGameState()==GamePanel.pauseState)
+		{
+			DrawOptionScreen();
 		}
 	}
-	public void drawTitleScreen()
+	public void DrawTitleScreen()
 	{
 			gc.setFont(Font.font("Courier New",FontWeight.BOLD,70));
 			String text ="HIT MONSTER GAME"; 
-			
+			int x = (int) getCenteredTextX(new Text(text),70);
+			int y =(int) (gp.getTileSize()*1.7);
 			gc.setFill(Color.BLUEVIOLET);
 			gc.fillText(text, gp.getTileSize()+3, gp.getTileSize()*1.7+3);
 			gc.setFill(Color.WHITE);
@@ -41,8 +49,8 @@ public class UI {
 			
 			
 			
-			int x = (int) getCenteredTextX(new Text(text),70);
-			int y =(int) (gp.getTileSize()*2.5);
+			x = (int) getCenteredTextX(new Text(text),70);
+			y =(int) (gp.getTileSize()*2.5);
 			
 //			Image logo = new Image(getClass().getResourceAsStream("/gameLOGO.png"));
 //			gc.drawImage(logo, x,y, gp.getTileSize()*4,gp.getTileSize()*4);
@@ -55,8 +63,9 @@ public class UI {
 			x= (int) getCenteredTextX(new Text(text),40);
 			y+=gp.getTileSize()*5;
 			gc.fillText(text, x, y);
-			if(cursorNum==0) {
-				gc.fillText("‣", x-gp.getTileSize(), y);
+			if(titleNum==0) {
+				gc.fillText("‣", x-gp.getTileSize(), y+4);
+				
 			}
 			
 			
@@ -64,8 +73,8 @@ public class UI {
 			x=(int) getCenteredTextX(new Text(text),40);
 			y+=gp.getTileSize();
 			gc.fillText(text,x, y);
-			if(cursorNum==1) {
-				gc.fillText("‣", x-gp.getTileSize(), y);
+			if(titleNum==1) {
+				gc.fillText("‣", x-gp.getTileSize(), y+4);
 			}
 			
 			
@@ -73,15 +82,98 @@ public class UI {
 			x=(int) getCenteredTextX(new Text(text),40);
 			y+=gp.getTileSize();
 			gc.fillText(text, x, y);
-			if(cursorNum==2) {
-				gc.fillText("‣", x-gp.getTileSize(), y);
+			if(titleNum==2) {
+				gc.fillText("‣", x-gp.getTileSize(), y+4);
 			}
 			
 			
 	}	
 
+	public void DrawOptionScreen()
+    {
+		int OptionScreenW=gp.getTileSize()*8;
+		int OptionScreenH=gp.getTileSize()*8;
+    	this.DrawScreen(gp.getTileSize()*4,gp.getTileSize()*2, OptionScreenW, OptionScreenH);
+    	int X = gp.getTileSize()*4;
+    	int Y =gp.getTileSize()*2;
+    	
+    	switch(getState()) {
+    	case 0:Option(X,Y);break;
+    	case 1:Option1(X,Y);break;
+    	case 2:Option2(X,Y);break;
+    	case 3:OptionEndGame(X,Y);break;
+    	}
+    }
+	public void Option (int X,int Y) {
+		
+		int textX;
+		int textY;
+//		setState(0);
+//		setOptionNum(1);
+		
+		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,30));
+		gc.setFill(Color.WHITE);
+		
+		
+		//option1
+		String text = "option1";
+		textX = X +gp.getTileSize();
+		textY  = gp.getTileSize()*4 +14;
+		gc.fillText(text, textX, textY);
+		if(optionNum==1) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);
+		}
+		
+		//option2
+		text = "option2";
+		textY  += gp.getTileSize()+10;
+		gc.fillText(text, textX, textY);
+		if(optionNum==2) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);
+		}
+		
+		//option3
+		text = "END GAME";
+		textY  += gp.getTileSize()+10;
+		gc.fillText(text, textX, textY);
+		if(optionNum==3) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);
+		}
+		
+		
+		//back
+		text = "BACK";
+		textY  += gp.getTileSize()*2 +24;
+		gc.fillText(text, textX, textY);
+		if(optionNum==4) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);
+		}
+		
+		
+		
+		
+	}
+	public void Option1(int X,int Y) {
+		
+		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,30));
+		gc.setFill(Color.WHITE);
+		String text = "dawdwadawdadwa";
+		int textX = X +gp.getTileSize();
+		int textY  = Y+gp.getTileSize()*4;
+		gc.fillText(text, textX, textY);
+	}
+	public void Option2(int X,int Y) {
+		
+		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,30));
+		gc.setFill(Color.WHITE);
+		String text = "dawdwadawdadwa";
+		int textX = X +gp.getTileSize();
+		int textY  = Y+gp.getTileSize()*4;
+		gc.fillText(text, textX, textY);
+
+	}
+	public void OptionEndGame(int X,int Y) {
+		
+		
+	}
 	
-	public void drawScreen(int x,int y,int width,int height){
+	public void DrawScreen(int x,int y,int width,int height){
 			
 		Color color = Color.rgb(0,0,0,0.8);
 
@@ -110,13 +202,26 @@ public class UI {
 	private double getCenteredTextX(Text text,int fontSize) {
 	    double screenWidth = gp.getScreenWidth();
 	    double textWidth = measureStringWidth(text);
-	    return (screenWidth - textWidth/text.getFont().getSize()*fontSize) / 2   ;
+	    return (gp.getScreenWidth() - textWidth/text.getFont().getSize()*fontSize) / 2   ;
 	}
-	public int getCursorNum() {
-		return cursorNum;
+	public int getTitleNum() {
+		return titleNum;
 	}
-	public void setCursorNum(int cursorNum) {
-		this.cursorNum = cursorNum;
+	public void setTitleNum(int titleNum) {
+		this.titleNum = titleNum;
+	}
+	public int getState() {
+		return state;
+	}
+	public void setState(int optionState) {
+		this.state = optionState;
+	}
+	public int getOptionNum() {
+		return optionNum;
+	}
+	public void setOptionNum(int optionNum) {
+		this.optionNum = optionNum;
 	}
 	
 }
+

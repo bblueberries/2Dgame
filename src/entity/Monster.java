@@ -36,9 +36,9 @@ public class Monster extends Entity{
     	Random random = new Random();
     	int xPos = random.nextInt(10)+18;
     	int yPos = random.nextInt(10)+16;
-    	System.out.println(xPos+" "+yPos);
-    	System.out.println("this is "+gp.getTileManager());
-    	System.out.println("this is "+gp.getTileManager().getMapTileNum()[xPos][yPos]);
+//    	System.out.println(xPos+" "+yPos);
+//    	System.out.println("this is "+gp.getTileManager());
+//    	System.out.println("this is "+gp.getTileManager().getMapTileNum()[xPos][yPos]);
     	while(!checkSpawn){
         	int spawnTile = this.gp.tilemanager.getMapTileNum()[xPos][yPos];
         	if(gp.tilemanager.getTile()[spawnTile].isCollision() == true) {

@@ -151,6 +151,7 @@ public class UI {
 		
 		
 		//back
+		gc.setFont(Font.font("Courier New",FontWeight.BOLD,30));
 		text = "BACK";
 		textY  += gp.getTileSize()*2 +10;
 		gc.fillText(text, textX, textY);
@@ -165,7 +166,7 @@ public class UI {
 		
 		gc.setFont(Font.font("Courier New",FontWeight.BOLD,30));
 		gc.setFill(Color.WHITE);
-		String text = "Control";
+		String text = "CONTROL";
 		int textX = X +gp.getTileSize()*5/2 +10;
 		int textY  = Y+gp.getTileSize()*1;
 		gc.fillText(text, textX, textY);

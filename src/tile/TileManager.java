@@ -26,7 +26,7 @@ public class TileManager {
     public void getTileImage() {
         try {
             tile[0] = new Tile();
-            tile[0].setImage(new Image(getClass().getResourceAsStream("/tiles/grass01.png")));  
+            tile[0].setImage(new Image(getClass().getResourceAsStream("/tiles/tiletest.png")));  
             
             tile[1] = new Tile();
             tile[1].setImage(new Image(getClass().getResourceAsStream("/tiles/wall.png")));

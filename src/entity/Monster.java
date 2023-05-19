@@ -53,8 +53,9 @@ public class Monster extends Entity{
 		getImages().add( new Image(getClass().getResourceAsStream("/monster/orc_right_2.png")));
 		 
 	}
-	int dirCounter = 0;
-	int i = 801;
+	int dirCounter = 59;
+	Random firstRandom = new Random();
+	int i = firstRandom.nextInt(800)+1;
 	public void update() {
 		dirCounter++;
 	    if(dirCounter % 60 == 0) {

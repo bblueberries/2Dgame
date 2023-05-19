@@ -236,6 +236,7 @@ public class Player extends Entity {
         
 	        setCollide(false);
 	        gp.getCollisionChecker().checkTile(this);
+	        gp.getCollisionChecker().checkOtherEntity(this, gp.getMonsters());
 	        
 	        if(!isCollide()) {
 		        switch(getDirection()) {

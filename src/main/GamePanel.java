@@ -62,8 +62,7 @@ public class GamePanel extends StackPane {
 
 	TileManager tilemanager = new TileManager(this);
 	
-	public GamePanel()
-	{
+	public GamePanel() {
 		 canvas = new Canvas(screenWidth, screenHeight);
 		 gc = canvas.getGraphicsContext2D();
 		 ui = new UI(this,gc);
@@ -118,117 +117,88 @@ public class GamePanel extends StackPane {
 		 this.setOnKeyReleased( event -> {
 			 KeyHandler.setKeyPressed(event.getCode(), false);	
 		 });
-//		
 		 
 		 this.startGameLoop();
 		
+	}			
+
+	private void startGameLoop() {
+		playMusic(bgSound);
+		genMonster();
+	    gameLoop = new AnimationTimer() {
+	    	private long lastUpdate = 0;
+
+	        @Override
+	        public void handle(long now) {
+	        	if (now - lastUpdate >= frameTimeNano) {
+	                update();
+	                draw();
+//	                   System.out.println(now-lastUpdate);
+	                lastUpdate = now;   
+	            }
+	        }
+	    };
+	      gameLoop.start();
+	}
+	// generate monster in map
+	public void genMonster() {
+		for(int i=0;i<3;i++) {
+			this.monsters[i] = new Monster(this);
+		}
 	}
 
-
-//	@Override
-//	public void run() {
-//		
-//		double drawInterval =1000000000/FPS; // time for drawing one frame which = 1sec/fps (framePerSec)
-//		double dT =0;
-//		long lastT=System.nanoTime();
-//		long currentT;
-//		long timer =0;
-//		int drawCount=0;
-//		
-//		while(gameThread != null)
-//		{
-//			currentT=System.nanoTime();
-//			dT += (currentT - lastT) / drawInterval;// [sec]
-//			timer += (currentT - lastT);
-//			lastT=currentT;
-//			
-//			if(dT >= 1) // when time past / drawIntervalTime >= 1 means it's time to draw 
-//			{
-//				update();
-//				repaint();
-//				dT-=1;
-//				drawCount++;
-//			}
-//			
-//			if(timer >= 1000000000) //timer = 1 sec
-//			{
-//				System.out.println("FPS :"+drawCount);
-//				drawCount=0;
-//				timer=0;
-//			}
-//			
-
-	  private void startGameLoop() {
-		  playMusic(bgSound);
-	      gameLoop = new AnimationTimer() {
-	    	  private long lastUpdate = 0;
-
-	          @Override
-	          public void handle(long now) {
-	              if (now - lastUpdate >= frameTimeNano) {
-	                  update();
-	                  draw();
-//	                     System.out.println(now-lastUpdate);
-	                  lastUpdate = now;
-	                  
-	              }
-	          }
-	      };
-	        gameLoop.start();
-	  }
-
-	    private void update() {
-	        // Update your game logic here
+	private void update() {
+	    // Update your game logic here
 	    	
-	    	//PLAYING
-	    	if(getGameState()==playingState)
-	    	{
-	    		player.update();
-	    		testMonster.update();
+		//PLAYING
+	    if(getGameState()==playingState) {
+	    	player.update();
+	    	testMonster.update();
+	    	for(int i=0;i<monsters.length;i++) {
+	    		if(monsters[i] != null) {
+	    			monsters[i].update();
+	    		}
 	    	}
-	    	//PAUSE
-	    	if(getGameState() ==pauseState)
-	    	{
-	    		
-	    	}
-	    	
 	    }
+	    //PAUSE
+	    if(getGameState() ==pauseState) {
+	    		
+	    }
+	}
 
 	
-	    public Player getPlayer() 
-	    {
+	public Player getPlayer() {
 		return player;
-	    }
-	    private void draw() {
-	        gc.clearRect(0, 0, screenWidth, screenHeight);
-	       
+	}
+	
+	private void draw() {
+	    gc.clearRect(0, 0, screenWidth, screenHeight);
+	    ui.draw(gc);
+	    if(getGameState()==titleState) {
 	        ui.draw(gc);
-	        if(getGameState()==titleState)
-	        {
-	        	ui.draw(gc);
-	         }
-	        else {
-	        tilemanager.draw(gc); 
+	    } else {
+	    	tilemanager.draw(gc); 
 	        player.draw(gc);
 	        heart.draw(gc);
 	        testMonster.draw(gc);
-	        if(getGameState()==playingState)
-	        {
+	        for(int i=0;i<monsters.length;i++) {
+	    		if(monsters[i] != null) {
+	    			monsters[i].draw(gc);
+	    		}
+	    	}
+	        if(getGameState()==playingState) {
 	        	heart.draw(gc);  
 	        }
-	        
-	        if(getGameState()==pauseState)
-	    	{
+	        if(getGameState()==pauseState) {
 	        	this.DrawOptionScreen();
 	    	} 
-	        }
+	    }
 	       
-	    }
+	}
 	    
-	    public void DrawOptionScreen()
-	    {
-	    	ui.drawScreen(this.getTileSize()*4,this.getTileSize()*2, this.getTileSize()*8, this.getTileSize()*8);
-	    }
+	public void DrawOptionScreen() {
+	    ui.drawScreen(this.getTileSize()*4,this.getTileSize()*2, this.getTileSize()*8, this.getTileSize()*8);
+	}
 
 
 		public CollisionChecker getCollisionChecker() {
@@ -279,7 +249,7 @@ public class GamePanel extends StackPane {
 		}
 
 
-		public Monster[] getMonster() {
+		public Monster[] getMonsters() {
 			return monsters;
 		}
 

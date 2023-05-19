@@ -3,6 +3,8 @@ package main;
 
 
 
+import java.util.Random;
+
 import entity.Entity;
 import entity.Monster;
 import entity.Player;
@@ -140,7 +142,10 @@ public class GamePanel extends StackPane {
 	  }
 	  public void startNewGameLoop() 
 	  {
-		 genMonster(7);
+		 Random random = new Random();
+		 int maxMons = random.nextInt(5)+5;
+		 genMonster(maxMons);
+//		 genMonster(7);
 		 resetGame();
 		 if(gameLoop != null)
 		 {

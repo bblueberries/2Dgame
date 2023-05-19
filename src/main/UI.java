@@ -59,14 +59,14 @@ public class UI {
 		x= gp.getTileSize()+5;
 		y= gp.getScreenHeight()/2 - gp.getTileSize()*2 +5;
 		gc.setFont(Font.font("Courier New",FontWeight.BOLD,80));
-		gc.setFill(Color.DARKGREY);
+		gc.setFill(Color.GOLD);
 		text="CONGRATUATION!";
 		gc.fillText(text, x, y);
 		
 		x+= gp.getTileSize();
 		y+=gp.getTileSize() -20;
 		gc.setFont(Font.font("Courier New",FontWeight.NORMAL,25));
-		gc.setFill(Color.BLACK);
+		gc.setFill(Color.LEMONCHIFFON);
 		text="PRESS ESC TO GO BACK TO TITLE SCREEN..";
 		gc.fillText(text, x, y);
 	}

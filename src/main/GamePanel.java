@@ -56,6 +56,7 @@ public class GamePanel extends StackPane {
 	public static final int titleState=0;
 	public static final int playingState=1;
 	public static final int pauseState=2;
+//	public static final int optionState=3;
 	
 	public void setPlayer(Player player) {
 		this.player = player;
@@ -93,8 +94,10 @@ public class GamePanel extends StackPane {
 				{
 				
 				}
-				
+				if(getGameState() == pauseState || getGameState() == playingState)
+				{
 				keyPressedChangeState();
+				}
 				
 				if(getGameState() == titleState)
 				{
@@ -181,7 +184,7 @@ public class GamePanel extends StackPane {
 	        
 	        if(getGameState()==pauseState)
 	    	{
-	        	ui.DrawOptionScreen();
+	        	ui.draw(gc);
 	    	} 
 	        }
 	       
@@ -191,17 +194,17 @@ public class GamePanel extends StackPane {
 	    	
 				if(KeyHandler.getKeyPressed(KeyCode.S))
 				{
-					ui.setCursorNum( (ui.getCursorNum()+1)%3);
+					ui.setTitleNum( (ui.getTitleNum()+1)%3);
 				}
 				else if(KeyHandler.getKeyPressed(KeyCode.W))
 				{
-					if(ui.getCursorNum()-1<0) {ui.setCursorNum(ui.getCursorNum()+3);}
-					ui.setCursorNum( (ui.getCursorNum()-1)%3);
+					if(ui.getTitleNum()-1<0) {ui.setTitleNum(ui.getTitleNum()+3);}
+					ui.setTitleNum( (ui.getTitleNum()-1)%3);
 				}
 				
 				if(KeyHandler.getKeyPressed(KeyCode.SPACE))
 				{
-					switch(ui.getCursorNum())
+					switch(ui.getTitleNum())
 					{
 					case 0: setGameState(playingState);playMusic(bgSound);break;
 					case 1: break;
@@ -210,7 +213,19 @@ public class GamePanel extends StackPane {
 				}
 			}
 	    public void keyPressedChangeState() {
-	    	if(KeyHandler.getKeyPressed(KeyCode.ESCAPE) && (getGameState() == playingState || getGameState()==pauseState) ) // if press ESC change gamestate to pause or to playing
+	    	
+	    	
+	    	if(ui.getOptionNum()==2)if(KeyHandler.getKeyPressed(KeyCode.SPACE)) {ui.setOptionNum(1);ui.setState(0);}
+	    	if(ui.getOptionNum()==4)
+	    	{if(KeyHandler.getKeyPressed(KeyCode.SPACE)) {ui.setOptionNum(1);setGameState(playingState);}}
+	    	if(ui.getState()!=0)
+	    	{
+	    		if(KeyHandler.getKeyPressed(KeyCode.ESCAPE) || (ui.getState()==3&&ui.getOptionNum()==2&&KeyHandler.getKeyPressed(KeyCode.SPACE))) 
+	    		{
+	    			ui.setState(0);
+	    		}
+	    	}
+	    	else if(KeyHandler.getKeyPressed(KeyCode.ESCAPE)) // if press ESC change gamestate to pause or to playing
 	    	{	
 				if(getGameState()==playingState) {this.setGameState(pauseState);}
 				else if(getGameState()==pauseState) {this.setGameState(playingState);}
@@ -220,7 +235,12 @@ public class GamePanel extends StackPane {
 	    public void keyPressedPauseState() {
 	    	if(KeyHandler.getKeyPressed(KeyCode.S)&&ui.getOptionNum()<4)
 			{
-				ui.setOptionNum( (ui.getOptionNum()+1));
+				
+				if(ui.getState()==3)
+				{
+					if(ui.getOptionNum()<2) ui.setOptionNum( (ui.getOptionNum()+1));
+				}
+				else ui.setOptionNum( (ui.getOptionNum()+1));
 			}
 			else if(KeyHandler.getKeyPressed(KeyCode.W)&&ui.getOptionNum()>1)
 			{

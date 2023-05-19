@@ -2,6 +2,7 @@
 
 package main;
 
+import entity.Monster;
 import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
 import javafx.scene.canvas.GraphicsContext;
@@ -30,29 +31,7 @@ public class UI {
 		{
 			if(gameFinished)
 			{
-//				gp.setGameState(GamePanel.endingState);
-				int x= gp.getTileSize();
-				int y= gp.getScreenHeight()/2 - gp.getTileSize()*2;
-				gc.setFont(Font.font("Courier New",FontWeight.BOLD,80));
-				gc.setFill(Color.BLACK);
-				String text="CONGRATUATION!";
-				gc.fillText(text, x, y);
-				
-				x= gp.getTileSize()+5;
-				y= gp.getScreenHeight()/2 - gp.getTileSize()*2 +5;
-				gc.setFont(Font.font("Courier New",FontWeight.BOLD,80));
-				gc.setFill(Color.DARKGREY);
-				text="CONGRATUATION!";
-				gc.fillText(text, x, y);
-				
-				x+= gp.getTileSize();
-				y+=gp.getTileSize() -20;
-				gc.setFont(Font.font("Courier New",FontWeight.NORMAL,25));
-				gc.setFill(Color.BLACK);
-				text="PRESS ESC TO GO BACK TO TITLE SCREEN..";
-				gc.fillText(text, x, y);
-				
-//				gp.getGameLoop().stop();
+				DrawEndingText();
 			}
 		}
 		else if(gp.getGameState()==GamePanel.titleState)
@@ -63,6 +42,33 @@ public class UI {
 		{
 			DrawOptionScreen();
 		}
+		else if(gp.getGameState()==GamePanel.playingState)
+		{
+			DrawMonsterLeft(gp.getMonsterAlive((Monster[]) gp.getMonster()));
+		}
+	}
+	public void DrawEndingText()
+	{
+		int x= gp.getTileSize();
+		int y= gp.getScreenHeight()/2 - gp.getTileSize()*2;
+		gc.setFont(Font.font("Courier New",FontWeight.BOLD,80));
+		gc.setFill(Color.BLACK);
+		String text="CONGRATUATION!";
+		gc.fillText(text, x, y);
+		
+		x= gp.getTileSize()+5;
+		y= gp.getScreenHeight()/2 - gp.getTileSize()*2 +5;
+		gc.setFont(Font.font("Courier New",FontWeight.BOLD,80));
+		gc.setFill(Color.DARKGREY);
+		text="CONGRATUATION!";
+		gc.fillText(text, x, y);
+		
+		x+= gp.getTileSize();
+		y+=gp.getTileSize() -20;
+		gc.setFont(Font.font("Courier New",FontWeight.NORMAL,25));
+		gc.setFill(Color.BLACK);
+		text="PRESS ESC TO GO BACK TO TITLE SCREEN..";
+		gc.fillText(text, x, y);
 	}
 	public void DrawTitleScreen()
 	{
@@ -117,7 +123,14 @@ public class UI {
 			
 			
 	}	
-
+	public void DrawMonsterLeft(int monsterLeft) {
+		int x= gp.getTileSize()*9 +10;
+		int y= gp.getTileSize()*1;
+		gc.setFont(Font.font("Courier New",FontWeight.NORMAL,30));
+		gc.setFill(Color.YELLOW);
+		String text= "Monsters Left :"+Integer.toString(monsterLeft);
+		gc.fillText(text, x, y);
+	}
 	public void DrawOptionScreen()
     {
 		int OptionScreenW=gp.getTileSize()*8;
@@ -303,6 +316,7 @@ public class UI {
 	    double textWidth = measureStringWidth(text);
 	    return (gp.getScreenWidth() - textWidth/text.getFont().getSize()*fontSize) / 2   ;
 	}
+	
 	
 	public void LoadGameDraw()
 	{

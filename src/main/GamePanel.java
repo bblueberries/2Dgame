@@ -43,7 +43,7 @@ public class GamePanel extends StackPane {
     private AnimationTimer gameLoop;
     
     private Sound bgSound = new Sound(0);
-	private KeyHandler keyH	= new KeyHandler();
+	private KeyHandler keyHandler	= new KeyHandler(this);
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
 
@@ -89,28 +89,34 @@ public class GamePanel extends StackPane {
 		 this.frameTimeNano = (long) (1000000000 / targetFPS);
 		 
 		 this.setOnKeyPressed( event -> {
-				KeyHandler.setKeyPressed(event.getCode(), true);
+				keyHandler.setKeyPressed(event.getCode(), true);
 				if(getGameState() == playingState) 
 				{
-				
-				}
-				if(getGameState() == pauseState || getGameState() == playingState)
-				{
-				keyPressedChangeState();
+					
 				}
 				
-				if(getGameState() == titleState)
+				// To toggle option Screen
+				if(getGameState() == pauseState || getGameState() == playingState) 
 				{
-				keyPressedTitleState();
+				keyHandler.keyPressedChangeState();
 				}
 				
-				if(getGameState() == pauseState)
-				{
-					keyPressedPauseState();
+				// title Screen
+				if(getGameState() == titleState){ 
+				
+				keyHandler.keyPressedTitleState();
+				}
+				
+				// option Screen
+				if(getGameState() == pauseState){ 
+				
+					keyHandler.backPressed();
+					keyHandler.keyPressedPauseState();
 				}
 			 });
+		 
 		 this.setOnKeyReleased( event -> {
-			 KeyHandler.setKeyPressed(event.getCode(), false);	
+			 keyHandler.setKeyPressed(event.getCode(), false);	
 		 });
 //		
 		
@@ -129,22 +135,18 @@ public class GamePanel extends StackPane {
 	              if (now - lastUpdate >= frameTimeNano) {
 	                  update();
 	                  draw();
-//	                     System.out.println(now-lastUpdate);
 	                  lastUpdate = now;
 
 	              }
 	          }
 	          };
 	          gameLoop.start(); 
-//		  playMusic(BGsound);
-		 // playMusic();
 
 	      }
 	
 
 	    private void update() {
 	        // Update your game logic here
-
 	    	
 	    	//PLAYING
 	    	if(getGameState()==playingState)
@@ -166,22 +168,26 @@ public class GamePanel extends StackPane {
 
 	    private void draw() {
 	        gc.clearRect(0, 0, screenWidth, screenHeight);
-	       
-//	        ui.draw(gc);
+	        
+	        //title Screen
 	        if(getGameState()==titleState)
 	        {
 	        	ui.draw(gc);
 	         }
+	        
 	        else {
 	        tilemanager.draw(gc); 
 	        player.draw(gc);
 	        heart.draw(gc);
 	        testMonster.draw(gc);
+	        
+	        //Drawing HP only when playing
 	        if(getGameState()==playingState)
 	        {
 	        	heart.draw(gc);  
 	        }
 	        
+	        //Drawing Option screen when pausing
 	        if(getGameState()==pauseState)
 	    	{
 	        	ui.draw(gc);
@@ -190,74 +196,7 @@ public class GamePanel extends StackPane {
 	       
 	    }
 	    
-	    public void keyPressedTitleState() {
-	    	
-				if(KeyHandler.getKeyPressed(KeyCode.S))
-				{
-					ui.setTitleNum( (ui.getTitleNum()+1)%3);
-				}
-				else if(KeyHandler.getKeyPressed(KeyCode.W))
-				{
-					if(ui.getTitleNum()-1<0) {ui.setTitleNum(ui.getTitleNum()+3);}
-					ui.setTitleNum( (ui.getTitleNum()-1)%3);
-				}
-				
-				if(KeyHandler.getKeyPressed(KeyCode.SPACE))
-				{
-					switch(ui.getTitleNum())
-					{
-					case 0: setGameState(playingState);playMusic(bgSound);break;
-					case 1: break;
-					case 2:	System.exit(0);break;
-					}
-				}
-			}
-	    public void keyPressedChangeState() {
-	    	
-	    	
-	    	if(ui.getOptionNum()==2)if(KeyHandler.getKeyPressed(KeyCode.SPACE)) {ui.setOptionNum(1);ui.setState(0);}
-	    	if(ui.getOptionNum()==4)
-	    	{if(KeyHandler.getKeyPressed(KeyCode.SPACE)) {ui.setOptionNum(1);setGameState(playingState);}}
-	    	if(ui.getState()!=0)
-	    	{
-	    		if(KeyHandler.getKeyPressed(KeyCode.ESCAPE) || (ui.getState()==3&&ui.getOptionNum()==2&&KeyHandler.getKeyPressed(KeyCode.SPACE))) 
-	    		{
-	    			ui.setState(0);
-	    		}
-	    	}
-	    	else if(KeyHandler.getKeyPressed(KeyCode.ESCAPE)) // if press ESC change gamestate to pause or to playing
-	    	{	
-				if(getGameState()==playingState) {this.setGameState(pauseState);}
-				else if(getGameState()==pauseState) {this.setGameState(playingState);}
-	    	}
-	    }
 	    
-	    public void keyPressedPauseState() {
-	    	if(KeyHandler.getKeyPressed(KeyCode.S)&&ui.getOptionNum()<4)
-			{
-				
-				if(ui.getState()==3)
-				{
-					if(ui.getOptionNum()<2) ui.setOptionNum( (ui.getOptionNum()+1));
-				}
-				else ui.setOptionNum( (ui.getOptionNum()+1));
-			}
-			else if(KeyHandler.getKeyPressed(KeyCode.W)&&ui.getOptionNum()>1)
-			{
-				
-				ui.setOptionNum( (ui.getOptionNum()-1));
-			}
-			
-//			if(KeyHandler.getKeyPressed(KeyCode.SPACE))
-//			{
-//				switch(ui.getCursorNum())
-//				{
-//				case 0: setGameState(playingState);playMusic(bgSound);break;
-//				case 1: break;
-//				case 2:	System.exit(0);break;
-//				}
-//			}
-	    }
 	    
 
 
@@ -336,6 +275,36 @@ public class GamePanel extends StackPane {
 
 		public Player getPlayer() {
 			return player;
+		}
+
+
+		public UI getUi() {
+			return ui;
+		}
+
+
+		public void setUi(UI ui) {
+			this.ui = ui;
+		}
+
+
+		public Sound getBgSound() {
+			return bgSound;
+		}
+
+
+		public void setBgSound(Sound bgSound) {
+			this.bgSound = bgSound;
+		}
+
+
+		public KeyHandler getKeyHandler() {
+			return keyHandler;
+		}
+
+
+		public void setKeyHandler(KeyHandler keyHandler) {
+			this.keyHandler = keyHandler;
 		}
 	}
 		

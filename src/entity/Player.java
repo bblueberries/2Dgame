@@ -204,49 +204,18 @@ public class Player extends Entity {
     public void update() {
         // Update player position based on input from keyHandler 
     	
+    		if(gp.getKeyHandler().isWalkPressed())
+    		{
 
-    	if(KeyHandler.getKeyPressed(KeyCode.W)||KeyHandler.getKeyPressed(KeyCode.S)||KeyHandler.getKeyPressed(KeyCode.A)||KeyHandler.getKeyPressed(KeyCode.D)) {
-    		
-    		if (KeyHandler.getKeyPressed(KeyCode.D) && KeyHandler.getKeyPressed(KeyCode.W)) {
-//            	System.out.println("wd");
-                setDirection("right and up");
-                
-            }
-            else if (KeyHandler.getKeyPressed(KeyCode.D) && KeyHandler.getKeyPressed(KeyCode.S)) {
-            	setDirection("right and down");
-                
-            }
-            else if (KeyHandler.getKeyPressed(KeyCode.A) && KeyHandler.getKeyPressed(KeyCode.S)) {
-            	setDirection("left and down");
-                
-            }
-            else if (KeyHandler.getKeyPressed(KeyCode.A) && KeyHandler.getKeyPressed(KeyCode.W)) {
-            	setDirection("left and up");
-                
-            }
-            else if (KeyHandler.getKeyPressed(KeyCode.W)) {
-//	        	System.out.println("W");
-            	setDirection("up"); 
-            
-	        }
-	        else if (KeyHandler.getKeyPressed(KeyCode.S)) {
-	        	setDirection("down");
-	           
-	        }
-	        else if (KeyHandler.getKeyPressed(KeyCode.A)) {
-	        	setDirection("left");
-	            
-	        } 
-	        else if (KeyHandler.getKeyPressed(KeyCode.D)) {
-//	        	System.out.println("D");
-	        	setDirection("right");
-	            
-	        }
-        
-        
+    		//set direction to walk
+	        setDirection(gp.getKeyHandler().playerUpdate()); 
+	        
+	        //set isCollide
 	        setCollide(false);
 	        gp.getCollisionChecker().checkTile(this);
 	        
+	        
+	        //character walk
 	        if(!isCollide()) {
 		        switch(getDirection()) {
 		        case "up" :
@@ -271,28 +240,23 @@ public class Player extends Entity {
 		    		setPosition(getPosition()[0],getPosition()[1] + getDiaSpeed());break;
 		        }
 	        }
-    	}
+    	//switch character sprite
         setSpriteCounter(getSpriteCounter()+1);
         if(getSpriteCounter()>=12)
         {
         	setSpriteCounter(0);
         	setSpriteNum((getSpriteNum()+1)%2);
         	
-        }
+        }}
     }
     
     public void draw(GraphicsContext gc) {
-//      if(spriteNum==0)
-//      {
-//    	gc.setFill(Color.RED);
-//        gc.fillRect(x, y, gamePanel.tileSize, gamePanel.tileSize);}
-//      if(spriteNum==1)
-//      {
-//    	gc.setFill(Color.DARKRED);
-//        gc.fillRect(x, y, gamePanel.tileSize, gamePanel.tileSize);}
+
     	Image imagetofill = null;
     	int spNum = getSpriteNum();
     	ArrayList<Image> imgs = getImages();
+    	
+    	//draw character sprite depend on direction & spriteNumber
     	switch(getDirection()) 
     	{
     	case "up" :
@@ -319,11 +283,12 @@ public class Player extends Entity {
 		case "left and down" :
 			imagetofill = ((spNum == 1)? imgs.get(4):imgs.get(5)); //left
 			break;	
+
 		}
     	
     	
     	gc.drawImage(imagetofill,ScreenX,ScreenY ,gp.getTileSize(), gp.getTileSize());
-//    	gc.fillRect(ScreenX, ScreenX, 32, 32);
+
     	
     }
 	public int getScreenX() {
@@ -333,126 +298,3 @@ public class Player extends Entity {
 		return ScreenY;
 	}
 }
-//public class Player extends Entity {
-//
-//private GamePanel gp;
-//private KeyHandler keyH;
-//
-//public Player(GamePanel gp,KeyHandler keyH)
-//{
-//	this.gp =gp;
-//	this.keyH= keyH;
-//	setDefaultValues();
-//	getPlayerImage();
-//	direction="up";
-//}
-//public void setDefaultValues()
-//{
-//	x=100;
-//	y=100;
-//	speed =4;
-//}
-//public void getPlayerImage()
-//{
-//	try {
-//		up1 = ImageIO.read(getClass().getResourceAsStream("/player/down1.png"));
-//		up2 = ImageIO.read(getClass().getResourceAsStream("/player/down2.png"));
-//		down1 = ImageIO.read(getClass().getResourceAsStream("/player/up1.png"));
-//		down2 = ImageIO.read(getClass().getResourceAsStream("/player/up2.png"));
-//		left1 = ImageIO.read(getClass().getResourceAsStream("/player/left1.png"));
-//		left2 = ImageIO.read(getClass().getResourceAsStream("/player/left2.png"));
-//		right1 = ImageIO.read(getClass().getResourceAsStream("/player/right1.png"));
-//		right2 = ImageIO.read(getClass().getResourceAsStream("/player/right2.png"));
-//		
-//	} catch (IOException e) {
-//		e.printStackTrace();
-//	}
-//}
-//
-//public void update() {
-//	int dx = 0;
-//	int dy = 0;
-//	if(keyH.upPressed == true)
-//	{
-//		direction="up";
-//		dy-=speed;
-//	}
-//	else if(keyH.downPressed == true)
-//	{
-//		direction="down";
-//		dy+=speed;
-//	}
-//	else if(keyH.leftPressed == true)
-//	{
-//		direction="left";
-//		dx-=speed;
-//	}
-//	else if(keyH.rightPressed == true)
-//	{
-//		direction="right";
-//		dx+=speed;
-//	}
-//	x+=dx;
-//	y+=dy;
-//	spriteCounter++;
-//	if(spriteCounter>=12) {
-//		if(spriteNum==1)
-//			spriteNum=2;
-//		else if(spriteNum==2)
-//			     spriteNum=1;
-//		spriteCounter=0;
-//	}
-//}
-//public void draw(Graphics2D g2)
-//{
-//	BufferedImage image = null;
-//	switch(direction) {
-//	case "up" :
-//		if(spriteNum==1)
-//		{
-//		image = up1;	
-//		}
-//		if(spriteNum==2)
-//		{
-//		image = up2;	
-//		}
-//		break;
-//	case "down" :
-//		if(spriteNum==1)
-//		{
-//		image = down1;	
-//		}
-//		if(spriteNum==2)
-//		{
-//		image = down2;	
-//		}
-//		break;
-//	case "left" :
-//		if(spriteNum==1)
-//		{
-//		image = left1;	
-//		}
-//		if(spriteNum==2)
-//		{
-//		image = left2;	
-//		}
-//		break;
-//	case "right" :
-//		if(spriteNum==1)
-//		{
-//		image = right1;	
-//		}
-//		if(spriteNum==2)
-//		{
-//		image =right2;	
-//		}
-//		break;
-//		
-//	}
-//	g2.drawImage(image, x, y, gp.tileSize,gp.tileSize,null);
-//}
-//
-//
-//}
-//
-//

@@ -114,40 +114,28 @@ public class UI {
 		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,30));
 		gc.setFill(Color.WHITE);
 		
-		//back to optionScreen
-		if(getState()!=0)
-		{if(KeyHandler.getKeyPressed(KeyCode.ESCAPE)) {setState(0);}}
+		
 		//option1
 		String text = "option1";
 		textX = X +gp.getTileSize();
 		textY  = gp.getTileSize()*4 +14;
 		gc.fillText(text, textX, textY);
 		if(optionNum==1) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);
-		if(KeyHandler.getKeyPressed(KeyCode.SPACE))
-		{	
-			setState(1);
-			System.out.println(getState());
-		}}
+		}
+		
 		//option2
 		text = "option2";
 		textY  += gp.getTileSize()+10;
 		gc.fillText(text, textX, textY);
 		if(optionNum==2) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);
-		if(KeyHandler.getKeyPressed(KeyCode.SPACE))
-		{	
-			setState(2);
-			System.out.println(getState());
-		}}
+		}
+		
 		//option3
 		text = "END GAME";
 		textY  += gp.getTileSize()+10;
 		gc.fillText(text, textX, textY);
 		if(optionNum==3) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);
-		if(KeyHandler.getKeyPressed(KeyCode.SPACE))
-		{	
-		
-			setOptionNum(1);setState(3);
-		}}
+		}
 		
 		
 		//back
@@ -155,10 +143,8 @@ public class UI {
 		textY  += gp.getTileSize()*2 +24;
 		gc.fillText(text, textX, textY);
 		if(optionNum==4) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);
-		if(KeyHandler.getKeyPressed(KeyCode.SPACE))
-		{	
-		setOptionNum(1);setState(4);
-		}}
+		}
+		
 		
 		
 		
@@ -184,7 +170,7 @@ public class UI {
 	}
 	public void OptionEndGame(int X,int Y) {
 		
-		if(KeyHandler.getKeyPressed(KeyCode.SPACE)) {System.exit(0);}
+		
 	}
 	
 	public void DrawScreen(int x,int y,int width,int height){

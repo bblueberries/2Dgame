@@ -58,14 +58,14 @@ public class Monster extends Entity{
     }
 	private void getMonsterImage() {
 		 
-		getImages().add( new Image(getClass().getResourceAsStream("/monster/orc_up_1.png"))) ;
-		getImages().add( new Image(getClass().getResourceAsStream("/monster/orc_up_2.png")));
-		getImages().add( new Image(getClass().getResourceAsStream("/monster/orc_down_1.png")));
-		getImages().add( new Image(getClass().getResourceAsStream("/monster/orc_down_2.png")));
-		getImages().add( new Image(getClass().getResourceAsStream("/monster/orc_left_1.png")));
-		getImages().add( new Image(getClass().getResourceAsStream("/monster/orc_left_2.png")));
-		getImages().add( new Image(getClass().getResourceAsStream("/monster/orc_right_1.png")));
-		getImages().add( new Image(getClass().getResourceAsStream("/monster/orc_right_2.png")));
+		getImages().add( new Image(getClass().getResourceAsStream("/monster/mons_up_1.png"))) ;
+		getImages().add( new Image(getClass().getResourceAsStream("/monster/mons_up_2.png")));
+		getImages().add( new Image(getClass().getResourceAsStream("/monster/mons_down_1.png")));
+		getImages().add( new Image(getClass().getResourceAsStream("/monster/mons_down_2.png")));
+		getImages().add( new Image(getClass().getResourceAsStream("/monster/mons_left_1.png")));
+		getImages().add( new Image(getClass().getResourceAsStream("/monster/mons_left_2.png")));
+		getImages().add( new Image(getClass().getResourceAsStream("/monster/mons_right_1.png")));
+		getImages().add( new Image(getClass().getResourceAsStream("/monster/mons_right_2.png")));
 		 
 	}
 	int dirCounter = 59;
@@ -77,29 +77,29 @@ public class Monster extends Entity{
 	    	Random random = new Random();
 	    	i = random.nextInt(800)+1;
 	    	
-//	    	if(i <= 100) {
-//	    		this.setDirection("up");
-//	    	} else if(i <= 200) {
-//	    		this.setDirection("down");
-//	    	} else if(i <= 300) {
-//	    		this.setDirection("left");
-//	    	} else if(i <= 400) {
-//	    		this.setDirection("right");
-//	    	} else if(i <= 500) {
-//	    		this.setDirection("right and up");
-//	    	} else if(i <= 600) {
-//	    		this.setDirection("right and down");
-//	    	} else if(i <= 700) {
-//	    		this.setDirection("left and up");
-//	    	} else if(i <= 800) {
-//	    		this.setDirection("left and down");
-//	    	}
-	    	
-	    	if(i <= 400) {
+	    	if(i <= 100) {
 	    		this.setDirection("up");
-	    	} else if(i <= 800) {
+	    	} else if(i <= 200) {
 	    		this.setDirection("down");
+	    	} else if(i <= 300) {
+	    		this.setDirection("left");
+	    	} else if(i <= 400) {
+	    		this.setDirection("right");
+	    	} else if(i <= 500) {
+	    		this.setDirection("right and up");
+	    	} else if(i <= 600) {
+	    		this.setDirection("right and down");
+	    	} else if(i <= 700) {
+	    		this.setDirection("left and up");
+	    	} else if(i <= 800) {
+	    		this.setDirection("left and down");
 	    	}
+	    	
+//	    	if(i <= 400) {
+//	    		this.setDirection("up");
+//	    	} else if(i <= 800) {
+//	    		this.setDirection("down");
+//	    	}
 	    	
 	    	dirCounter = 0;
 	    }

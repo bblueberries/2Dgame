@@ -20,14 +20,42 @@ public class UI {
 	private int titleState=0;
 	private int state=0;
 	private int optionNum=1;
-	
+	private boolean gameFinished=false;
 	public UI(GamePanel gp,GraphicsContext gc) {
 		this.gp = gp;
 		this.gc= gc;
 	}
 	public void draw(GraphicsContext gc) {
-		
-		if(gp.getGameState()==GamePanel.titleState)
+		if(gp.getGameState()==GamePanel.endingState)
+		{
+			if(gameFinished)
+			{
+//				gp.setGameState(GamePanel.endingState);
+				int x= gp.getTileSize();
+				int y= gp.getScreenHeight()/2 - gp.getTileSize()*2;
+				gc.setFont(Font.font("Courier New",FontWeight.BOLD,80));
+				gc.setFill(Color.BLACK);
+				String text="CONGRATUATION!";
+				gc.fillText(text, x, y);
+				
+				x= gp.getTileSize()+5;
+				y= gp.getScreenHeight()/2 - gp.getTileSize()*2 +5;
+				gc.setFont(Font.font("Courier New",FontWeight.BOLD,80));
+				gc.setFill(Color.DARKGREY);
+				text="CONGRATUATION!";
+				gc.fillText(text, x, y);
+				
+				x+= gp.getTileSize();
+				y+=gp.getTileSize() -20;
+				gc.setFont(Font.font("Courier New",FontWeight.NORMAL,25));
+				gc.setFill(Color.BLACK);
+				text="PRESS ESC TO GO BACK TO TITLE SCREEN..";
+				gc.fillText(text, x, y);
+				
+//				gp.getGameLoop().stop();
+			}
+		}
+		else if(gp.getGameState()==GamePanel.titleState)
 		{
 			DrawTitleScreen();
 		}
@@ -314,6 +342,12 @@ public class UI {
 	}
 	public void setTitleState(int titleState) {
 		this.titleState = titleState;
+	}
+	public boolean isGameFinished() {
+		return gameFinished;
+	}
+	public void setGameFinished(boolean gameFinished) {
+		this.gameFinished = gameFinished;
 	}
 	
 }

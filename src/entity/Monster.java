@@ -30,7 +30,7 @@ public class Monster extends Entity{
 		this.getSolidArea().setWidth(28);
 		this.getSolidArea().setHeight(28);//= new Rectangle(10,18,28,28);
 		
-        this.getMonsterImage();
+        this.setMonsterImage();
     }
     private void setDefaultValue()
     {
@@ -62,7 +62,7 @@ public class Monster extends Entity{
         this.setMaxLife(5);
         this.setLife(getMaxLife());
     }
-	private void getMonsterImage() {
+	private void setMonsterImage() {
 		 
 		getImages().add( new Image(getClass().getResourceAsStream("/monster/mons_up_1.png"))) ;
 		getImages().add( new Image(getClass().getResourceAsStream("/monster/mons_up_2.png")));

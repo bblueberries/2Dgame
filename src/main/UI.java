@@ -81,7 +81,7 @@ public class UI {
 	{
 			gc.setFont(Font.font("Courier New",FontWeight.BOLD,70));
 			String text ="HIT MONSTER GAME"; 
-			int x = (int) getCenteredTextX(new Text(text),70);
+			int x = gp.getTileSize();
 			int y =(int) (gp.getTileSize()*1.7);
 			gc.setFill(Color.BLUEVIOLET);
 			gc.fillText(text, gp.getTileSize()+3, gp.getTileSize()*1.7+3);
@@ -91,41 +91,40 @@ public class UI {
 			
 			
 			
-			x = (int) getCenteredTextX(new Text(text),70);
-			y =(int) (gp.getTileSize()*2.5);
+			x = (int)gp.getTileSize()*5-20;
+			y =(int) (gp.getTileSize()*3);
 			
-//			Image logo = new Image(getClass().getResourceAsStream("/gameLOGO.png"));
-//			gc.drawImage(logo, x,y, gp.getTileSize()*4,gp.getTileSize()*4);
+			gc.drawImage(gp.getPlayer().getImages().get(3), x,y, gp.getTileSize()*4,gp.getTileSize()*4);
+			gc.drawImage(gp.getMonster()[0].getImages().get(3), x+gp.getTileSize()*2+20,y+gp.getTileSize(), gp.getTileSize()*3,gp.getTileSize()*3);
 			
-			
-			gc.setFont(Font.font("Courier New",FontWeight.BOLD,40));
+			gc.setFont(Font.font("Courier New",FontWeight.SEMI_BOLD,40));
 			gc.setFill(Color.WHITE);
 			
 			text ="NEW GAME"; 
-			x= (int) getCenteredTextX(new Text(text),40);
-			y+=gp.getTileSize()*5;
+			x= gp.getTileSize();
+			y+=gp.getTileSize()*6-20;
 			gc.fillText(text, x, y);
 			if(titleNum==0) {
-				gc.fillText("‣", x-gp.getTileSize(), y+4);
+				gc.fillText("‣", x-gp.getTileSize()/2, y+2);
 				
 			}
 			
 			
 			text ="LOAD GAME"; 
-			x=(int) getCenteredTextX(new Text(text),40);
-			y+=gp.getTileSize();
+			x=gp.getTileSize();
+			y+=gp.getTileSize()+10;
 			gc.fillText(text,x, y);
 			if(titleNum==1) {
-				gc.fillText("‣", x-gp.getTileSize(), y+4);
+				gc.fillText("‣", x-gp.getTileSize()/2, y+2);
 			}
 			
 			
 			text ="QUIT"; 
-			x=(int) getCenteredTextX(new Text(text),40);
-			y+=gp.getTileSize();
+			x=gp.getTileSize();
+			y+=gp.getTileSize()+10;
 			gc.fillText(text, x, y);
 			if(titleNum==2) {
-				gc.fillText("‣", x-gp.getTileSize(), y+4);
+				gc.fillText("‣", x-gp.getTileSize()/2, y+2);
 			}
 			
 			
@@ -164,11 +163,11 @@ public class UI {
 	
 		
 		Text header = new Text("OPTION");
-		Font font = Font.font("Arial",FontWeight.BOLD,40);
+		Font font = Font.font("Courier New",FontWeight.BOLD,40);
 		Color textColor = Color.WHITE;
 		gc.setFont(font);
 		gc.setFill(textColor);
-		textX = (int) getCenteredTextX(header,40);
+		textX = gp.getTileSize()*13/2 -6;
 		textY= Y+gp.getTileSize()+10;
 		
 		gc.fillText(header.getText(),textX,textY );
@@ -314,15 +313,6 @@ public class UI {
 		
 		
 	}
-	private double measureStringWidth(Text text) {
-        text.applyCss();
-        return text.getLayoutBounds().getWidth();
-    }
-	public double getCenteredTextX(Text text,int fontSize) {
-	    double screenWidth = gp.getScreenWidth();
-	    double textWidth = measureStringWidth(text);
-	    return (gp.getScreenWidth() - textWidth/text.getFont().getSize()*fontSize) / 2   ;
-	}
 	
 	
 	public void LoadGameDraw()
@@ -333,7 +323,7 @@ public class UI {
 		Text text = new Text("PLEASE NEW GAME FIRST..");
 		Font font = Font.font("Courier New",40);
 		Color textColor = Color.WHITE;
-		int textX = (int) gp.getUi().getCenteredTextX(text,40)-gp.getTileSize()+5;
+		int textX = gp.getTileSize()*3-gp.getTileSize()+5;
 		int textY= y+gp.getTileSize();
 		
 		gc.setFont(font);

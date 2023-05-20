@@ -151,11 +151,12 @@ public class GamePanel extends StackPane {
 	  {
 		  //reset variable
 		  setPlayer(new Player(this)); 
-		  maxMons = random.nextInt(5)+5;
 		  
+		  monster = new Monster[20];
+		  maxMons = random.nextInt(5)+5;
 		  genMonster(maxMons);
 		  setCurrentMonster( this.getMaxMons());
-		  System.out.println(maxMons +" "+ getCurrentMonster()+" "+getMonsterAlive(monster));
+//		  System.out.println(maxMons +" "+ getCurrentMonster()+" "+getMonsterAlive(monster));
 		  setGameState(GamePanel.titleState);
 	  }
 	  public void startNewGameLoop() 

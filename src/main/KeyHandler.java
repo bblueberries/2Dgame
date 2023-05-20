@@ -55,6 +55,7 @@ public class KeyHandler{
 					{
 						gp.getEzSound().stop();
 						gp.setFirstTimeStart(true);
+						gp.playMusic(gp.getTitleSound());
 						gp.setGameState(GamePanel.titleState);
 						
 					}
@@ -199,6 +200,7 @@ public class KeyHandler{
 	public void newGame() {
 		//Create new Game
 		gp.startNewGameLoop();
+		gp.stopMusic(gp.getTitleSound());
 		gp.playMusic(gp.getBgSound());
 		gp.setFirstTimeStart(true);
 		gp.setGameState(GamePanel.playingState);
@@ -220,6 +222,7 @@ public class KeyHandler{
 		else
 		{
 		gp.setGameState(GamePanel.playingState);
+		gp.stopMusic(gp.getTitleSound());
 		gp.playMusic(gp.getBgSound());
 		}
 		

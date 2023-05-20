@@ -50,6 +50,7 @@ public class GamePanel extends StackPane {
     private Sound winSound = new Sound(2);
     private Sound selectSound = new Sound(3);
     private Sound ezSound = new Sound(4);
+    private Sound titleSound = new Sound(5);
     
     
     
@@ -96,9 +97,10 @@ public class GamePanel extends StackPane {
 		 setFocusTraversable(true);
 		 
 		 //sound setting
-		 hitSound.setVolumn(0.2);
-		 bgSound.setVolumn(0.5);
-		 ezSound.setVolumn(1);
+		 hitSound.setVolumn(0.1);
+		 bgSound.setVolumn(0.3);
+		 titleSound.setVolumn(0.2);
+		 ezSound.setVolumn(0.8);
 		 
 		 //set time to draw
 		 this.frameTimeNano = (long) (1000000000 / targetFPS);
@@ -165,7 +167,10 @@ public class GamePanel extends StackPane {
 		  genMonster(maxMons);
 		  setCurrentMonster( this.getMaxMons());
 //		  System.out.println(maxMons +" "+ getCurrentMonster()+" "+getMonsterAlive(monster));
+		  
 		  setGameState(GamePanel.titleState);
+		  playMusic(getTitleSound()); 
+	
 	  }
 	  public void startNewGameLoop() 
 	  {
@@ -475,6 +480,14 @@ public class GamePanel extends StackPane {
 
 		public void setEzSound(Sound ezSound) {
 			this.ezSound = ezSound;
+		}
+
+		public Sound getTitleSound() {
+			return titleSound;
+		}
+
+		public void setTitleSound(Sound titleSound) {
+			this.titleSound = titleSound;
 		}
 	}
 		

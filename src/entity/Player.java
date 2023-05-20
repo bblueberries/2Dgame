@@ -177,7 +177,7 @@ public class Player extends Entity {
     	setPosition(gp.getTileSize()*xPos,gp.getTileSize()*yPos);
         setSpeed(6);
         setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));
-        setDirection("up");
+        setDirection("down");
         
         //PLAYER STATUS
         this.setMaxLife(5);
@@ -197,14 +197,15 @@ public class Player extends Entity {
 
 	  }
 	 public void update() {
-        // Update player position based on input from keyHandler 
+		 	// Update player position based on input from keyHandler 
     	
-    		if(gp.getKeyHandler().isWalkPressed())
+		 	//update when press WASD & can't walk until acknowledge game advice
+    		if(gp.getKeyHandler().isWalkPressed()&& !gp.getFirstTimeStart())
     		{
 
     	
     		//set direction to walk
-	        setDirection(gp.getKeyHandler().playerUpdate()); 
+	       setDirection(gp.getKeyHandler().playerUpdate()); 
 	        
 	        //set isCollide
 	        setCollide(false);

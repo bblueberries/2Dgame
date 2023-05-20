@@ -37,16 +37,29 @@ public class KeyHandler{
 	
 	public void keyPressedChangeState() {
 	    		
-		
+				// acknowledge game advice
+				if(gp.getGameState()==GamePanel.playingState)
+				{
+					if(gp.getFirstTimeStart())
+					{
+						if(getKeyPressed(KeyCode.SPACE))
+						{
+							gp.setFirstTimeStart(false);
+						}
+					}
+				}
+				//back to title screen after ending(ESC)
 				if(gp.getGameState()==GamePanel.endingState)
 				{
 					if(getKeyPressed(KeyCode.ESCAPE))
 					{
+						gp.getEzSound().stop();
 						gp.setFirstTimeStart(true);
 						gp.setGameState(GamePanel.titleState);
 						
 					}
 				}
+				//default Uistate
 				if(gp.getUi().getState()==0)
 	    		{
 		    	// toggle option screen(pauseState)
@@ -187,8 +200,10 @@ public class KeyHandler{
 		//Create new Game
 		gp.startNewGameLoop();
 		gp.playMusic(gp.getBgSound());
+		gp.setFirstTimeStart(true);
 		gp.setGameState(GamePanel.playingState);
-		gp.setFirstTimeStart(false);
+		//gp.getUi();
+		
 	}
 	public void loadGame() {
 		

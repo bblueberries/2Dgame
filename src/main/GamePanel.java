@@ -49,6 +49,9 @@ public class GamePanel extends StackPane {
     private Sound hitSound = new Sound(1);
     private Sound winSound = new Sound(2);
     private Sound selectSound = new Sound(3);
+    private Sound ezSound = new Sound(4);
+    
+    
     
 	private KeyHandler keyHandler	= new KeyHandler(this);
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
@@ -91,6 +94,11 @@ public class GamePanel extends StackPane {
 		 getChildren().add(canvas); 
 		 setBackground(new javafx.scene.layout.Background(new javafx.scene.layout.BackgroundFill(Color.BLACK, null, null)));
 		 setFocusTraversable(true);
+		 
+		 //sound setting
+		 hitSound.setVolumn(0.2);
+		 bgSound.setVolumn(0.5);
+		 ezSound.setVolumn(1);
 		 
 		 //set time to draw
 		 this.frameTimeNano = (long) (1000000000 / targetFPS);
@@ -201,6 +209,7 @@ public class GamePanel extends StackPane {
 	    		player.update();
 	    		
 	    		if(getMonsterAlive(monster) != currentMonster) {
+	    			
 	    			playSE(hitSound);
     				currentMonster = getMonsterAlive(monster);
 	    		}
@@ -208,7 +217,7 @@ public class GamePanel extends StackPane {
 	    		{
 	    			getUi().setGameFinished(true);
 	    			stopMusic(bgSound);
-	    			playSE(winSound);
+	    			playSE(ezSound);
 	    			setGameState(endingState);
 	    		}
 
@@ -220,7 +229,7 @@ public class GamePanel extends StackPane {
 	    		}
 	    	}
 	    	//PAUSE
-	    	if(getGameState() ==pauseState)
+	    	if(getGameState() ==pauseState )
 	    	{
 	    		
 	    	}
@@ -235,7 +244,7 @@ public class GamePanel extends StackPane {
 	        gc.clearRect(0, 0, screenWidth, screenHeight);
 	        
 	        //title Screen
-	        if(getGameState()==titleState)
+	        if(getGameState()==titleState )
 	        {
 	        	if(isFirstTimeStartWarning())
 	        	{ui.LoadGameDraw();}
@@ -248,18 +257,20 @@ public class GamePanel extends StackPane {
 	        tilemanager.draw(gc); 
 	        player.draw(gc);
 	      //  heart.draw(gc);
-	        for(int i=0;i<monster.length;i++) {
-    			if(monster[i] != null) {
-    				monster[i].draw(gc);
-    			}
+	     
+	        	for(int i=0;i<monster.length;i++) {
+	        		if(monster[i] != null) {
+	        			monster[i].draw(gc);
+	        		}
+    			
+	        
     		}
 	        
-	        //Drawing HP only when playing
+	        //Drawing mons left
 	        if(getGameState()==playingState)
 	        {
 	        	getUi().draw(gc);
 	        }
-	        
 	        //Drawing Option screen when pausing
 	        if(getGameState()==pauseState)
 	    	{
@@ -456,6 +467,14 @@ public class GamePanel extends StackPane {
 
 		public void setSelectSound(Sound selectSound) {
 			this.selectSound = selectSound;
+		}
+
+		public Sound getEzSound() {
+			return ezSound;
+		}
+
+		public void setEzSound(Sound ezSound) {
+			this.ezSound = ezSound;
 		}
 	}
 		

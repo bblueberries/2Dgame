@@ -17,6 +17,7 @@ public class Sound {
     	this.soundPath[1] = "/sound/hitmonster.mp3";
     	this.soundPath[2] = "/sound/wining.mp3";
     	this.soundPath[3] = "/sound/selectsound.mp3";
+    	this.soundPath[4] = "/sound/ezsound.mp3";
     	Media media = new Media(getClass().getResource(this.soundPath[i]).toString());
         mediaPlayer = new MediaPlayer(media);
     }
@@ -33,7 +34,10 @@ public class Sound {
     public void stop() {
         mediaPlayer.stop();
     }
-    
+    public void setVolumn(double volume)
+    {
+    	mediaPlayer.setVolume(volume);
+    }
     public String getSoundPath(int i) {
     	return this.soundPath[i];
     }

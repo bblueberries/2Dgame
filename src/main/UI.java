@@ -27,6 +27,7 @@ public class UI {
 		this.gc= gc;
 	}
 	public void draw(GraphicsContext gc) {
+		
 		if(gp.getGameState()==GamePanel.endingState)
 		{
 			if(gameFinished)
@@ -44,6 +45,10 @@ public class UI {
 		}
 		else if(gp.getGameState()==GamePanel.playingState)
 		{
+			if(gp.getFirstTimeStart())
+			{
+				DrawAdviceWindow();
+			}
 			DrawMonsterLeft(gp.getMonsterAlive((Monster[]) gp.getMonster()));
 		}
 	}
@@ -148,8 +153,8 @@ public class UI {
     	
     	switch(getState()) {
     	case 0:Option(X,Y);break;
-    	case 1:Control(X,Y);break;
-    	case 2:Info(X,Y);break;
+    	case 1:Info(X,Y);break;
+    	case 2:Control(X,Y);break;
     	case 3:OptionEndGame(X,Y);break;
     	}
     }
@@ -176,7 +181,7 @@ public class UI {
 		gc.setFont(Font.font("Courier New",FontWeight.SEMI_BOLD,30));
 		gc.setFill(Color.WHITE);
 		//option1
-		String text = "CONTROL";
+		String text = "INFO";
 		textX = X +gp.getTileSize();
 		textY  = gp.getTileSize()*4 +25;
 		gc.fillText(text, textX, textY);
@@ -184,7 +189,7 @@ public class UI {
 		}
 		
 		//option2
-		text = "INFO";
+		text = "CONTROL";
 		textY  += gp.getTileSize()+10;
 		gc.fillText(text, textX, textY);
 		if(optionNum==2) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);
@@ -284,12 +289,28 @@ public class UI {
 		
 		text = "and return to title screen?";
 		textX -= 12;
+		textY  += gp.getTileSize()/2;
+		gc.fillText(text, textX, textY);
+		
+		gc.setFont(Font.font("Courier New",FontWeight.LIGHT,15));
+		gc.setFill(Color.RED);
+		text = "Game won't save if you didn't";
+		textX += 30;
 		textY  += gp.getTileSize();
 		gc.fillText(text, textX, textY);
-			
+		
+		text="acknowledge game advice yet..";
+		//textX+=60;
+		textY+=gp.getTileSize()/2;
+		gc.fillText(text, textX, textY);
+		
+		
+		
+		gc.setFont(Font.font("Courier New",FontWeight.LIGHT,20));
+		gc.setFill(Color.WHITE);
 		text = "YES";
 		textX = X+ gp.getTileSize()*3 +25;
-		textY  += gp.getTileSize()*3;
+		textY  += gp.getTileSize()*3/2;
 		gc.fillText(text, textX, textY);
 		if(optionNum==1) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+2);}
 		
@@ -315,7 +336,42 @@ public class UI {
 		
 	}
 	
-	
+	public void DrawAdviceWindow()
+	{
+		int x=gp.getTileSize()*2;
+		int y=gp.getTileSize()*3/2;
+		int W=gp.getTileSize()*12;
+		int H=gp.getTileSize()*7/2 +10;
+		DrawScreen(x,y,W,H);
+		
+		gc.setFont(Font.font("Courier New",FontWeight.LIGHT,16));
+		gc.setFill(Color.WHITE);
+		String text = "Mysterious meteorites landed on Earth in many places.";
+		y+=gp.getTileSize()/2;
+		x+=gp.getTileSize()/2;
+		gc.fillText(text,x,y);
+		
+		text ="Ghosts appeared around the crater. People are unable";
+		y+=gp.getTileSize()/2;
+		gc.fillText(text, x, y);
+		
+		text="to live. It's your job to take down these ghosts! ";
+		y+=gp.getTileSize()/2;
+		gc.fillText(text, x, y);
+		
+		
+		text="Use WASD walk to the ghosts and make them disappear! ";
+		x+=15; //centered
+		gc.setFill(Color.YELLOW);
+		y+=gp.getTileSize();
+		gc.fillText(text, x, y);
+		
+		text="Press SPACE to continue...";
+		x+=gp.getTileSize()*2+20;// centered
+		y+=gp.getTileSize();
+		gc.setFill(Color.BEIGE);
+		gc.fillText(text, x, y);
+	}
 	public void LoadGameDraw()
 	{
 	

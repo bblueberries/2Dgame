@@ -15,11 +15,12 @@ public class KeyHandler{
 	private GamePanel gp;
 	
 	public KeyHandler(GamePanel gp)
-	{
+	{	//set game panel
 		this.gp=gp;
 	}
 	
 	public boolean getKeyPressed(KeyCode keycode) {
+		//get if key code is press?
 		return keyPressed.contains(keycode);
 	}
 	
@@ -35,183 +36,224 @@ public class KeyHandler{
 			keyPressed.remove(keycode);
 		}}
 	
-	public void keyPressedChangeState() {
+	public void pressedChangeState() {
 	    		
-				// acknowledge game advice
-				if(gp.getGameState()==GamePanel.playingState)
-				{
-					if(gp.getFirstTimeStart())
-					{
-						if(getKeyPressed(KeyCode.SPACE))
-						{
-							gp.setFirstTimeStart(false);
-						}
-					}
-				}
+				// acknowledge game advice to play game
+				acknowledgeGameAdvicePlayingState();
 				//back to title screen after ending(ESC)
-				if(gp.getGameState()==GamePanel.endingState)
-				{
-					if(getKeyPressed(KeyCode.ESCAPE))
-					{
-						
-						gp.getEzSound().stop();
-						gp.setFirstTimeStart(true);
-						gp.playMusic(gp.getTitleSound());
-						gp.setGameState(GamePanel.titleState);
-						
-					}
-				}
-				//default Uistate
+				backToTitleEndingState();
+				
+				
 				if(gp.getUi().getState()==0)
 	    		{
 		    	// toggle option screen(pauseState)
-				if(getKeyPressed(KeyCode.ESCAPE))
-		    	{	
-					gp.getUi().setOptionNum(1);
-					if(gp.getGameState()==GamePanel.playingState) {gp.setGameState(GamePanel.pauseState);}
-					else if(gp.getGameState()==GamePanel.pauseState) {gp.setGameState(GamePanel.playingState);}
-		    	}
+					togglePauseState();
 	    		}
 				
 	    		else
 		    	{	
-	    			
 	    			// back to option screen (ESC)
-		    		if(getKeyPressed(KeyCode.ESCAPE)) 
-		    		{
-		    			gp.getUi().setOptionNum(1);
-		    			gp.getUi().setState(0);
-		    		}
+		    		backPauseState();
 		    	}
 		    }
-
-	public void keyPressedPauseState() {
-		    	//select option 
-				if(gp.getUi().getState()==0)
+	public void backPauseState() {
+		if(getKeyPressed(KeyCode.ESCAPE)) 
+		{
+			gp.getUi().setOptionNum(1);
+			gp.getUi().setState(0);
+		}
+	}
+	public void togglePauseState() {
+		if(getKeyPressed(KeyCode.ESCAPE))
+    	{	
+			gp.getUi().setOptionNum(1);
+			if(gp.getGameState()==GamePanel.playingState) {gp.setGameState(GamePanel.pauseState);}
+			else if(gp.getGameState()==GamePanel.pauseState) {gp.setGameState(GamePanel.playingState);}
+    	}
+	}
+	public void  acknowledgeGameAdvicePlayingState() {
+		if(gp.getGameState()==GamePanel.playingState)
+		{
+			if(gp.getFirstTimeStart())
+			{
+				if(getKeyPressed(KeyCode.SPACE))
 				{
-					if(getKeyPressed(KeyCode.S)&&gp.getUi().getOptionNum()<4)
-						{
-							gp.getUi().setOptionNum( (gp.getUi().getOptionNum()+1));
-							gp.playSE(gp.getSelectSound());
-						}
-						 
-						
-					else if(getKeyPressed(KeyCode.W)&&gp.getUi().getOptionNum()>1)	
-						{
-							gp.getUi().setOptionNum( (gp.getUi().getOptionNum()-1));
-							 gp.playSE(gp.getSelectSound());
-						}
+					gp.setFirstTimeStart(false);
 				}
+			}
+		}
+	}
+	public void backToTitleEndingState() {
+		if(gp.getGameState()==GamePanel.endingState)
+		{
+			if(getKeyPressed(KeyCode.ESCAPE))
+			{
+				
+				gp.getEzSound().stop();
+				gp.setFirstTimeStart(true);
+				gp.playMusic(gp.getTitleSound());
+				gp.setGameState(GamePanel.titleState);
+				
+			}
+		}
+	}
+	public void scrollPauseState() {
+		    	//choose option 
+				scrollOptionPauseState();
 		  		//select option in EndGame's option
-				if(gp.getUi().getState()==3)
-				{
-					if(getKeyPressed(KeyCode.S)&&gp.getUi().getOptionNum()<2)
-					{
-						gp.getUi().setOptionNum( (gp.getUi().getOptionNum()+1));
-						gp.playSE(gp.getSelectSound());
-					}
-					else if(getKeyPressed(KeyCode.W)&&gp.getUi().getOptionNum()>1)
-						{
-							gp.getUi().setOptionNum( (gp.getUi().getOptionNum()-1));
-							gp.playSE(gp.getSelectSound());
-						}
-				}
+				scrollExitPauseState();
 	  }
-	public void optionPressed(int optionNum) {
+	public void scrollExitPauseState() {
+		if(gp.getUi().getState()==3)
+		{
+			if(getKeyPressed(KeyCode.S)&&gp.getUi().getOptionNum()<2)
+			{
+				gp.getUi().setOptionNum( (gp.getUi().getOptionNum()+1));
+				gp.playSE(gp.getSelectSound());
+			}
+			else if(getKeyPressed(KeyCode.W)&&gp.getUi().getOptionNum()>1)
+				{
+					gp.getUi().setOptionNum( (gp.getUi().getOptionNum()-1));
+					gp.playSE(gp.getSelectSound());
+				}
+		}
+	}
+	public void scrollOptionPauseState() {
+		if(gp.getUi().getState()==0)
+		{
+			if(getKeyPressed(KeyCode.S)&&gp.getUi().getOptionNum()<4)
+				{
+					gp.getUi().setOptionNum( (gp.getUi().getOptionNum()+1));
+					gp.playSE(gp.getSelectSound());
+				}
+				 
+				
+			else if(getKeyPressed(KeyCode.W)&&gp.getUi().getOptionNum()>1)	
+				{
+					gp.getUi().setOptionNum( (gp.getUi().getOptionNum()-1));
+					 gp.playSE(gp.getSelectSound());
+				}
+		}
+	}
+	public void pressedPauseState(int optionNum) {
+		
 		//in Option screen
 		if(gp.getUi().getState()==0)
 		{
-		if(gp.getUi().getOptionNum()==4)
-		{
+			if(gp.getUi().getOptionNum()==4) //optionNum4 = back option
+			{
+				//press back option
+				pressBackOption();
+			}
+			//set state from pressed option
+			else pressOption();
+		}
+		
+		//in Exit game option
+		else if(gp.getUi().getState()==3)
+		{	
+			if(getKeyPressed(KeyCode.SPACE)) 
+			{	//confirm YES
+				pressYesExitOption();
+				//confirm NO
+				pressNoExitOption();
+			}
+		}
+	}
+	public void pressYesExitOption() {
+			if(gp.getUi().getOptionNum()==1)
+			{
+				gp.getUi().setTitleNum(0);
+				gp.getUi().setOptionNum(1);
+				gp.getUi().setState(0);
+				gp.stopMusic(gp.getBgSound());
+				gp.playMusic(gp.getTitleSound());
+				gp.setGameState(GamePanel.titleState);
+			}
+		}	
+	public void pressNoExitOption() {
+		if(gp.getUi().getOptionNum()==2)
+		{	
+			gp.getUi().setState(0);
+			gp.getUi().setOptionNum(1);
+		}
+	}
+	public void pressOption() {
+		if(getKeyPressed(KeyCode.SPACE)) 
+		{ 
+				gp.getUi().setState(gp.getUi().getOptionNum());
+				gp.getUi().setOptionNum(1);
+		}
+	}
+	public void pressBackOption() {
+		
 			if(getKeyPressed(KeyCode.SPACE)) 
 				{
 				gp.getUi().setOptionNum(1);
 				gp.setGameState(GamePanel.playingState);
 				}
-		}
-		else if(getKeyPressed(KeyCode.SPACE)) { 
-				gp.getUi().setState(optionNum);
-				gp.getUi().setOptionNum(1);
-		}
-		}
-		//in Exist Option screen
-		else if(gp.getUi().getState()==3)
-		{	
-			if(getKeyPressed(KeyCode.SPACE)) 
-			{	//confirm YES
-				if(gp.getUi().getOptionNum()==1)
-				{
-					gp.getUi().setTitleNum(0);
-					gp.getUi().setOptionNum(1);
-					gp.getUi().setState(0);
-					gp.stopMusic(gp.getBgSound());
-					gp.playMusic(gp.getTitleSound());
-					gp.setGameState(GamePanel.titleState);
-				}
-				//confirm NO
-				else if(gp.getUi().getOptionNum()==2)
-				{	
-					gp.getUi().setState(0);
-					gp.getUi().setOptionNum(1);
-				}
-			}
-			
-		}
+		
 	}
-	
 
-	public void keyPressedTitleState() {
+	public void pressedTitleState() {
 	    	
 			//in Title Screen
 	    	if(gp.getUi().getTitleState()==0)
 				{
-	    		//Choosing Option in Title Screen
-				if(getKeyPressed(KeyCode.S))
-				{
-					gp.getUi().setTitleNum( (gp.getUi().getTitleNum()+1)%3);
-					gp.playSE(gp.getSelectSound());
-				}
-				else if(getKeyPressed(KeyCode.W))
-				{
-					if(gp.getUi().getTitleNum()-1<0) {gp.getUi().setTitleNum(gp.getUi().getTitleNum()+3);}
-					{
-					gp.getUi().setTitleNum( (gp.getUi().getTitleNum()-1)%3);
-					gp.playSE(gp.getSelectSound());}
-				}
-				
+	    		//Choose option in Title Screen
+				scrollOptionTitleScreen();				
 				//Select the option
-				
-				if(getKeyPressed(KeyCode.SPACE))
-				{
-					switch(gp.getUi().getTitleNum())
-					{
-					case 0: newGame();gp.playMusic(gp.getBgSound());break; //Play
-					case 1: loadGame();break; //
-					case 2:	System.exit(0);break; //Exit
-					}
-				}
+				pressOptionTitleScreen();
 				}
 	    	//In Warning Screen
-	    	 if(gp.getUi().getTitleState()==1)
-	    	 {
-	    		 if(getKeyPressed(KeyCode.ESCAPE))
-	    		 {
-	    			 gp.getUi().setTitleNum(0);
-	    			 gp.getUi().setTitleState(0);
-	    			 gp.setFirstTimeStartWarning(false);
-	    			 
-				}
-	    	 }
+	    	exitWarningScreen();
 			}
-	public void newGame() {
+	
+	public void pressOptionTitleScreen() {
+		if(getKeyPressed(KeyCode.SPACE))
+		{
+			switch(gp.getUi().getTitleNum())
+			{
+			case 0: createNewGame();gp.playMusic(gp.getBgSound());break; //Play
+			case 1: loadGame();break; //
+			case 2:	System.exit(0);break; //Exit
+			}
+		}
+	}
+	public void scrollOptionTitleScreen() {
+		if(getKeyPressed(KeyCode.S))
+		{
+			gp.getUi().setTitleNum( (gp.getUi().getTitleNum()+1)%3);
+			gp.playSE(gp.getSelectSound());
+		}
+		else if(getKeyPressed(KeyCode.W))
+		{
+			if(gp.getUi().getTitleNum()-1<0)
+				{gp.getUi().setTitleNum(gp.getUi().getTitleNum()+3);}
+			
+			gp.getUi().setTitleNum( (gp.getUi().getTitleNum()-1)%3);
+			gp.playSE(gp.getSelectSound());
+			
+		}
+	}
+	public void exitWarningScreen() {
+		if(gp.getUi().getTitleState()==1)
+		{
+   		 	if(getKeyPressed(KeyCode.ESCAPE))
+   		 	{
+   		 		gp.getUi().setTitleNum(0);
+   		 		gp.getUi().setTitleState(0);
+   		 		gp.setFirstTimeStartWarning(false);
+			}
+		}
+	}
+	public void createNewGame() {
 		//Create new Game
 		gp.startNewGameLoop();
 		gp.stopMusic(gp.getTitleSound());
 		gp.playMusic(gp.getBgSound());
 		gp.setFirstTimeStart(true);
-		gp.setGameState(GamePanel.playingState);
-		//gp.getUi();
-		
+		gp.setGameState(GamePanel.playingState);		
 	}
 	public void loadGame() {
 		
@@ -221,7 +263,6 @@ public class KeyHandler{
 			//Take user to Warning Screen
 			gp.getUi().setTitleState(1);
 			gp.setFirstTimeStartWarning(true);
-			
 			
 		}
 		//Load Game
@@ -233,7 +274,7 @@ public class KeyHandler{
 		}
 		
 	}
-	public String playerUpdate() {
+	public String updatePlayerDirection() {
 		    
 		    		//Set player direction to walk
 		    		if (getKeyPressed(KeyCode.D) && getKeyPressed(KeyCode.W)) {

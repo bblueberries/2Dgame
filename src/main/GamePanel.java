@@ -110,27 +110,27 @@ public class GamePanel extends StackPane {
 				keyHandler.setKeyPressed(event.getCode(), true);
 				if(getGameState() == endingState) 
 				{
-					keyHandler.keyPressedChangeState();
+					keyHandler.pressedChangeState();
 				}
 				
 				// To toggle option Screen
 				if(getGameState() == pauseState || getGameState() == playingState) 
 				{
-				keyHandler.keyPressedChangeState();
+				keyHandler.pressedChangeState();
 				}
 				
 				// title Screen
 				if(getGameState() == titleState){ 
 				
-				keyHandler.keyPressedTitleState();
+				keyHandler.pressedTitleState();
 				}
 				
 				// option Screen
 				if(getGameState() == pauseState){ 
 				
 					
-					keyHandler.keyPressedPauseState();
-					keyHandler.optionPressed(ui.getOptionNum());
+					keyHandler.scrollPauseState();
+					keyHandler.pressedPauseState(ui.getOptionNum());
 				}
 			 });
 		 

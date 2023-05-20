@@ -251,6 +251,15 @@ public class UI {
 		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,25));
 		text = "                  ESC";
 		gc.fillText(text, textX, textY);
+		
+		gc.setFont(Font.font("Courier New",FontWeight.BOLD,25));
+		text = "CHOOSING";
+		textY  += gp.getTileSize()+5;
+		gc.fillText(text, textX, textY);
+		
+		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,25));
+		text = "                  W/S";
+		gc.fillText(text, textX, textY);
 	}
 	public void Info(int X,int Y) {
 		

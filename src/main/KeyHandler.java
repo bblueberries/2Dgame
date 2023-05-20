@@ -141,6 +141,7 @@ public class KeyHandler{
 			{	//confirm YES
 				if(gp.getUi().getOptionNum()==1)
 				{
+					gp.getUi().setTitleNum(0);
 					gp.getUi().setOptionNum(1);
 					gp.getUi().setState(0);
 					gp.stopMusic(gp.getBgSound());
@@ -195,6 +196,7 @@ public class KeyHandler{
 	    	 {
 	    		 if(getKeyPressed(KeyCode.ESCAPE))
 	    		 {
+	    			 gp.getUi().setTitleNum(0);
 	    			 gp.getUi().setTitleState(0);
 	    			 gp.setFirstTimeStartWarning(false);
 	    			 

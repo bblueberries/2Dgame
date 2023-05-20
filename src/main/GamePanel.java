@@ -46,6 +46,7 @@ public class GamePanel extends StackPane {
     
     private Sound bgSound = new Sound(0);
     private Sound hitSound = new Sound(1);
+    private Sound winSound = new Sound(2);
 	private KeyHandler keyHandler	= new KeyHandler(this);
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
@@ -140,7 +141,7 @@ public class GamePanel extends StackPane {
 	  public void resetGame()
 	  {
 		  setPlayer(new Player(this));
-		  
+		  setCurrentMonster( this.getMaxMons());
 		  setGameState(GamePanel.titleState);
 	  }
 	  public void startNewGameLoop() 
@@ -184,15 +185,14 @@ public class GamePanel extends StackPane {
 //	    		System.out.println(currentMonster);
 	    		player.update();
 	    		if(getMonsterAlive(monster) != currentMonster) {
-	    			this.getHitSound().play();
-	    			this.getHitSound().stop();
-	    			this.getHitSound().play();
+	    			playSE(hitSound);
     				currentMonster = getMonsterAlive(monster);
 	    		}
 	    		if(getMonsterAlive(monster)==0)
 	    		{
 	    			getUi().setGameFinished(true);
 	    			stopMusic(bgSound);
+	    			playSE(winSound);
 	    			setGameState(endingState);
 	    		}
 
@@ -293,6 +293,8 @@ public class GamePanel extends StackPane {
 		}
 		// For sound effect
 		public void playSE(Sound sound) {
+			sound.play();
+			sound.stop();
 			sound.play();
 		}
 		
@@ -422,6 +424,14 @@ public class GamePanel extends StackPane {
 
 		public Monster[] getMonster() {
 			return monster;
+		}
+
+		public int getCurrentMonster() {
+			return currentMonster;
+		}
+
+		public void setCurrentMonster(int currentMonster) {
+			this.currentMonster = currentMonster;
 		}
 	}
 		

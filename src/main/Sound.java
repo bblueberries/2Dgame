@@ -9,11 +9,12 @@ public class Sound {
 
     // Dict for using sound
     // 0 : bg sound
-    // 1 : ???
+    // 1 : hitmonster
     // 2 : ???
     public Sound(int i) {
     	this.soundPath[0] = "/sound/themesong.mp3";
-    	this.soundPath[1] = "/sound/hitmonster.wav";
+    	this.soundPath[1] = "/sound/hitmonster.mp3";
+    	this.soundPath[2] = "/sound/wining.mp3";
     	Media media = new Media(getClass().getResource(this.soundPath[i]).toString());
         mediaPlayer = new MediaPlayer(media);
     }

@@ -93,9 +93,10 @@ public class UI {
 			
 			x = (int)gp.getTileSize()*5-20;
 			y =(int) (gp.getTileSize()*3);
-			
+			Image monsImage = new Image(getClass().getResourceAsStream("/monster/mons_down_1.png"));
+			Image playerImage = new Image(getClass().getResourceAsStream("/player/ranger4.png"));
 			gc.drawImage(gp.getPlayer().getImages().get(3), x,y, gp.getTileSize()*4,gp.getTileSize()*4);
-			gc.drawImage(gp.getMonster()[0].getImages().get(3), x+gp.getTileSize()*2+20,y+gp.getTileSize(), gp.getTileSize()*3,gp.getTileSize()*3);
+			gc.drawImage(monsImage, x+gp.getTileSize()*2+20,y+gp.getTileSize(), gp.getTileSize()*3,gp.getTileSize()*3);
 			
 			gc.setFont(Font.font("Courier New",FontWeight.SEMI_BOLD,40));
 			gc.setFill(Color.WHITE);

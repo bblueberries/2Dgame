@@ -34,6 +34,7 @@ public class Monster extends Entity{
     }
     private void setDefaultValue()
     {
+//    	System.out.println(""+this.gp.getTileManager());
     	boolean checkSpawn = false;
     	Random random = new Random();
     	int xPos = random.nextInt(40)+5;

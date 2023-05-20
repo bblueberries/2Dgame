@@ -142,6 +142,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import java.lang.Math;
 import java.util.ArrayList;
+import java.util.Random;
 
 import main.GamePanel;
 import main.KeyHandler;
@@ -159,9 +160,8 @@ public class Player extends Entity {
     private int yPos;
     
     public Player(GamePanel gp) {
+//    	Random spawnRandom = new Random();
         this.gp = gp;
-        this.xPos = 23;
-        this.yPos = 21;
 		this.ScreenX =	this.gp.getScreenWidth()/2 - (this.gp.getTileSize()/2);
 		this.ScreenY =  this.gp.getScreenHeight()/2-(this.gp.getTileSize()/2);
 		this.getSolidArea().setX(10);
@@ -174,11 +174,27 @@ public class Player extends Entity {
     }
     private void setDefaultValue()
     {
-    	setPosition(gp.getTileSize()*xPos,gp.getTileSize()*yPos);
-        setSpeed(6);
-        setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));
-        setDirection("down");
         
+        boolean checkSpawn = false;
+    	Random random = new Random();
+    	int xPos = random.nextInt(40)+5;
+    	int yPos = random.nextInt(40)+5;
+    	while(!checkSpawn){
+        	int spawnTile = this.gp.tilemanager.getMapTileNum()[xPos][yPos];
+        	if(gp.tilemanager.getTile()[spawnTile].isCollision() == true) {
+        		checkSpawn = false;
+        		xPos = random.nextInt(40)+5;
+        		yPos = random.nextInt(40)+5;
+        	} else {
+        		checkSpawn = true;
+        	}
+    	}
+        
+    	setPosition(gp.getTileSize()*xPos,gp.getTileSize()*yPos);
+    	setSpeed(6);
+    	setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));
+    	setDirection("down");
+    	
         //PLAYER STATUS
         this.setMaxLife(5);
         this.setLife(getMaxLife());

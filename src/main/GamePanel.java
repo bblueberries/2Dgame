@@ -56,7 +56,6 @@ public class GamePanel extends StackPane {
     
 	private KeyHandler keyHandler	= new KeyHandler(this);
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
-	private Player player = new Player(this);
 
 
 	Random random = new Random();
@@ -79,6 +78,7 @@ public class GamePanel extends StackPane {
 	private Monster monster[] = new Monster[20];
 	private TileManager tileManager = new TileManager(this);
 	public TileManager tilemanager = new TileManager(this);
+	private Player player = new Player(this);
 	
 //	public void setPlayer(Player player) {
 //		this.player = player;
@@ -97,10 +97,10 @@ public class GamePanel extends StackPane {
 		 setFocusTraversable(true);
 		 
 		 //sound setting
-		 hitSound.setVolumn(0.1);
-		 bgSound.setVolumn(0.3);
+		 hitSound.setVolumn(0.2);
+		 bgSound.setVolumn(0.2);
 		 titleSound.setVolumn(0.2);
-		 ezSound.setVolumn(0.8);
+		 ezSound.setVolumn(0.7);
 		 
 		 //set time to draw
 		 this.frameTimeNano = (long) (1000000000 / targetFPS);

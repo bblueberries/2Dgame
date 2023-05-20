@@ -80,8 +80,8 @@ public class UI {
 	public void DrawTitleScreen()
 	{
 			gc.setFont(Font.font("Courier New",FontWeight.BOLD,70));
-			String text ="HIT MONSTER GAME"; 
-			int x = gp.getTileSize();
+			String text ="THE GHOST BUSTER"; 
+			int x = gp.getTileSize()-5;
 			int y =(int) (gp.getTileSize()*1.7);
 			gc.setFill(Color.BLUEVIOLET);
 			gc.fillText(text, gp.getTileSize()+3, gp.getTileSize()*1.7+3);

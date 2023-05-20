@@ -73,9 +73,17 @@ public class KeyHandler{
 				if(gp.getUi().getState()==0)
 				{
 					if(getKeyPressed(KeyCode.S)&&gp.getUi().getOptionNum()<4)
-						gp.getUi().setOptionNum( (gp.getUi().getOptionNum()+1));
+						{
+							gp.getUi().setOptionNum( (gp.getUi().getOptionNum()+1));
+							gp.playSE(gp.getSelectSound());
+						}
+						 
+						
 					else if(getKeyPressed(KeyCode.W)&&gp.getUi().getOptionNum()>1)	
-						gp.getUi().setOptionNum( (gp.getUi().getOptionNum()-1));
+						{
+							gp.getUi().setOptionNum( (gp.getUi().getOptionNum()-1));
+							 gp.playSE(gp.getSelectSound());
+						}
 				}
 		  		//select option in EndGame's option
 				if(gp.getUi().getState()==3)
@@ -83,9 +91,13 @@ public class KeyHandler{
 					if(getKeyPressed(KeyCode.S)&&gp.getUi().getOptionNum()<2)
 					{
 						gp.getUi().setOptionNum( (gp.getUi().getOptionNum()+1));
+						gp.playSE(gp.getSelectSound());
 					}
 					else if(getKeyPressed(KeyCode.W)&&gp.getUi().getOptionNum()>1)
-						{gp.getUi().setOptionNum( (gp.getUi().getOptionNum()-1));}
+						{
+							gp.getUi().setOptionNum( (gp.getUi().getOptionNum()-1));
+							gp.playSE(gp.getSelectSound());
+						}
 				}
 	  }
 	public void optionPressed(int optionNum) {
@@ -138,11 +150,14 @@ public class KeyHandler{
 				if(getKeyPressed(KeyCode.S))
 				{
 					gp.getUi().setTitleNum( (gp.getUi().getTitleNum()+1)%3);
+					gp.playSE(gp.getSelectSound());
 				}
 				else if(getKeyPressed(KeyCode.W))
 				{
 					if(gp.getUi().getTitleNum()-1<0) {gp.getUi().setTitleNum(gp.getUi().getTitleNum()+3);}
+					{
 					gp.getUi().setTitleNum( (gp.getUi().getTitleNum()-1)%3);
+					gp.playSE(gp.getSelectSound());}
 				}
 				
 				//Select the option

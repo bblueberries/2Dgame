@@ -44,20 +44,25 @@ public class GamePanel extends StackPane {
     private GraphicsContext gc;
     private AnimationTimer gameLoop;
     
+    //Sound & Sound Effect
     private Sound bgSound = new Sound(0);
     private Sound hitSound = new Sound(1);
     private Sound winSound = new Sound(2);
+    private Sound selectSound = new Sound(3);
+    
 	private KeyHandler keyHandler	= new KeyHandler(this);
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 	private Player player = new Player(this);
 
-//	private Monster testMonster = new Monster(this);
+
 	Random random = new Random();
-	private int maxMons = random.nextInt(5)+5;;
+	private int maxMons = random.nextInt(5)+5;
 	private Heart heart = new Heart(this);
 	private UI ui;
 	private boolean FirstTimeStart= true;
 	private boolean FirstTimeStartWarning=false;
+	
+	//GAME STATE
 	private int gameState=0;
 	public static final int titleState=0;
 	public static final int playingState=1;
@@ -78,18 +83,19 @@ public class GamePanel extends StackPane {
 	
 	public GamePanel()
 	{
+		// initialize screen & variable
 		 canvas = new Canvas(screenWidth, screenHeight);
 		 gc = canvas.getGraphicsContext2D();
 		 ui = new UI(this,gc);
 		 gc.setImageSmoothing(false);
-
-		 getChildren().add(canvas);
-		 
+		 getChildren().add(canvas); 
 		 setBackground(new javafx.scene.layout.Background(new javafx.scene.layout.BackgroundFill(Color.BLACK, null, null)));
 		 setFocusTraversable(true);
 		 
+		 //set time to draw
 		 this.frameTimeNano = (long) (1000000000 / targetFPS);
 		 
+		 //set On key Pressed that use in game
 		 this.setOnKeyPressed( event -> {
 				keyHandler.setKeyPressed(event.getCode(), true);
 				if(getGameState() == endingState) 
@@ -118,15 +124,17 @@ public class GamePanel extends StackPane {
 				}
 			 });
 		 
+		 //set on key released
 		 this.setOnKeyReleased( event -> {
 			 keyHandler.setKeyPressed(event.getCode(), false);	
 		 });
-//		
 		
+		//start animation timer
 		 this.startNewGameLoop();
 		 
 	}
 	
+	//create monster
 	private void genMonster(int maxMonster) {
 		if(maxMonster > monster.length) {
 			maxMonster = monster.length;
@@ -138,17 +146,23 @@ public class GamePanel extends StackPane {
 		}
 	}
 	
+	//for reset game when NEW GAME
 	  public void resetGame()
 	  {
-		  setPlayer(new Player(this));
+		  //reset variable
+		  setPlayer(new Player(this)); 
+		  maxMons = random.nextInt(5)+5;
+		  
+		  genMonster(maxMons);
 		  setCurrentMonster( this.getMaxMons());
+		  System.out.println(maxMons +" "+ getCurrentMonster()+" "+getMonsterAlive(monster));
 		  setGameState(GamePanel.titleState);
 	  }
 	  public void startNewGameLoop() 
 	  {
 //		 Random random = new Random();
 //		 maxMons = random.nextInt(5)+5;
-		 genMonster(maxMons);
+		
 //		 genMonster(7);
 		 resetGame();
 		 if(gameLoop != null)
@@ -184,6 +198,7 @@ public class GamePanel extends StackPane {
 	    	{
 //	    		System.out.println(currentMonster);
 	    		player.update();
+	    		
 	    		if(getMonsterAlive(monster) != currentMonster) {
 	    			playSE(hitSound);
     				currentMonster = getMonsterAlive(monster);
@@ -432,6 +447,14 @@ public class GamePanel extends StackPane {
 
 		public void setCurrentMonster(int currentMonster) {
 			this.currentMonster = currentMonster;
+		}
+
+		public Sound getSelectSound() {
+			return selectSound;
+		}
+
+		public void setSelectSound(Sound selectSound) {
+			this.selectSound = selectSound;
 		}
 	}
 		

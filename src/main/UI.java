@@ -96,7 +96,7 @@ public class UI {
 			
 			
 			
-			x = (int)gp.getTileSize()*5-20;
+			x = (int)gp.getTileSize()*5-15;
 			y =(int) (gp.getTileSize()*3);
 			Image monsImage = new Image(getClass().getResourceAsStream("/monster/mons_down_1.png"));
 			Image playerImage = new Image(getClass().getResourceAsStream("/player/ranger4.png"));

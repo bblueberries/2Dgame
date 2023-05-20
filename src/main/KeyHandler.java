@@ -53,6 +53,7 @@ public class KeyHandler{
 				{
 					if(getKeyPressed(KeyCode.ESCAPE))
 					{
+						
 						gp.getEzSound().stop();
 						gp.setFirstTimeStart(true);
 						gp.playMusic(gp.getTitleSound());
@@ -66,6 +67,7 @@ public class KeyHandler{
 		    	// toggle option screen(pauseState)
 				if(getKeyPressed(KeyCode.ESCAPE))
 		    	{	
+					gp.getUi().setOptionNum(1);
 					if(gp.getGameState()==GamePanel.playingState) {gp.setGameState(GamePanel.pauseState);}
 					else if(gp.getGameState()==GamePanel.pauseState) {gp.setGameState(GamePanel.playingState);}
 		    	}
@@ -77,6 +79,7 @@ public class KeyHandler{
 	    			// back to option screen (ESC)
 		    		if(getKeyPressed(KeyCode.ESCAPE)) 
 		    		{
+		    			gp.getUi().setOptionNum(1);
 		    			gp.getUi().setState(0);
 		    		}
 		    	}
@@ -141,6 +144,7 @@ public class KeyHandler{
 					gp.getUi().setOptionNum(1);
 					gp.getUi().setState(0);
 					gp.stopMusic(gp.getBgSound());
+					gp.playMusic(gp.getTitleSound());
 					gp.setGameState(GamePanel.titleState);
 				}
 				//confirm NO

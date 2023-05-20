@@ -166,6 +166,11 @@ public class GamePanel extends StackPane {
 		  maxMons = random.nextInt(5)+5;
 		  genMonster(maxMons);
 		  setCurrentMonster( this.getMaxMons());
+		  
+		  getUi().setState(0);
+		  getUi().setOptionNum(1);
+		  getUi().setTitleNum(0);
+		  getUi().setTitleState(0);
 //		  System.out.println(maxMons +" "+ getCurrentMonster()+" "+getMonsterAlive(monster));
 		  
 		  setGameState(GamePanel.titleState);

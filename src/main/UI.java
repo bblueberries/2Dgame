@@ -17,19 +17,19 @@ public class UI {
 	
 	private GamePanel gp;
 	private GraphicsContext gc;
-	private int titleNum = 0;
+	private int titleNum ;
 	//0:NEW GAME
 	//1:LOAD GAME
 	//2:EXIT	
-	private int titleState = 0;
+	private int titleState ;
 	//0:normal Title Screen
 	//1:Warning Screen when press LOAD GAME before NEW GAME
-	private int optionState = 0;
+	private int optionState ;
 	//0:default state/option screen
 	//1:in INFO option
 	//2:in CONTROL option
 	//3:in EXIT GAME option
-	private int optionNum = 1;
+	private int optionNum ;
 	//1:INFO option (default state)
 	//2:CONTROL option
 	//3:EXIT GAME option
@@ -68,7 +68,7 @@ public class UI {
 			//if first time draw advice window
 			if(gp.getFirstTimeStart())
 			{
-				DrawAdviceWindow();
+				drawAdviceWindow();
 			}
 			//draw UI monster-left in top-right corner
 			drawMonsterLeft(gp.getMonsterAlive((Monster[]) gp.getMonster()));
@@ -207,7 +207,7 @@ public class UI {
 		//set size of option screen
 		int optionScreenW = gp.getTileSize()*8;
 		int optionScreenH = gp.getTileSize()*8;
-    	this.DrawScreen(gp.getTileSize()*4,gp.getTileSize()*2, optionScreenW, optionScreenH);
+    	this.drawScreen(gp.getTileSize()*4,gp.getTileSize()*2, optionScreenW, optionScreenH);
     	//position to place option screen
     	int x = gp.getTileSize()*4;
     	int y = gp.getTileSize()*2;
@@ -408,7 +408,7 @@ public class UI {
 	
 	}
 	
-	public void DrawScreen(int x,int y,int width,int height){
+	public void drawScreen(int x,int y,int width,int height){
 			
 		Color color = Color.rgb(0,0,0,0.8);
 
@@ -422,13 +422,13 @@ public class UI {
 		
 	}
 	
-	public void DrawAdviceWindow()
+	public void drawAdviceWindow()
 	{
 		int x = gp.getTileSize()*2;
 		int y = gp.getTileSize()*3/2;
 		int W = gp.getTileSize()*12;
 		int H = gp.getTileSize()*7/2 +10;
-		DrawScreen(x,y,W,H);
+		drawScreen(x,y,W,H);
 		
 		Font font =Font.font("Courier New",FontWeight.LIGHT,16);
 		gc.setFont(font);

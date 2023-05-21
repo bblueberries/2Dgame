@@ -147,32 +147,33 @@ import java.util.Random;
 import main.GamePanel;
 import main.KeyHandler;
 
-public class Player extends Entity {
+public class Player extends Entity implements Drawable, Updatable{
     private final GamePanel gp;
     private final int ScreenX;
     private final int ScreenY;
     
+    // Constructor
     public Player(GamePanel gp) {
-//    	Random spawnRandom = new Random();
         this.gp = gp;
 		this.ScreenX =	this.gp.getScreenWidth()/2 - (this.gp.getTileSize()/2);
 		this.ScreenY =  this.gp.getScreenHeight()/2-(this.gp.getTileSize()/2);
+		//= new Rectangle(10,18,28,28);
 		this.getSolidArea().setX(10);
 		this.getSolidArea().setY(18);
 		this.getSolidArea().setWidth(28);
-		this.getSolidArea().setHeight(28);//= new Rectangle(10,18,28,28);
-		
-        this.getPlayerImage();
+		this.getSolidArea().setHeight(28);
+        this.setPlayerImage();
         this.setDefaultValue();
     }
-    private void setDefaultValue()
-    {
-        
+    
+ // Set player to random spawn and set other attributes.
+    @Override
+    public void setDefaultValue() {
         boolean checkSpawn = false;
     	Random random = new Random();
     	this.setxPos(random.nextInt(40)+5);
     	this.setyPos(random.nextInt(40)+5);
-    	while(!checkSpawn){
+    	while(!checkSpawn) {
         	int spawnTile = this.gp.getTileManager().getMapTileNum()[this.getxPos()][this.getyPos()];
         	if(gp.tilemanager.getTile()[spawnTile].isCollision() == true) {
         		checkSpawn = false;
@@ -188,8 +189,8 @@ public class Player extends Entity {
     	setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));
     	setDirection("down");
     }
-	 private void getPlayerImage() {
-
+    
+	 private void setPlayerImage() {
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger6.png")));
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger7.png")));
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger4.png")));
@@ -198,26 +199,24 @@ public class Player extends Entity {
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger3.png")));
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger0.png")));
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger1.png")));
-		 
-
-	  }
+	 }
+	 
 	 public void update() {
 		 	// Update player position based on input from keyHandler 
     	
-		 	//update when press WASD & can't walk until acknowledge game advice
-    		if(gp.getKeyHandler().isWalkPressed()&& !gp.getFirstTimeStart())
-    		{
+		 	// update when press WASD & can't walk until acknowledge game advice
+    		if(gp.getKeyHandler().isWalkPressed()&& !gp.getFirstTimeStart()) {
 
     	
-    		//set direction to walk
-	       setDirection(gp.getKeyHandler().updatePlayerDirection()); 
+    		// set direction to walk
+    		setDirection(gp.getKeyHandler().updatePlayerDirection()); 
 	        
-	        //set isCollide
+	        // set isCollide
 	        setIsCollide(false);
 	        gp.getCollisionChecker().checkOtherEntity(this, gp.getMonster());
 	        gp.getCollisionChecker().checkTile(this);
 
-	        //character walk
+	        // character walk
 	        if(!getIsCollide()) {
 		        switch(getDirection()) {
 		        case "up" :
@@ -230,26 +229,20 @@ public class Player extends Entity {
 		    		setPosition(getPosition()[0] + getSpeed(),getPosition()[1]);break;
 		    	case "right and up" :
 		    		setPosition(getPosition()[0] + getDiaSpeed(),getPosition()[1]);
-		    		setPosition(getPosition()[0],getPosition()[1] - getDiaSpeed());break;
+		    		setPosition(getPosition()[0], getPosition()[1] - getDiaSpeed());break;
 		    	case "right and down" :
 		    		setPosition(getPosition()[0] + getDiaSpeed(),getPosition()[1]);
-		    		setPosition(getPosition()[0],getPosition()[1] + getDiaSpeed());break;
+		    		setPosition(getPosition()[0], getPosition()[1] + getDiaSpeed());break;
 		    	case "left and up" :
 		    		setPosition(getPosition()[0] - getDiaSpeed(),getPosition()[1]);
-		    		setPosition(getPosition()[0],getPosition()[1] - getDiaSpeed());break;
+		    		setPosition(getPosition()[0], getPosition()[1] - getDiaSpeed());break;
 		    	case "left and down" :
 		    		setPosition(getPosition()[0] - getDiaSpeed(),getPosition()[1]);
-		    		setPosition(getPosition()[0],getPosition()[1] + getDiaSpeed());break;
+		    		setPosition(getPosition()[0], getPosition()[1] + getDiaSpeed());break;
 		        }
 	        }
-    	//switch character sprite
-        setSpriteCounter(getSpriteCounter()+1);
-        if(getSpriteCounter()>=12)
-        {
-        	setSpriteCounter(0);
-        	setSpriteNum((getSpriteNum()+1)%2);
-        	
-        }}
+	        calculateSprite();
+    	}
     }
     
     public void draw(GraphicsContext gc) {
@@ -286,12 +279,8 @@ public class Player extends Entity {
 			imagetofill = ((spNum == 1)? imgs.get(4):imgs.get(5)); //left
 			break;	
 
-		}
-    	
-    	
+		} 	
     	gc.drawImage(imagetofill,ScreenX,ScreenY ,gp.getTileSize(), gp.getTileSize());
-
-    	
     }
 	public int getScreenX() {
 		return ScreenX;

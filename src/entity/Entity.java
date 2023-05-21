@@ -14,12 +14,13 @@ package entity;
 //}
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javafx.scene.image.Image;
 import javafx.scene.shape.Rectangle;
 import main.GamePanel;
 
-public class Entity {
+public abstract class Entity {
 	private GamePanel gp;
 	private int[] position; // world position
     private int speed;
@@ -38,7 +39,20 @@ public class Entity {
     	this.setImages(new ArrayList<Image>());
     	this.setSolidArea(new Rectangle());
     	this.setPosition(new int[2]);
-    }  
+    	
+    }
+    
+    // Switch character sprite
+    public void calculateSprite() {
+    	this.setSpriteCounter(this.getSpriteCounter()+1);
+	    if(this.getSpriteCounter()>=12) {
+	        this.setSpriteCounter(0);
+	        this.setSpriteNum((this.getSpriteNum()+1)%2);	
+	    }
+    }
+    
+    // Abstract method
+    public abstract void setDefaultValue();
     
     // Getter and Setter method
 	public int[] getPosition() {

@@ -45,7 +45,7 @@ public class KeyHandler{
 				backToTitleEndingState();
 				
 				
-				if(gp.getUi().getState()==0)
+				if(gp.getUi().getOptionState()==0)
 	    		{
 		    	// toggle option screen(pauseState)
 					togglePauseState();
@@ -61,7 +61,7 @@ public class KeyHandler{
 		if(getKeyPressed(KeyCode.ESCAPE)) 
 		{
 			gp.getUi().setOptionNum(1);
-			gp.getUi().setState(0);
+			gp.getUi().setOptionState(0);
 		}
 	}
 	public void togglePauseState() {
@@ -107,7 +107,7 @@ public class KeyHandler{
 	  }
 	public void scrollExitPauseState() {
 		//choose option Y/N in Exit option
-		if(gp.getUi().getState() == 3)
+		if(gp.getUi().getOptionState() == 3)
 		{
 			if(getKeyPressed(KeyCode.S) && gp.getUi().getOptionNum() < 2)
 			{
@@ -123,7 +123,7 @@ public class KeyHandler{
 	}
 	public void scrollOptionPauseState() {
 		//choose option in Option screen
-		if(gp.getUi().getState() == 0)
+		if(gp.getUi().getOptionState() == 0)
 		{
 			if(getKeyPressed(KeyCode.S) && gp.getUi().getOptionNum()<4)
 				{
@@ -142,7 +142,7 @@ public class KeyHandler{
 	public void pressedPauseState(int optionNum) {
 		
 		//in Option screen
-		if(gp.getUi().getState() == 0)
+		if(gp.getUi().getOptionState() == 0)
 		{
 			if(gp.getUi().getOptionNum() == 4) //optionNum4 = back option
 			{
@@ -154,7 +154,7 @@ public class KeyHandler{
 		}
 		
 		//in Exit game option
-		else if(gp.getUi().getState() == 3)
+		else if(gp.getUi().getOptionState() == 3)
 		{	
 			if(getKeyPressed(KeyCode.SPACE)) 
 			{	//confirm YES
@@ -170,7 +170,7 @@ public class KeyHandler{
 				//set default,change song
 				gp.getUi().setTitleNum(0);
 				gp.getUi().setOptionNum(1);
-				gp.getUi().setState(0);
+				gp.getUi().setOptionState(0);
 				gp.stopMusic(gp.getBgSound());
 				gp.playMusic(gp.getTitleSound());
 				gp.setGameState(GamePanel.titleState);
@@ -179,7 +179,7 @@ public class KeyHandler{
 	public void pressNoExitOption() {
 		if(gp.getUi().getOptionNum() == 2)
 		{	
-			gp.getUi().setState(0);
+			gp.getUi().setOptionState(0);
 			gp.getUi().setOptionNum(1);
 		}
 	}
@@ -187,7 +187,7 @@ public class KeyHandler{
 		//confirm each option -> change state to that option
 		if(getKeyPressed(KeyCode.SPACE)) 
 		{ 
-				gp.getUi().setState(gp.getUi().getOptionNum());
+				gp.getUi().setOptionState(gp.getUi().getOptionNum());
 				gp.getUi().setOptionNum(1);
 		}
 	}

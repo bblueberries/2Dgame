@@ -165,7 +165,7 @@ public class GamePanel extends StackPane {
 		  genMonster(maxMons);
 		  setCurrentMonster( this.getMaxMons());
 		  
-		  getUi().setState(0);
+		  getUi().setOptionState(0);
 		  getUi().setOptionNum(1);
 		  getUi().setTitleNum(0);
 		  getUi().setTitleState(0);

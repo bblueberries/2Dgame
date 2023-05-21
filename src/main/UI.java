@@ -18,14 +18,33 @@ public class UI {
 	private GamePanel gp;
 	private GraphicsContext gc;
 	private int titleNum = 0;
+	//0:NEW GAME
+	//1:LOAD GAME
+	//2:EXIT	
 	private int titleState = 0;
-	private int state = 0;
+	//0:normal Title Screen
+	//1:Warning Screen when press LOAD GAME before NEW GAME
+	private int optionState = 0;
+	//0:default state/option screen
+	//1:in INFO option
+	//2:in CONTROL option
+	//3:in EXIT GAME option
 	private int optionNum = 1;
+	//1:INFO option (default state)
+	//2:CONTROL option
+	//3:EXIT GAME option
+	//4:BACK option
+
+	
 	private boolean isGameFinished=false;
 	
 	public UI(GamePanel gp,GraphicsContext gc) {
 		this.gp = gp;
 		this.gc = gc;
+		setTitleNum(0);
+		setTitleState(0);
+		setOptionNum(1);
+		setOptionState(0);
 	}
 	public void draw(GraphicsContext gc) {
 		
@@ -193,7 +212,7 @@ public class UI {
     	int x = gp.getTileSize()*4;
     	int y = gp.getTileSize()*2;
     	
-    	switch(getState()) {
+    	switch(getOptionState()) {
     	case 0:drawOption(x,y);break;
     	case 1:drawInfo(x,y);break;
     	case 2:drawControl(x,y);break;
@@ -466,11 +485,11 @@ public class UI {
 	public void setTitleNum(int titleNum) {
 		this.titleNum = titleNum;
 	}
-	public int getState() {
-		return state;
+	public int getOptionState() {
+		return optionState;
 	}
-	public void setState(int optionState) {
-		this.state = optionState;
+	public void setOptionState(int optionState) {
+		this.optionState = optionState;
 	}
 	public int getOptionNum() {
 		return optionNum;

@@ -67,12 +67,12 @@ public class KeyHandler{
 		if(getKeyPressed(KeyCode.ESCAPE))
     	{	
 			gp.getUi().setOptionNum(1);
-			if(gp.getGameState()==GamePanel.playingState) {gp.setGameState(GamePanel.pauseState);}
-			else if(gp.getGameState()==GamePanel.pauseState) {gp.setGameState(GamePanel.playingState);}
+			if(gp.getGameState() == GamePanel.playingState) {gp.setGameState(GamePanel.pauseState);}
+			else if(gp.getGameState() == GamePanel.pauseState) {gp.setGameState(GamePanel.playingState);}
     	}
 	}
 	public void  acknowledgeGameAdvicePlayingState() {
-		if(gp.getGameState()==GamePanel.playingState)
+		if(gp.getGameState() == GamePanel.playingState)
 		{
 			if(gp.getFirstTimeStart())
 			{
@@ -84,7 +84,7 @@ public class KeyHandler{
 		}
 	}
 	public void backToTitleEndingState() {
-		if(gp.getGameState()==GamePanel.endingState)
+		if(gp.getGameState() == GamePanel.endingState)
 		{
 			if(getKeyPressed(KeyCode.ESCAPE))
 			{
@@ -104,33 +104,33 @@ public class KeyHandler{
 				scrollExitPauseState();
 	  }
 	public void scrollExitPauseState() {
-		if(gp.getUi().getState()==3)
+		if(gp.getUi().getState() == 3)
 		{
-			if(getKeyPressed(KeyCode.S)&&gp.getUi().getOptionNum()<2)
+			if(getKeyPressed(KeyCode.S) && gp.getUi().getOptionNum() < 2)
 			{
-				gp.getUi().setOptionNum( (gp.getUi().getOptionNum()+1));
+				gp.getUi().setOptionNum((gp.getUi().getOptionNum()+1));
 				gp.playSE(gp.getSelectSound());
 			}
-			else if(getKeyPressed(KeyCode.W)&&gp.getUi().getOptionNum()>1)
+			else if(getKeyPressed(KeyCode.W) && gp.getUi().getOptionNum()>1)
 				{
-					gp.getUi().setOptionNum( (gp.getUi().getOptionNum()-1));
+					gp.getUi().setOptionNum((gp.getUi().getOptionNum()-1));
 					gp.playSE(gp.getSelectSound());
 				}
 		}
 	}
 	public void scrollOptionPauseState() {
-		if(gp.getUi().getState()==0)
+		if(gp.getUi().getState() == 0)
 		{
-			if(getKeyPressed(KeyCode.S)&&gp.getUi().getOptionNum()<4)
+			if(getKeyPressed(KeyCode.S) && gp.getUi().getOptionNum()<4)
 				{
-					gp.getUi().setOptionNum( (gp.getUi().getOptionNum()+1));
+					gp.getUi().setOptionNum((gp.getUi().getOptionNum()+1));
 					gp.playSE(gp.getSelectSound());
 				}
 				 
 				
-			else if(getKeyPressed(KeyCode.W)&&gp.getUi().getOptionNum()>1)	
+			else if(getKeyPressed(KeyCode.W) && gp.getUi().getOptionNum()>1)	
 				{
-					gp.getUi().setOptionNum( (gp.getUi().getOptionNum()-1));
+					gp.getUi().setOptionNum((gp.getUi().getOptionNum()-1));
 					 gp.playSE(gp.getSelectSound());
 				}
 		}
@@ -138,9 +138,9 @@ public class KeyHandler{
 	public void pressedPauseState(int optionNum) {
 		
 		//in Option screen
-		if(gp.getUi().getState()==0)
+		if(gp.getUi().getState() == 0)
 		{
-			if(gp.getUi().getOptionNum()==4) //optionNum4 = back option
+			if(gp.getUi().getOptionNum() == 4) //optionNum4 = back option
 			{
 				//press back option
 				pressBackOption();
@@ -150,7 +150,7 @@ public class KeyHandler{
 		}
 		
 		//in Exit game option
-		else if(gp.getUi().getState()==3)
+		else if(gp.getUi().getState() == 3)
 		{	
 			if(getKeyPressed(KeyCode.SPACE)) 
 			{	//confirm YES
@@ -161,7 +161,7 @@ public class KeyHandler{
 		}
 	}
 	public void pressYesExitOption() {
-			if(gp.getUi().getOptionNum()==1)
+			if(gp.getUi().getOptionNum() == 1)
 			{
 				gp.getUi().setTitleNum(0);
 				gp.getUi().setOptionNum(1);
@@ -172,7 +172,7 @@ public class KeyHandler{
 			}
 		}	
 	public void pressNoExitOption() {
-		if(gp.getUi().getOptionNum()==2)
+		if(gp.getUi().getOptionNum() == 2)
 		{	
 			gp.getUi().setState(0);
 			gp.getUi().setOptionNum(1);
@@ -198,7 +198,7 @@ public class KeyHandler{
 	public void pressedTitleState() {
 	    	
 			//in Title Screen
-	    	if(gp.getUi().getTitleState()==0)
+	    	if(gp.getUi().getTitleState() == 0)
 				{
 	    		//Choose option in Title Screen
 				scrollOptionTitleScreen();				
@@ -223,21 +223,21 @@ public class KeyHandler{
 	public void scrollOptionTitleScreen() {
 		if(getKeyPressed(KeyCode.S))
 		{
-			gp.getUi().setTitleNum( (gp.getUi().getTitleNum()+1)%3);
+			gp.getUi().setTitleNum((gp.getUi().getTitleNum()+1)%3);
 			gp.playSE(gp.getSelectSound());
 		}
 		else if(getKeyPressed(KeyCode.W))
 		{
-			if(gp.getUi().getTitleNum()-1<0)
+			if(gp.getUi().getTitleNum()-1 < 0)
 				{gp.getUi().setTitleNum(gp.getUi().getTitleNum()+3);}
 			
-			gp.getUi().setTitleNum( (gp.getUi().getTitleNum()-1)%3);
+			gp.getUi().setTitleNum((gp.getUi().getTitleNum()-1)%3);
 			gp.playSE(gp.getSelectSound());
 			
 		}
 	}
 	public void exitWarningScreen() {
-		if(gp.getUi().getTitleState()==1)
+		if(gp.getUi().getTitleState() == 1)
 		{
    		 	if(getKeyPressed(KeyCode.ESCAPE))
    		 	{
@@ -278,7 +278,7 @@ public class KeyHandler{
 		    
 		    		//Set player direction to walk
 		    		if (getKeyPressed(KeyCode.D) && getKeyPressed(KeyCode.W)) {
-		    			return"right and up";
+		    			return "right and up";
 		                
 		            }
 		            else if (getKeyPressed(KeyCode.D) && getKeyPressed(KeyCode.S)) {
@@ -286,11 +286,11 @@ public class KeyHandler{
 		                
 		            }
 		            else if (getKeyPressed(KeyCode.A) && getKeyPressed(KeyCode.S)) {
-		            	return"left and down";
+		            	return "left and down";
 		                
 		            }
 		            else if (getKeyPressed(KeyCode.A) && getKeyPressed(KeyCode.W)) {
-		            	return"left and up";
+		            	return "left and up";
 		                
 		            }
 		            else if (getKeyPressed(KeyCode.W)) {
@@ -298,7 +298,7 @@ public class KeyHandler{
 		            
 			        }
 			        else if (getKeyPressed(KeyCode.S)) {
-			        	return"down";
+			        	return "down";
 			           
 			        }
 			        else if (getKeyPressed(KeyCode.A)) {

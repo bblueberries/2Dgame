@@ -59,8 +59,8 @@ public class GamePanel extends StackPane {
 	private Random random = new Random();
 	private int maxMons = random.nextInt(5)+5;
 	private UI ui;
-	private boolean FirstTimeStart= true;
-	private boolean FirstTimeStartWarning=false;
+	private boolean isFirstTimeStart= true;
+	private boolean isFirstTimeStartWarning=false;
 	
 	//GAME STATE
 	private int gameState=0;
@@ -395,12 +395,12 @@ public class GamePanel extends StackPane {
 			this.gameLoop = gameLoop;
 		}
 
-		public boolean getFirstTimeStart() {
-			return FirstTimeStart;
+		public boolean isFirstTimeStart() {
+			return isFirstTimeStart;
 		}
 
-		public void setFirstTimeStart(boolean firstTimeStart) {
-			FirstTimeStart = firstTimeStart;
+		public void setFirstTimeStart(boolean isFirstTimeStart) {
+			this.isFirstTimeStart = isFirstTimeStart;
 		}
 		public void setPlayer(Player player) {
 			this.player = player;
@@ -415,11 +415,11 @@ public class GamePanel extends StackPane {
 		}
 
 		public boolean isFirstTimeStartWarning() {
-			return FirstTimeStartWarning;
+			return isFirstTimeStartWarning;
 		}
 
-		public void setFirstTimeStartWarning(boolean firstTimeStartWarning) {
-			FirstTimeStartWarning = firstTimeStartWarning;
+		public void setFirstTimeStartWarning(boolean isFirstTimeStartWarning) {
+			this.isFirstTimeStartWarning = isFirstTimeStartWarning;
 		}
 
 		public TileManager getTileManager() {

@@ -66,7 +66,7 @@ public class UI {
 		else if(gp.getGameState() == GamePanel.playingState)
 		{
 			//if first time draw advice window
-			if(gp.getFirstTimeStart())
+			if(gp.isFirstTimeStart())
 			{
 				drawAdviceWindow();
 			}

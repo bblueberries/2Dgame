@@ -209,7 +209,7 @@ public class Player extends Entity implements Drawable, Updatable{
 	public void update() {
 		
 		// Update when press WASD & can't walk until acknowledge game advice.
-		if(gp.getKeyHandler().isWalkPressed()&& !gp.getFirstTimeStart()) {
+		if(gp.getKeyHandler().isWalkPressed()&& !gp.isFirstTimeStart()) {
 
     		// Set direction to walk.
     		setDirection(gp.getKeyHandler().updatePlayerDirection()); 

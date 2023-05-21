@@ -14,7 +14,6 @@ public class Monster extends Entity implements Drawable, Updatable{
 	private GamePanel gp;
     private int screenX;
     private int screenY;
-    private int index;
     private int dirCounter; // Set to random direction when spawn.
 	
     // Constructor
@@ -169,14 +168,6 @@ public class Monster extends Entity implements Drawable, Updatable{
 		}
 	    
 	    gc.drawImage(imageToFill,screenX,screenY ,gp.getTileSize(), gp.getTileSize());
-	}
-	
-	public int getIndex() {
-		return index;
-	}
-	
-	public void setIndex(int index) {
-		this.index = index;
 	}
 	
 	public void setGp(GamePanel gp) {

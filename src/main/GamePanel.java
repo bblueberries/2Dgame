@@ -150,7 +150,6 @@ public class GamePanel extends StackPane {
 		
 		for(int i=0;i<maxMonster;i++) {
 			monster[i] = new Monster(this);
-			monster[i].setIndex(i);
 		}
 	}
 	

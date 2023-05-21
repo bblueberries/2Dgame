@@ -257,7 +257,7 @@ public class GamePanel extends StackPane {
 	        if(getGameState()==titleState )
 	        {
 	        	if(isFirstTimeStartWarning())
-	        	{ui.LoadGameDraw();}
+	        	{ui.drawLoadGameWarning();}
 	        	
 	        	else ui.draw(gc);
 	         }

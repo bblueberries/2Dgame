@@ -58,14 +58,14 @@ public class UI {
 		int y= gp.getScreenHeight()/2 - gp.getTileSize()*2;
 		gc.setFont(Font.font("Courier New",FontWeight.BOLD,80));
 		gc.setFill(Color.BLACK);
-		String text="CONGRATUATION!";
+		String text="CONGRATULATION!";
 		gc.fillText(text, x, y);
 		
 		x= gp.getTileSize()+5;
 		y= gp.getScreenHeight()/2 - gp.getTileSize()*2 +5;
 		gc.setFont(Font.font("Courier New",FontWeight.BOLD,80));
 		gc.setFill(Color.GOLD);
-		text="CONGRATUATION!";
+		text="CONGRATULATION!";
 		gc.fillText(text, x, y);
 		
 		x+= gp.getTileSize();

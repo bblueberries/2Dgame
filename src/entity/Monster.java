@@ -40,7 +40,7 @@ public class Monster extends Entity{
     	int xPos = random.nextInt(40)+5;
     	int yPos = random.nextInt(40)+5;
     	while(!checkSpawn){
-        	int spawnTile = this.gp.tilemanager.getMapTileNum()[xPos][yPos];
+        	int spawnTile = this.gp.getTileManager().getMapTileNum()[xPos][yPos];
         	if(gp.tilemanager.getTile()[spawnTile].isCollision() == true) {
         		checkSpawn = false;
         		xPos = random.nextInt(40)+5;

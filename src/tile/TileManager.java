@@ -94,9 +94,6 @@ public class TileManager {
 
     public void draw(GraphicsContext gc) {
         for (int row = 0; row < gp.getMaxWorldRow(); row++) {
-        	
-        
-        	
             for (int col = 0; col < gp.getMaxWorldCol(); col++) 
             {	
             	int drawY = row*gp.getTileSize();

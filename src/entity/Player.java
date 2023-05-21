@@ -165,24 +165,29 @@ public class Player extends Entity implements Drawable, Updatable{
         this.setDefaultValue();
     }
     
-    // Set player to random spawn and set other attributes.
+    // Random Spawn (only for player class)
     @Override
-    public void setDefaultValue() {
-        boolean checkSpawn = false;
+    public void randomSpawn(GamePanel gp) {
+    	boolean checkSpawn = false;
     	Random random = new Random();
     	this.setxPos(random.nextInt(40)+5);
     	this.setyPos(random.nextInt(40)+5);
-    	while(!checkSpawn) {
-        	int spawnTile = this.gp.getTileManager().getMapTileNum()[this.getxPos()][this.getyPos()];
-        	if(gp.tilemanager.getTile()[spawnTile].isCollision() == true) {
+    	while(!checkSpawn){
+        	int spawnTile = gp.getTileManager().getMapTileNum()[this.getxPos()][this.getyPos()];
+        	if(gp.tilemanager.getTile()[spawnTile].isCollision()) {
         		checkSpawn = false;
-            	this.setxPos(random.nextInt(40)+5);
+        		this.setxPos(random.nextInt(40)+5);
             	this.setyPos(random.nextInt(40)+5);
         	} else {
         		checkSpawn = true;
         	}
     	}
-        
+    }
+    
+    // Set player to random spawn and set other attributes.
+    @Override
+    public void setDefaultValue() {
+        randomSpawn(gp);
     	setPosition(gp.getTileSize()*this.getxPos(),gp.getTileSize()*this.getyPos());
     	setSpeed(6);
     	setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));

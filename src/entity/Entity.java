@@ -39,7 +39,28 @@ public abstract class Entity {
     	this.setImages(new ArrayList<Image>());
     	this.setSolidArea(new Rectangle());
     	this.setPosition(new int[2]);
-    	
+    }
+    
+    // Random Spawn
+    public void randomSpawn(GamePanel gp) {
+    	boolean checkSpawn = false;
+    	Random random = new Random();
+    	this.setxPos(random.nextInt(40)+5);
+    	this.setyPos(random.nextInt(40)+5);
+    	while(!checkSpawn){
+        	int spawnTile = gp.getTileManager().getMapTileNum()[this.getxPos()][this.getyPos()];
+        	if(gp.tilemanager.getTile()[spawnTile].isCollision()) {
+        		checkSpawn = false;
+        		this.setxPos(random.nextInt(40)+5);
+            	this.setyPos(random.nextInt(40)+5);
+        	} else if(gp.getPlayer().getxPos() == this.getxPos() && gp.getPlayer().getyPos() == this.getyPos()){
+        		checkSpawn = false;
+        		this.setxPos(random.nextInt(40)+5);
+            	this.setyPos(random.nextInt(40)+5);
+        	} else {
+        		checkSpawn = true;
+        	}
+    	}
     }
     
     // Switch character sprite

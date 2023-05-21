@@ -75,7 +75,7 @@ public class KeyHandler{
 	private void  acknowledgeGameAdvicePlayingState() {
 		if(gp.getGameState() == GamePanel.playingState)
 		{	
-			if(gp.getFirstTimeStart())
+			if(gp.isFirstTimeStart())
 			{
 				if(getKeyPressed(KeyCode.SPACE))
 				{
@@ -266,7 +266,7 @@ public class KeyHandler{
 	private void loadGame() {
 		
 		//FirstTimeStart (never New Game)
-		if(gp.getFirstTimeStart())
+		if(gp.isFirstTimeStart())
 		{
 			//Take user to Warning Screen
 			gp.getUi().setTitleState(1);

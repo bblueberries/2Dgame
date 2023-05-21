@@ -68,6 +68,7 @@ public class Monster extends Entity implements Drawable, Updatable{
 		getImages().add( new Image(getClass().getResourceAsStream("/monster/mons_right_2.png")));
 	}
 	
+	// Random the monster direction to walk.
 	public void randomDirection() {
 		this.setDirCounter(this.getDirCounter()+1);
 	    if(this.getDirCounter() % 60 == 0) {
@@ -95,7 +96,7 @@ public class Monster extends Entity implements Drawable, Updatable{
 	    }
 	}
 	
-	// Calculate new position and sprite value.
+	// Random direction and calculate new position and sprite value.
 	@Override
 	public void update() {
 		randomDirection();
@@ -155,37 +156,37 @@ public class Monster extends Entity implements Drawable, Updatable{
 	// Update new position and sprite value on screen.
 	@Override
 	public void draw(GraphicsContext gc) {
-	    Image imagetofill = null;
+	    Image imageToFill = null;
 	    int spNum = getSpriteNum();
 	    ArrayList<Image> imgs = getImages();
 	    switch(getDirection()) {
 	    case "up" :
-	    	imagetofill = ((spNum == 1)? imgs.get(0):imgs.get(1));
+	    	imageToFill = ((spNum == 1)? imgs.get(0):imgs.get(1));
 	    	break;
 	    case "down" :
-	    	imagetofill = ((spNum == 1)? imgs.get(2):imgs.get(3));
+	    	imageToFill = ((spNum == 1)? imgs.get(2):imgs.get(3));
 	    	break;
 	    case "left" :
-	    	imagetofill = ((spNum == 1)? imgs.get(4):imgs.get(5));
+	    	imageToFill = ((spNum == 1)? imgs.get(4):imgs.get(5));
 	    	break;
 	    case "right" :
-	    	imagetofill = ((spNum == 1)? imgs.get(6):imgs.get(7));
+	    	imageToFill = ((spNum == 1)? imgs.get(6):imgs.get(7));
 	    	break;
 	    case "right and up" :
-	    	imagetofill = ((spNum == 1)? imgs.get(6):imgs.get(7));
+	    	imageToFill = ((spNum == 1)? imgs.get(6):imgs.get(7));
 	    	break;	
 		case "right and down" :
-			imagetofill = ((spNum == 1)? imgs.get(6):imgs.get(7));
+			imageToFill = ((spNum == 1)? imgs.get(6):imgs.get(7));
 			break;	
 		case "left and up" :
-			imagetofill = ((spNum == 1)? imgs.get(4):imgs.get(5));
+			imageToFill = ((spNum == 1)? imgs.get(4):imgs.get(5));
 			break;	
 		case "left and down" :
-			imagetofill = ((spNum == 1)? imgs.get(4):imgs.get(5));
+			imageToFill = ((spNum == 1)? imgs.get(4):imgs.get(5));
 			break;	
 		}
 	    
-	    gc.drawImage(imagetofill,screenX,screenY ,gp.getTileSize(), gp.getTileSize());
+	    gc.drawImage(imageToFill,screenX,screenY ,gp.getTileSize(), gp.getTileSize());
 	}
 	
 	public int getIndex() {

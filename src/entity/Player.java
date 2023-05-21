@@ -157,7 +157,6 @@ public class Player extends Entity implements Drawable, Updatable{
         this.gp = gp;
 		this.ScreenX =	this.gp.getScreenWidth()/2 - (this.gp.getTileSize()/2);
 		this.ScreenY =  this.gp.getScreenHeight()/2-(this.gp.getTileSize()/2);
-		//= new Rectangle(10,18,28,28);
 		this.getSolidArea().setX(10);
 		this.getSolidArea().setY(18);
 		this.getSolidArea().setWidth(28);
@@ -166,7 +165,7 @@ public class Player extends Entity implements Drawable, Updatable{
         this.setDefaultValue();
     }
     
- // Set player to random spawn and set other attributes.
+    // Set player to random spawn and set other attributes.
     @Override
     public void setDefaultValue() {
         boolean checkSpawn = false;
@@ -189,8 +188,8 @@ public class Player extends Entity implements Drawable, Updatable{
     	setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));
     	setDirection("down");
     }
-    
-	 private void setPlayerImage() {
+    // Add picture to the ArrayList of images of player.
+    private void setPlayerImage() {
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger6.png")));
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger7.png")));
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger4.png")));
@@ -199,24 +198,20 @@ public class Player extends Entity implements Drawable, Updatable{
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger3.png")));
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger0.png")));
 		 getImages().add( new Image(getClass().getResourceAsStream("/player/ranger1.png")));
-	 }
-	 
-	 public void update() {
-		 	// Update player position based on input from keyHandler 
-    	
-		 	// update when press WASD & can't walk until acknowledge game advice
-    		if(gp.getKeyHandler().isWalkPressed()&& !gp.getFirstTimeStart()) {
+	}
+	
+    // Calculate the new position based on keyboard input and sprite value.
+	public void update() {
+		
+		// Update when press WASD & can't walk until acknowledge game advice.
+		if(gp.getKeyHandler().isWalkPressed()&& !gp.getFirstTimeStart()) {
 
-    	
-    		// set direction to walk
+    		// Set direction to walk.
     		setDirection(gp.getKeyHandler().updatePlayerDirection()); 
-	        
-	        // set isCollide
 	        setIsCollide(false);
 	        gp.getCollisionChecker().checkOtherEntity(this, gp.getMonster());
 	        gp.getCollisionChecker().checkTile(this);
 
-	        // character walk
 	        if(!getIsCollide()) {
 		        switch(getDirection()) {
 		        case "up" :
@@ -244,48 +239,49 @@ public class Player extends Entity implements Drawable, Updatable{
 	        calculateSprite();
     	}
     }
-    
+	
+	// Update new position and sprite value on screen.
     public void draw(GraphicsContext gc) {
 
-    	Image imagetofill = null;
+    	Image imageToFill = null;
     	int spNum = getSpriteNum();
     	ArrayList<Image> imgs = getImages();
-    	
-    	//draw character sprite depend on direction & spriteNumber
     	switch(getDirection()) 
     	{
     	case "up" :
-    		imagetofill = ((spNum == 1)? imgs.get(0):imgs.get(1));
+    		imageToFill = ((spNum == 1)? imgs.get(0):imgs.get(1));
     		break;
     	case "down" :
-    		imagetofill = ((spNum == 1)? imgs.get(2):imgs.get(3));
+    		imageToFill = ((spNum == 1)? imgs.get(2):imgs.get(3));
     		break;
     	case "left" :
-    		imagetofill = ((spNum == 1)? imgs.get(4):imgs.get(5));
+    		imageToFill = ((spNum == 1)? imgs.get(4):imgs.get(5));
     		break;
     	case "right" :
-    		imagetofill = ((spNum == 1)? imgs.get(6):imgs.get(7));
+    		imageToFill = ((spNum == 1)? imgs.get(6):imgs.get(7));
     		break;
     	case "right and up" :
-    		imagetofill = ((spNum == 1)? imgs.get(6):imgs.get(7)); //right
+    		imageToFill = ((spNum == 1)? imgs.get(6):imgs.get(7)); //right
     		break;	
 		case "right and down" :
-			imagetofill = ((spNum == 1)? imgs.get(6):imgs.get(7)); //right
+			imageToFill = ((spNum == 1)? imgs.get(6):imgs.get(7)); //right
 			break;	
 		case "left and up" :
-			imagetofill = ((spNum == 1)? imgs.get(4):imgs.get(5)); // left
+			imageToFill = ((spNum == 1)? imgs.get(4):imgs.get(5)); // left
 			break;	
 		case "left and down" :
-			imagetofill = ((spNum == 1)? imgs.get(4):imgs.get(5)); //left
+			imageToFill = ((spNum == 1)? imgs.get(4):imgs.get(5)); //left
 			break;	
-
-		} 	
-    	gc.drawImage(imagetofill,ScreenX,ScreenY ,gp.getTileSize(), gp.getTileSize());
+		} 
+    	gc.drawImage(imageToFill,ScreenX,ScreenY ,gp.getTileSize(), gp.getTileSize());
     }
+    
 	public int getScreenX() {
 		return ScreenX;
 	}
+	
 	public int getScreenY() {
 		return ScreenY;
 	}
+	
 }

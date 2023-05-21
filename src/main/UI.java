@@ -18,14 +18,33 @@ public class UI {
 	private GamePanel gp;
 	private GraphicsContext gc;
 	private int titleNum = 0;
+	//0:NEW GAME
+	//1:LOAD GAME
+	//2:EXIT	
 	private int titleState = 0;
-	private int state = 0;
+	//0:normal Title Screen
+	//1:Warning Screen when press LOAD GAME before NEW GAME
+	private int optionState = 0;
+	//0:default state/option screen
+	//1:in INFO option
+	//2:in CONTROL option
+	//3:in EXIT GAME option
 	private int optionNum = 1;
+	//1:INFO option (default state)
+	//2:CONTROL option
+	//3:EXIT GAME option
+	//4:BACK option
+
+	
 	private boolean isGameFinished=false;
 	
 	public UI(GamePanel gp,GraphicsContext gc) {
 		this.gp = gp;
 		this.gc = gc;
+		setTitleNum(0);
+		setTitleState(0);
+		setOptionNum(1);
+		setOptionState(0);
 	}
 	public void draw(GraphicsContext gc) {
 		
@@ -193,14 +212,14 @@ public class UI {
     	int x = gp.getTileSize()*4;
     	int y = gp.getTileSize()*2;
     	
-    	switch(getState()) {
+    	switch(getOptionState()) {
     	case 0:drawOption(x,y);break;
     	case 1:drawInfo(x,y);break;
     	case 2:drawControl(x,y);break;
     	case 3:drawEndGameOption(x,y);break;
     	}
     }
-	public void drawOption (int X,int Y) {
+	public void drawOption (int x,int y) {
 		
 		int textX;
 		int textY;
@@ -212,7 +231,7 @@ public class UI {
 		gc.setFont(font);
 		gc.setFill(textColor);
 		textX = gp.getTileSize()*13/2 -6;
-		textY = Y+gp.getTileSize()+10;
+		textY = y+gp.getTileSize()+10;
 		
 		gc.fillText(header.getText(),textX,textY );
 	
@@ -221,7 +240,7 @@ public class UI {
 		
 		//INFO option
 		String text = "INFO";
-		textX = X +gp.getTileSize();
+		textX = x +gp.getTileSize();
 		textY  = gp.getTileSize()*4 +25;
 		gc.fillText(text, textX, textY);
 		//draw cursor in front of this option
@@ -257,20 +276,21 @@ public class UI {
 		
 		
 	}
-	public void drawControl(int X,int Y) {
+	public void drawControl(int x,int y) {
 		
-		gc.setFont(Font.font("Courier New",FontWeight.BOLD,30));
+		Font font = Font.font("Courier New",FontWeight.BOLD,30);
+		gc.setFont(font);
 		gc.setFill(Color.WHITE);
 		//HEADER TEXT
 		String text = "CONTROL";
-		int textX = X +gp.getTileSize()*5/2 +10;
-		int textY  = Y+gp.getTileSize()*1;
+		int textX = getCenteredX(text,font);
+		int textY  = y+gp.getTileSize()*1;
 		gc.fillText(text, textX, textY);
 		
 		//MOVE KEY CONTROL//
 		gc.setFont(Font.font("Courier New",FontWeight.BOLD,25));
 		text = "MOVE";
-		textX = X +gp.getTileSize()-20;
+		textX = x +gp.getTileSize()-20;
 		textY  += gp.getTileSize()+20;
 		gc.fillText(text, textX, textY);
 		
@@ -312,71 +332,76 @@ public class UI {
 		gc.fillText(text, textX, textY);
 		////////////////
 	}
-	public void drawInfo(int X,int Y) {
+	public void drawInfo(int x,int y) {
 		//Draw info text
-		gc.setFont(Font.font("Courier New",FontWeight.LIGHT,15));
+		Font font = Font.font("Courier New",FontWeight.LIGHT,15);
+		gc.setFont(font);
 		gc.setFill(Color.WHITE);
 		String text = "This is ProgMeth's Final Project";
-		int textX = X +gp.getTileSize();
-		int textY  = Y+gp.getTileSize()*2;
+		int textX = getCenteredX(text,font);
+		int textY  = y + gp.getTileSize()*2;
 		gc.fillText(text, textX, textY);
 		
 		text = "By Atsawin Sungsuwan";
-		textX += gp.getTileSize();
+		textX = getCenteredX(text,font);;
 		textY += gp.getTileSize();
 		gc.fillText(text, textX, textY);
 		
 		text = "& Navanon Neknhum";
-		textX += gp.getTileSize()/2 - 16;
+		textX = getCenteredX(text,font);;
 		textY += gp.getTileSize();
 		gc.fillText(text, textX, textY);
 		
 		text = "Hope you enjoy the game<3";
-		textX -= gp.getTileSize()/2;
+		textX = getCenteredX(text,font);;
 		textY += gp.getTileSize()*2.5;
 		gc.fillText(text, textX, textY);
 
 	}
-	public void drawEndGameOption(int X,int Y) {
+	public void drawEndGameOption(int x,int y) {
 		
-		gc.setFont(Font.font("Courier New",FontWeight.LIGHT,20));
+		Font font =Font.font("Courier New",FontWeight.LIGHT,20);
+		gc.setFont(font);
 		gc.setFill(Color.WHITE);
 		
 		//asking text
 		String text = "Do you want to save game";
-		int textX = X+gp.getTileSize()-6;
-		int textY  = (int) (Y+gp.getTileSize()*2);
+		int textX = getCenteredX(text,font);
+		int textY  = (int) (y + gp.getTileSize()*2);
 		gc.fillText(text, textX, textY);
 		
 		text = "and return to title screen?";
-		textX -= 12;
+		textX = getCenteredX(text,font);
 		textY  += gp.getTileSize()/2;
 		gc.fillText(text, textX, textY);
 		
 		//warning text 
-		gc.setFont(Font.font("Courier New",FontWeight.LIGHT,15));
+		font = Font.font("Courier New",FontWeight.LIGHT,15);
+		gc.setFont(font);
 		gc.setFill(Color.RED);
 		text = "Game won't save if you didn't";
-		textX += 30;
+		textX = getCenteredX(text,font);
 		textY  += gp.getTileSize();
 		gc.fillText(text, textX, textY);
 		
 		text = "acknowledge game advice yet..";
+		textX = getCenteredX(text,font);
 		textY += gp.getTileSize()/2;
 		gc.fillText(text, textX, textY);
 		
 		
 		
-		gc.setFont(Font.font("Courier New",FontWeight.LIGHT,20));
+		font = Font.font("Courier New",FontWeight.LIGHT,20);
+		gc.setFont(font);
 		gc.setFill(Color.WHITE);
 		text = "YES";
-		textX = X+ gp.getTileSize()*3 +25;
+		textX = getCenteredX(text,font);
 		textY  += gp.getTileSize()*3/2;
 		gc.fillText(text, textX, textY);
 		if(optionNum == 1) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+2);}
 		
 		text = "NO";
-		textX += 5;
+		textX = getCenteredX(text,font);
 		textY  += gp.getTileSize();
 		gc.fillText(text, textX, textY);
 		if(optionNum == 2) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+2);}
@@ -405,7 +430,8 @@ public class UI {
 		int H = gp.getTileSize()*7/2 +10;
 		DrawScreen(x,y,W,H);
 		
-		gc.setFont(Font.font("Courier New",FontWeight.LIGHT,16));
+		Font font =Font.font("Courier New",FontWeight.LIGHT,16);
+		gc.setFont(font);
 		gc.setFill(Color.WHITE);
 		String text = "Mysterious meteorites landed on Earth in many places.";
 		y += gp.getTileSize()/2;
@@ -422,13 +448,13 @@ public class UI {
 		
 		
 		text = "Use WASD walk to the ghosts and make them disappear! ";
-		x += 15; //centered
+		x = getCenteredX(text,font);
 		gc.setFill(Color.YELLOW);
 		y += gp.getTileSize();
 		gc.fillText(text, x, y);
 		
 		text = "Press SPACE to continue...";
-		x += gp.getTileSize()*2+20;// centered
+		x = getCenteredX(text,font);
 		y += gp.getTileSize();
 		gc.setFill(Color.BEIGE);
 		gc.fillText(text, x, y);
@@ -441,7 +467,7 @@ public class UI {
 		Text text = new Text("PLEASE NEW GAME FIRST..");
 		Font font = Font.font("Courier New",40);
 		Color textColor = Color.WHITE;
-		int textX = gp.getTileSize()*3-gp.getTileSize()+5;
+		int textX = getCenteredX(text.getText(),font);
 		int textY= y+gp.getTileSize();
 		
 		gc.setFont(font);
@@ -466,11 +492,11 @@ public class UI {
 	public void setTitleNum(int titleNum) {
 		this.titleNum = titleNum;
 	}
-	public int getState() {
-		return state;
+	public int getOptionState() {
+		return optionState;
 	}
-	public void setState(int optionState) {
-		this.state = optionState;
+	public void setOptionState(int optionState) {
+		this.optionState = optionState;
 	}
 	public int getOptionNum() {
 		return optionNum;

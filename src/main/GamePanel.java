@@ -46,7 +46,6 @@ public class GamePanel extends StackPane {
     //Sound & Sound Effect
     private Sound bgSound = new Sound(0);
     private Sound hitSound = new Sound(1);
-    private Sound winSound = new Sound(2);
     private Sound selectSound = new Sound(3);
     private Sound ezSound = new Sound(4);
     private Sound titleSound = new Sound(5);
@@ -164,7 +163,7 @@ public class GamePanel extends StackPane {
 		  genMonster(maxMons);
 		  setCurrentMonster( this.getMaxMons());
 		  
-		  getUi().setState(0);
+		  getUi().setOptionState(0);
 		  getUi().setOptionNum(1);
 		  getUi().setTitleNum(0);
 		  getUi().setTitleState(0);

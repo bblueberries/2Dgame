@@ -31,7 +31,7 @@ public class CollisionChecker {
     		tileLeft = gp.tilemanager.getMapTileNum()[EnLeftCol][predictTopRow];
     		tileRight = gp.tilemanager.getMapTileNum()[EnRightCol][predictTopRow];
     		if(gp.tilemanager.getTile()[tileLeft].isCollision() || gp.tilemanager.getTile()[tileRight].isCollision()) {
-    			entity.setCollide(true);
+    			entity.setIsCollide(true);
     		}
     		break;
     	case "down" :
@@ -39,7 +39,7 @@ public class CollisionChecker {
     		tileLeft = gp.tilemanager.getMapTileNum()[EnLeftCol][predictBottomRow];
     		tileRight = gp.tilemanager.getMapTileNum()[EnRightCol][predictBottomRow];
     		if(gp.tilemanager.getTile()[tileLeft].isCollision() || gp.tilemanager.getTile()[tileRight].isCollision()) {
-    			entity.setCollide(true);
+    			entity.setIsCollide(true);
     		}
     		break;
     	case "left" :
@@ -47,7 +47,7 @@ public class CollisionChecker {
     		tileTop = gp.tilemanager.getMapTileNum()[predictLeftCol][EnTopRow];
     		tileBottom = gp.tilemanager.getMapTileNum()[predictLeftCol][EnBottomRow];
     		if(gp.tilemanager.getTile()[tileTop].isCollision() || gp.tilemanager.getTile()[tileBottom].isCollision()) {
-    			entity.setCollide(true);
+    			entity.setIsCollide(true);
     		}
     		break;
     	case "right" :
@@ -55,7 +55,7 @@ public class CollisionChecker {
     		tileTop = gp.tilemanager.getMapTileNum()[predictRightCol][EnTopRow];
     		tileBottom = gp.tilemanager.getMapTileNum()[predictRightCol][EnBottomRow];
     		if(gp.tilemanager.getTile()[tileTop].isCollision() || gp.tilemanager.getTile()[tileBottom].isCollision()) {
-    			entity.setCollide(true);
+    			entity.setIsCollide(true);
     		}
     		break;
     	case "right and up" :
@@ -67,7 +67,7 @@ public class CollisionChecker {
     		tileBottom = gp.tilemanager.getMapTileNum()[predictRightCol][EnBottomRow];
     		tileCorner = gp.tilemanager.getMapTileNum()[predictRightCol][predictTopRow];
     		if(gp.tilemanager.getTile()[tileLeft].isCollision() || gp.tilemanager.getTile()[tileRight].isCollision() || gp.tilemanager.getTile()[tileTop].isCollision() || gp.tilemanager.getTile()[tileBottom].isCollision() || gp.tilemanager.getTile()[tileCorner].isCollision()) {
-    			entity.setCollide(true);
+    			entity.setIsCollide(true);
     		}
     		break;
     	case "right and down" :
@@ -79,7 +79,7 @@ public class CollisionChecker {
     		tileBottom = gp.tilemanager.getMapTileNum()[predictRightCol][EnBottomRow];
     		tileCorner = gp.tilemanager.getMapTileNum()[predictRightCol][predictBottomRow];
     		if(gp.tilemanager.getTile()[tileLeft].isCollision() || gp.tilemanager.getTile()[tileRight].isCollision() || gp.tilemanager.getTile()[tileTop].isCollision() || gp.tilemanager.getTile()[tileBottom].isCollision() || gp.tilemanager.getTile()[tileCorner].isCollision()) {
-    			entity.setCollide(true);
+    			entity.setIsCollide(true);
     		}
     		break;
     	case "left and up" :
@@ -91,7 +91,7 @@ public class CollisionChecker {
     		tileBottom = gp.tilemanager.getMapTileNum()[predictLeftCol][EnBottomRow];
     		tileCorner = gp.tilemanager.getMapTileNum()[predictLeftCol][predictTopRow];
     		if(gp.tilemanager.getTile()[tileLeft].isCollision() || gp.tilemanager.getTile()[tileRight].isCollision() || gp.tilemanager.getTile()[tileTop].isCollision() || gp.tilemanager.getTile()[tileBottom].isCollision() || gp.tilemanager.getTile()[tileCorner].isCollision()) {
-    			entity.setCollide(true);
+    			entity.setIsCollide(true);
     		}
     		break;
     	case "left and down" :
@@ -103,7 +103,7 @@ public class CollisionChecker {
     		tileBottom = gp.tilemanager.getMapTileNum()[predictLeftCol][EnBottomRow];
     		tileCorner = gp.tilemanager.getMapTileNum()[predictLeftCol][predictBottomRow];
     		if(gp.tilemanager.getTile()[tileLeft].isCollision() || gp.tilemanager.getTile()[tileRight].isCollision() || gp.tilemanager.getTile()[tileTop].isCollision() || gp.tilemanager.getTile()[tileBottom].isCollision() || gp.tilemanager.getTile()[tileCorner].isCollision()) {
-    			entity.setCollide(true);
+    			entity.setIsCollide(true);
     		}
     		break;
     	}
@@ -115,7 +115,7 @@ public class CollisionChecker {
 			if(checkCollide(entities[i],predictLeftEdge,predictRightEdge,predictTopEdge,predictBottomEdge)) {
 				entities[i] = null;
 			} else {
-				entity.setCollide(false);
+				entity.setIsCollide(false);
 			}
 		}
 	}

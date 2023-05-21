@@ -194,10 +194,6 @@ public class Player extends Entity {
     	setSpeed(6);
     	setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));
     	setDirection("down");
-    	
-        //PLAYER STATUS
-        this.setMaxLife(5);
-        this.setLife(getMaxLife());
     }
 	 private void getPlayerImage() {
 
@@ -224,12 +220,12 @@ public class Player extends Entity {
 	       setDirection(gp.getKeyHandler().updatePlayerDirection()); 
 	        
 	        //set isCollide
-	        setCollide(false);
+	        setIsCollide(false);
 	        gp.getCollisionChecker().checkOtherEntity(this, gp.getMonster());
 	        gp.getCollisionChecker().checkTile(this);
 
 	        //character walk
-	        if(!isCollide()) {
+	        if(!getIsCollide()) {
 		        switch(getDirection()) {
 		        case "up" :
 		    		setPosition(getPosition()[0],getPosition()[1] - getSpeed());break;

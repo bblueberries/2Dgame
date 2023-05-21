@@ -21,102 +21,101 @@ import main.GamePanel;
 
 public class Entity {
 	private GamePanel gp;
-	private int[] Position; // world position
-
-	private int[] screenPos;
-
+	private int[] position; // world position
     private int speed;
     private int diaSpeed;
-
     private ArrayList<Image> images;
     private String direction;
-
     private int spriteCounter = 0;
     private int spriteNum = 1;
-    
     private Rectangle solidArea;
     private boolean isCollide = false;
     
-    //CHARACTER STATUS
-    private int maxLife;
-    private int life;
-    
     public Entity() {
-    	images = new ArrayList<Image>();   //index up:0,1  | down:2,3 | left:4,5 | right:6,7 
-    	solidArea = new Rectangle();
-    	Position = new int[2];
-
-    	screenPos = new int[2];
-
+    	this.setImages(new ArrayList<Image>());
+    	this.setSolidArea(new Rectangle());
+    	this.setPosition(new int[2]);
     }  
     
-	public int getMaxLife() {
-		return maxLife;
-	}
-	public void setMaxLife(int maxLife) {
-		this.maxLife = maxLife;
-	}
-	public int getLife() {
-		return life;
-	}
-	public void setLife(int life) {
-		this.life = life;
-	}
 	public int[] getPosition() {
-		return Position;
+		return position;
 	}
+	
+	public void setPosition(int[] position) {
+		this.position = position;
+	}
+	
+	public void setPosition(int x,int y) {
+		position[0] = x;
+		position[1] = y;
+	}
+
 	public int getSpeed() {
 		return speed;
 	}
+	
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
+	
 	public int getDiaSpeed() {
 		return diaSpeed;
 	}
+	
 	public void setDiaSpeed(int diaSpeed) {
 		this.diaSpeed = diaSpeed;
 	}
+	
 	public ArrayList<Image> getImages() {
 		return images;  
+	}
+	
+	public void setImages(ArrayList<Image> images) {
+		this.images = images;
 	}
 	
 	public String getDirection() {
 		return direction;
 	}
+	
 	public void setDirection(String direction) {
 		this.direction = direction;
 	}
+	
 	public int getSpriteCounter() {
 		return spriteCounter;
 	}
+	
 	public void setSpriteCounter(int spriteCounter) {
 		this.spriteCounter = spriteCounter;
 	}
+	
 	public int getSpriteNum() {
 		return spriteNum;
 	}
+	
 	public void setSpriteNum(int spriteNum) {
 		this.spriteNum = spriteNum;
 	}
+	
 	public Rectangle getSolidArea() {
 		return solidArea;
 	}
 	
-	public boolean isCollide() {
+	public void setSolidArea(Rectangle solidArea) {
+		this.solidArea = solidArea;
+	}
+
+	public boolean getIsCollide() {
 		return isCollide;
 	}
-	public void setCollide(boolean isCollide) {
+	
+	public void setIsCollide(boolean isCollide) {
 		this.isCollide = isCollide;
 	}
-
-
-	public void setPosition(int x,int y) {
-		Position[0] = x;
-		Position[1] = y;
-	}
-
+	
 	public GamePanel getGp() {
 		return gp;
 	}
+	
 }

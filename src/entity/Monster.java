@@ -58,10 +58,6 @@ public class Monster extends Entity{
         setSpeed(4);
         setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));
         setDirection("down");
-        
-        //MONSTER STATUS
-        this.setMaxLife(5);
-        this.setLife(getMaxLife());
     }
 	private void setMonsterImage() {
 		 
@@ -100,30 +96,23 @@ public class Monster extends Entity{
 	    		this.setDirection("left and up");
 	    	} else if(i <= 800) {
 	    		this.setDirection("left and down");
-	    	}
-	    	
-//	    	if(i <= 400) {
-//	    		this.setDirection("up");
-//	    	} else if(i <= 800) {
-//	    		this.setDirection("down");
-//	    	}
-	    	
+	    	} 	
 	    	dirCounter = 0;
 	    }
 
 			 
-		setCollide(true);
+		setIsCollide(true);
 		Entity player[] = new Entity[1];
 		player[0] = gp.getPlayer();
 		gp.getCollisionChecker().checkOtherEntity(this, player);
 //		System.out.println(otherMonster.toString());
 //		gp.getCollisionChecker().checkOtherEntity(this, otherMonster);
 //		System.out.println("isCollide = "+isCollide());
-		if(!isCollide()) {
+		if(!getIsCollide()) {
 			gp.getCollisionChecker().checkTile(this);
 		}
 		        
-		if(!isCollide()) {	
+		if(!getIsCollide()) {	
 			switch(getDirection()) {
 				case "up" :
 			    	setPosition(getPosition()[0],getPosition()[1] - getSpeed());

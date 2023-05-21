@@ -16,7 +16,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.StrokeLineCap;
-import object.Heart;
 
 public class GamePanel extends StackPane {
   //SCREEN SETTING
@@ -60,7 +59,6 @@ public class GamePanel extends StackPane {
 
 	Random random = new Random();
 	private int maxMons = random.nextInt(5)+5;
-	private Heart heart = new Heart(this);
 	private UI ui;
 	private boolean FirstTimeStart= true;
 	private boolean FirstTimeStartWarning=false;

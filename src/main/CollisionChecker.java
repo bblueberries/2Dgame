@@ -28,81 +28,81 @@ public class CollisionChecker {
     	{
     	case "up" :
     		predictTopRow = (EnTopEdge - EnSpeed)/gp.getTileSize();
-    		tileLeft = gp.tilemanager.getMapTileNum()[EnLeftCol][predictTopRow];
-    		tileRight = gp.tilemanager.getMapTileNum()[EnRightCol][predictTopRow];
-    		if(gp.tilemanager.getTile()[tileLeft].isCollision() || gp.tilemanager.getTile()[tileRight].isCollision()) {
+    		tileLeft = gp.getTileManager().getMapTileNum()[EnLeftCol][predictTopRow];
+    		tileRight = gp.getTileManager().getMapTileNum()[EnRightCol][predictTopRow];
+    		if(gp.getTileManager().getTile()[tileLeft].isCollision() || gp.getTileManager().getTile()[tileRight].isCollision()) {
     			entity.setIsCollide(true);
     		}
     		break;
     	case "down" :
     		predictBottomRow = (EnBottomEdge + EnSpeed)/gp.getTileSize();
-    		tileLeft = gp.tilemanager.getMapTileNum()[EnLeftCol][predictBottomRow];
-    		tileRight = gp.tilemanager.getMapTileNum()[EnRightCol][predictBottomRow];
-    		if(gp.tilemanager.getTile()[tileLeft].isCollision() || gp.tilemanager.getTile()[tileRight].isCollision()) {
+    		tileLeft = gp.getTileManager().getMapTileNum()[EnLeftCol][predictBottomRow];
+    		tileRight = gp.getTileManager().getMapTileNum()[EnRightCol][predictBottomRow];
+    		if(gp.getTileManager().getTile()[tileLeft].isCollision() || gp.getTileManager().getTile()[tileRight].isCollision()) {
     			entity.setIsCollide(true);
     		}
     		break;
     	case "left" :
     		predictLeftCol = (EnLeftEdge - EnSpeed)/gp.getTileSize();
-    		tileTop = gp.tilemanager.getMapTileNum()[predictLeftCol][EnTopRow];
-    		tileBottom = gp.tilemanager.getMapTileNum()[predictLeftCol][EnBottomRow];
-    		if(gp.tilemanager.getTile()[tileTop].isCollision() || gp.tilemanager.getTile()[tileBottom].isCollision()) {
+    		tileTop = gp.getTileManager().getMapTileNum()[predictLeftCol][EnTopRow];
+    		tileBottom = gp.getTileManager().getMapTileNum()[predictLeftCol][EnBottomRow];
+    		if(gp.getTileManager().getTile()[tileTop].isCollision() || gp.getTileManager().getTile()[tileBottom].isCollision()) {
     			entity.setIsCollide(true);
     		}
     		break;
     	case "right" :
     		predictRightCol = (EnRightEdge + EnSpeed)/gp.getTileSize();
-    		tileTop = gp.tilemanager.getMapTileNum()[predictRightCol][EnTopRow];
-    		tileBottom = gp.tilemanager.getMapTileNum()[predictRightCol][EnBottomRow];
-    		if(gp.tilemanager.getTile()[tileTop].isCollision() || gp.tilemanager.getTile()[tileBottom].isCollision()) {
+    		tileTop = gp.getTileManager().getMapTileNum()[predictRightCol][EnTopRow];
+    		tileBottom = gp.getTileManager().getMapTileNum()[predictRightCol][EnBottomRow];
+    		if(gp.getTileManager().getTile()[tileTop].isCollision() || gp.getTileManager().getTile()[tileBottom].isCollision()) {
     			entity.setIsCollide(true);
     		}
     		break;
     	case "right and up" :
     		predictTopRow = (EnTopEdge - EnSpeed)/gp.getTileSize();
     		predictRightCol = (EnRightEdge + EnSpeed)/gp.getTileSize();
-    		tileLeft = gp.tilemanager.getMapTileNum()[EnLeftCol][predictTopRow];
-    		tileRight = gp.tilemanager.getMapTileNum()[EnRightCol][predictTopRow];
-    		tileTop = gp.tilemanager.getMapTileNum()[predictRightCol][EnTopRow];
-    		tileBottom = gp.tilemanager.getMapTileNum()[predictRightCol][EnBottomRow];
-    		tileCorner = gp.tilemanager.getMapTileNum()[predictRightCol][predictTopRow];
-    		if(gp.tilemanager.getTile()[tileLeft].isCollision() || gp.tilemanager.getTile()[tileRight].isCollision() || gp.tilemanager.getTile()[tileTop].isCollision() || gp.tilemanager.getTile()[tileBottom].isCollision() || gp.tilemanager.getTile()[tileCorner].isCollision()) {
+    		tileLeft = gp.getTileManager().getMapTileNum()[EnLeftCol][predictTopRow];
+    		tileRight = gp.getTileManager().getMapTileNum()[EnRightCol][predictTopRow];
+    		tileTop = gp.getTileManager().getMapTileNum()[predictRightCol][EnTopRow];
+    		tileBottom = gp.getTileManager().getMapTileNum()[predictRightCol][EnBottomRow];
+    		tileCorner = gp.getTileManager().getMapTileNum()[predictRightCol][predictTopRow];
+    		if(gp.getTileManager().getTile()[tileLeft].isCollision() || gp.getTileManager().getTile()[tileRight].isCollision() || gp.getTileManager().getTile()[tileTop].isCollision() || gp.getTileManager().getTile()[tileBottom].isCollision() || gp.getTileManager().getTile()[tileCorner].isCollision()) {
     			entity.setIsCollide(true);
     		}
     		break;
     	case "right and down" :
     		predictBottomRow = (EnBottomEdge + EnSpeed)/gp.getTileSize();
     		predictRightCol = (EnRightEdge + EnSpeed)/gp.getTileSize();
-    		tileLeft = gp.tilemanager.getMapTileNum()[EnLeftCol][predictBottomRow];
-    		tileRight = gp.tilemanager.getMapTileNum()[EnRightCol][predictBottomRow];
-    		tileTop = gp.tilemanager.getMapTileNum()[predictRightCol][EnTopRow];
-    		tileBottom = gp.tilemanager.getMapTileNum()[predictRightCol][EnBottomRow];
-    		tileCorner = gp.tilemanager.getMapTileNum()[predictRightCol][predictBottomRow];
-    		if(gp.tilemanager.getTile()[tileLeft].isCollision() || gp.tilemanager.getTile()[tileRight].isCollision() || gp.tilemanager.getTile()[tileTop].isCollision() || gp.tilemanager.getTile()[tileBottom].isCollision() || gp.tilemanager.getTile()[tileCorner].isCollision()) {
+    		tileLeft = gp.getTileManager().getMapTileNum()[EnLeftCol][predictBottomRow];
+    		tileRight = gp.getTileManager().getMapTileNum()[EnRightCol][predictBottomRow];
+    		tileTop = gp.getTileManager().getMapTileNum()[predictRightCol][EnTopRow];
+    		tileBottom = gp.getTileManager().getMapTileNum()[predictRightCol][EnBottomRow];
+    		tileCorner = gp.getTileManager().getMapTileNum()[predictRightCol][predictBottomRow];
+    		if(gp.getTileManager().getTile()[tileLeft].isCollision() || gp.getTileManager().getTile()[tileRight].isCollision() || gp.getTileManager().getTile()[tileTop].isCollision() || gp.getTileManager().getTile()[tileBottom].isCollision() || gp.getTileManager().getTile()[tileCorner].isCollision()) {
     			entity.setIsCollide(true);
     		}
     		break;
     	case "left and up" :
     		predictTopRow = (EnTopEdge - EnSpeed)/gp.getTileSize();
     		predictLeftCol = (EnLeftEdge - EnSpeed)/gp.getTileSize();
-    		tileLeft = gp.tilemanager.getMapTileNum()[EnLeftCol][predictTopRow];
-    		tileRight = gp.tilemanager.getMapTileNum()[EnRightCol][predictTopRow];
-    		tileTop = gp.tilemanager.getMapTileNum()[predictLeftCol][EnTopRow];
-    		tileBottom = gp.tilemanager.getMapTileNum()[predictLeftCol][EnBottomRow];
-    		tileCorner = gp.tilemanager.getMapTileNum()[predictLeftCol][predictTopRow];
-    		if(gp.tilemanager.getTile()[tileLeft].isCollision() || gp.tilemanager.getTile()[tileRight].isCollision() || gp.tilemanager.getTile()[tileTop].isCollision() || gp.tilemanager.getTile()[tileBottom].isCollision() || gp.tilemanager.getTile()[tileCorner].isCollision()) {
+    		tileLeft = gp.getTileManager().getMapTileNum()[EnLeftCol][predictTopRow];
+    		tileRight = gp.getTileManager().getMapTileNum()[EnRightCol][predictTopRow];
+    		tileTop = gp.getTileManager().getMapTileNum()[predictLeftCol][EnTopRow];
+    		tileBottom = gp.getTileManager().getMapTileNum()[predictLeftCol][EnBottomRow];
+    		tileCorner = gp.getTileManager().getMapTileNum()[predictLeftCol][predictTopRow];
+    		if(gp.getTileManager().getTile()[tileLeft].isCollision() || gp.getTileManager().getTile()[tileRight].isCollision() || gp.getTileManager().getTile()[tileTop].isCollision() || gp.getTileManager().getTile()[tileBottom].isCollision() || gp.getTileManager().getTile()[tileCorner].isCollision()) {
     			entity.setIsCollide(true);
     		}
     		break;
     	case "left and down" :
     		predictBottomRow = (EnBottomEdge + EnSpeed)/gp.getTileSize();
     		predictLeftCol = (EnLeftEdge - EnSpeed)/gp.getTileSize();
-    		tileLeft = gp.tilemanager.getMapTileNum()[EnLeftCol][predictBottomRow];
-    		tileRight = gp.tilemanager.getMapTileNum()[EnRightCol][predictBottomRow];
-    		tileTop = gp.tilemanager.getMapTileNum()[predictLeftCol][EnTopRow];
-    		tileBottom = gp.tilemanager.getMapTileNum()[predictLeftCol][EnBottomRow];
-    		tileCorner = gp.tilemanager.getMapTileNum()[predictLeftCol][predictBottomRow];
-    		if(gp.tilemanager.getTile()[tileLeft].isCollision() || gp.tilemanager.getTile()[tileRight].isCollision() || gp.tilemanager.getTile()[tileTop].isCollision() || gp.tilemanager.getTile()[tileBottom].isCollision() || gp.tilemanager.getTile()[tileCorner].isCollision()) {
+    		tileLeft = gp.getTileManager().getMapTileNum()[EnLeftCol][predictBottomRow];
+    		tileRight = gp.getTileManager().getMapTileNum()[EnRightCol][predictBottomRow];
+    		tileTop = gp.getTileManager().getMapTileNum()[predictLeftCol][EnTopRow];
+    		tileBottom = gp.getTileManager().getMapTileNum()[predictLeftCol][EnBottomRow];
+    		tileCorner = gp.getTileManager().getMapTileNum()[predictLeftCol][predictBottomRow];
+    		if(gp.getTileManager().getTile()[tileLeft].isCollision() || gp.getTileManager().getTile()[tileRight].isCollision() || gp.getTileManager().getTile()[tileTop].isCollision() || gp.getTileManager().getTile()[tileBottom].isCollision() || gp.getTileManager().getTile()[tileCorner].isCollision()) {
     			entity.setIsCollide(true);
     		}
     		break;

@@ -30,6 +30,8 @@ public class Entity {
     private int spriteNum = 1;
     private Rectangle solidArea;
     private boolean isCollide = false;
+    private int xPos;
+    private int yPos;
     
     // Constructor
     public Entity() {
@@ -118,6 +120,22 @@ public class Entity {
 	
 	public GamePanel getGp() {
 		return gp;
+	}
+
+	public int getxPos() {
+		return xPos;
+	}
+
+	public void setxPos(int xPos) {
+		this.xPos = xPos;
+	}
+
+	public int getyPos() {
+		return yPos;
+	}
+
+	public void setyPos(int yPos) {
+		this.yPos = yPos;
 	}
 	
 }

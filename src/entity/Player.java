@@ -149,15 +149,8 @@ import main.KeyHandler;
 
 public class Player extends Entity {
     private final GamePanel gp;
-   
-    // Player properties and variables
-//    private int x;
-//    private int y;
-//    private int speed;
     private final int ScreenX;
     private final int ScreenY;
-    private int xPos;
-    private int yPos;
     
     public Player(GamePanel gp) {
 //    	Random spawnRandom = new Random();
@@ -177,20 +170,20 @@ public class Player extends Entity {
         
         boolean checkSpawn = false;
     	Random random = new Random();
-    	int xPos = random.nextInt(40)+5;
-    	int yPos = random.nextInt(40)+5;
+    	this.setxPos(random.nextInt(40)+5);
+    	this.setyPos(random.nextInt(40)+5);
     	while(!checkSpawn){
-        	int spawnTile = this.gp.getTileManager().getMapTileNum()[xPos][yPos];
+        	int spawnTile = this.gp.getTileManager().getMapTileNum()[this.getxPos()][this.getyPos()];
         	if(gp.tilemanager.getTile()[spawnTile].isCollision() == true) {
         		checkSpawn = false;
-        		xPos = random.nextInt(40)+5;
-        		yPos = random.nextInt(40)+5;
+            	this.setxPos(random.nextInt(40)+5);
+            	this.setyPos(random.nextInt(40)+5);
         	} else {
         		checkSpawn = true;
         	}
     	}
         
-    	setPosition(gp.getTileSize()*xPos,gp.getTileSize()*yPos);
+    	setPosition(gp.getTileSize()*this.getxPos(),gp.getTileSize()*this.getyPos());
     	setSpeed(6);
     	setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));
     	setDirection("down");
@@ -305,17 +298,5 @@ public class Player extends Entity {
 	}
 	public int getScreenY() {
 		return ScreenY;
-	}
-	public int getxPos() {
-		return xPos;
-	}
-	public void setxPos(int xPos) {
-		this.xPos = xPos;
-	}
-	public int getyPos() {
-		return yPos;
-	}
-	public void setyPos(int yPos) {
-		this.yPos = yPos;
 	}
 }

@@ -11,50 +11,42 @@ import main.KeyHandler;
 import main.Sound;
 
 public class Monster extends Entity{
-	private final GamePanel gp;
-    private int ScreenX;
-    private int ScreenY;
+	private GamePanel gp;
+    private int screenX;
+    private int screenY;
     private int index;
 	
 	public Monster(GamePanel gp) {
-        this.gp = gp;
-        this.setDefaultValue();
-//		this.ScreenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
-//		this.ScreenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();
-//        this.ScreenX =	this.gp.getScreenWidth()/2 - (this.gp.getTileSize()/2);
-//		this.ScreenY =  this.gp.getScreenHeight()/2-(this.gp.getTileSize()/2);
-        
-        
+        this.setGp(gp);
+        this.setDefaultValue();      
 		this.getSolidArea().setX(10);
 		this.getSolidArea().setY(18);
 		this.getSolidArea().setWidth(28);
-		this.getSolidArea().setHeight(28);//= new Rectangle(10,18,28,28);
-		
+		this.getSolidArea().setHeight(28); // = new Rectangle(10,18,28,28);
         this.setMonsterImage();
     }
-    private void setDefaultValue()
-    {
-//    	System.out.println(""+this.gp.getTileManager());
+	
+    private void setDefaultValue() {
     	boolean checkSpawn = false;
     	Random random = new Random();
-    	int xPos = random.nextInt(40)+5;
-    	int yPos = random.nextInt(40)+5;
+    	this.setxPos(random.nextInt(40)+5);
+    	this.setyPos(random.nextInt(40)+5);
     	while(!checkSpawn){
-        	int spawnTile = this.gp.getTileManager().getMapTileNum()[xPos][yPos];
-        	if(gp.tilemanager.getTile()[spawnTile].isCollision() == true) {
+        	int spawnTile = this.gp.getTileManager().getMapTileNum()[this.getxPos()][this.getyPos()];
+        	if(gp.tilemanager.getTile()[spawnTile].isCollision()) {
         		checkSpawn = false;
-        		xPos = random.nextInt(40)+5;
-        		yPos = random.nextInt(40)+5;
-        	} else if(gp.getPlayer().getxPos() == xPos && gp.getPlayer().getyPos() == yPos){
+        		this.setxPos(random.nextInt(40)+5);
+            	this.setyPos(random.nextInt(40)+5);
+        	} else if(gp.getPlayer().getxPos() == this.getxPos() && gp.getPlayer().getyPos() == this.getyPos()){
         		checkSpawn = false;
-        		xPos = random.nextInt(40)+5;
-        		yPos = random.nextInt(40)+5;
+        		this.setxPos(random.nextInt(40)+5);
+            	this.setyPos(random.nextInt(40)+5);
         	} else {
         		checkSpawn = true;
         	}
     	}
     	
-    	setPosition(gp.getTileSize()*xPos,gp.getTileSize()*yPos);
+    	setPosition(gp.getTileSize()*this.getxPos(),gp.getTileSize()*this.getyPos());
         setSpeed(4);
         setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));
         setDirection("down");
@@ -116,44 +108,44 @@ public class Monster extends Entity{
 			switch(getDirection()) {
 				case "up" :
 			    	setPosition(getPosition()[0],getPosition()[1] - getSpeed());
-			    	this.ScreenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
-			    	this.ScreenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
+			    	this.screenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
+			    	this.screenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
 			    case "down" :
 			    	setPosition(getPosition()[0],getPosition()[1] + getSpeed());
-			    	this.ScreenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
-			    	this.ScreenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
+			    	this.screenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
+			    	this.screenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
 			    case "left" :
 			    	setPosition(getPosition()[0] - getSpeed(),getPosition()[1]);
-			    	this.ScreenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
-			    	this.ScreenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
+			    	this.screenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
+			    	this.screenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
 			    case "right" :
 			    	setPosition(getPosition()[0] + getSpeed(),getPosition()[1]);
-			    	this.ScreenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
-			    	this.ScreenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
+			    	this.screenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
+			    	this.screenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
 			    case "right and up" :
 			    	setPosition(getPosition()[0] + getDiaSpeed(),getPosition()[1]);
 			    	setPosition(getPosition()[0],getPosition()[1] - getDiaSpeed());
-			    	this.ScreenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
-			    	this.ScreenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
+			    	this.screenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
+			    	this.screenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
 			    case "right and down" :
 			    	setPosition(getPosition()[0] + getDiaSpeed(),getPosition()[1]);
 			    	setPosition(getPosition()[0],getPosition()[1] + getDiaSpeed());
-			    	this.ScreenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
-			    	this.ScreenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
+			    	this.screenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
+			    	this.screenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
 			    case "left and up" :
 			    	setPosition(getPosition()[0] - getDiaSpeed(),getPosition()[1]);
 			    	setPosition(getPosition()[0],getPosition()[1] - getDiaSpeed());
-			    	this.ScreenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
-			    	this.ScreenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
+			    	this.screenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
+			    	this.screenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
 			    case "left and down" :
 			    	setPosition(getPosition()[0] - getDiaSpeed(),getPosition()[1]);
 			    	setPosition(getPosition()[0],getPosition()[1] + getDiaSpeed());
-			    	this.ScreenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
-			    	this.ScreenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
+			    	this.screenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
+			    	this.screenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();break;
 				}
 		    } else {
-		    	this.ScreenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
-		    	this.ScreenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();
+		    	this.screenX =	this.getPosition()[0] - gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX();
+		    	this.screenY =  this.getPosition()[1] - gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY();
 		    }
 	    setSpriteCounter(getSpriteCounter()+1);
 	    if(getSpriteCounter()>=12) {
@@ -203,7 +195,7 @@ public class Monster extends Entity{
 			}
 	    	
 	    	
-	    	gc.drawImage(imagetofill,ScreenX,ScreenY ,gp.getTileSize(), gp.getTileSize());
+	    	gc.drawImage(imagetofill,screenX,screenY ,gp.getTileSize(), gp.getTileSize());
 //	    	gc.fillRect(ScreenX, ScreenX, 32, 32);
 	    	
 	    }
@@ -212,6 +204,9 @@ public class Monster extends Entity{
 		}
 		public void setIndex(int index) {
 			this.index = index;
+		}
+		public void setGp(GamePanel gp) {
+			this.gp = gp;
 		}
 	 
 }

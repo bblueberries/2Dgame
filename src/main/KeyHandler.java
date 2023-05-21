@@ -11,7 +11,7 @@ import javafx.scene.text.Text;
 
 public class KeyHandler{
 
-	private static ArrayList<KeyCode> keyPressed = new ArrayList<>(); 
+	private ArrayList<KeyCode> keyPressed = new ArrayList<>(); 
 	private GamePanel gp;
 	
 	public KeyHandler(GamePanel gp)

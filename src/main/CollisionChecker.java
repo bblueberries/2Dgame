@@ -3,11 +3,11 @@ package main;
 import entity.Entity;
 
 public class CollisionChecker {
+	private GamePanel gp;
 	
-	
-	GamePanel gp;
+	// Constructor
 	public CollisionChecker(GamePanel gp) {
-		this.gp = gp;
+		this.setGp(gp);
 	}
 	
 	// Check whether entity can move through the tile.
@@ -275,5 +275,9 @@ public class CollisionChecker {
 		} else {
 			return false;
 		}
+	}
+
+	public void setGp(GamePanel gp) {
+		this.gp = gp;
 	}
 }

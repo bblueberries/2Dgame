@@ -31,12 +31,14 @@ public class Entity {
     private Rectangle solidArea;
     private boolean isCollide = false;
     
+    // Constructor
     public Entity() {
     	this.setImages(new ArrayList<Image>());
     	this.setSolidArea(new Rectangle());
     	this.setPosition(new int[2]);
     }  
     
+    // Getter and Setter method
 	public int[] getPosition() {
 		return position;
 	}

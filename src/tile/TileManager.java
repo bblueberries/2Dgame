@@ -24,7 +24,7 @@ public class TileManager {
         loadMap("/maps/map.txt");
     }
 
-    public void getTileImage() {
+    private void getTileImage() {
         try {
         	//set tile for use later
         	//List index of tile
@@ -77,7 +77,7 @@ public class TileManager {
         }
     }
 
-    public void loadMap(String filePath) {
+    private void loadMap(String filePath) {
         try {
         	//read file and convert to array mapTileNum
             InputStream is = getClass().getResourceAsStream(filePath);
@@ -108,7 +108,7 @@ public class TileManager {
             	this.screenY=drawY + gp.getPlayer().getScreenY() - gp.getPlayer().getPosition()[1];
             	this.screenX=drawX + gp.getPlayer().getScreenX() - gp.getPlayer().getPosition()[0];
             	
-            	//preventing out of bound
+            	//only draw in player POV
             	if( drawX + gp.getTileSize() > gp.getPlayer().getPosition()[0] - gp.getPlayer().getScreenX()&&
             		drawX - gp.getTileSize() < gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX()&&
             		drawY + gp.getTileSize() > gp.getPlayer().getPosition()[1] - gp.getPlayer().getScreenY()&&

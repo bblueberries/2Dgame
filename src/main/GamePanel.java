@@ -33,7 +33,7 @@ public class GamePanel extends StackPane {
 	 private final int maxWorldRow = 50;
 
    //FPS
-	 private static final double targetFPS=90;
+	 private final double targetFPS=90;
    //Time for run FPS
 	 private final long frameTimeNano;
 	
@@ -56,7 +56,7 @@ public class GamePanel extends StackPane {
 	private CollisionChecker collisionChecker = new CollisionChecker(this);
 
 
-	Random random = new Random();
+	private Random random = new Random();
 	private int maxMons = random.nextInt(5)+5;
 	private UI ui;
 	private boolean FirstTimeStart= true;
@@ -74,7 +74,6 @@ public class GamePanel extends StackPane {
 	private int currentMonster = this.getMaxMons();
 	private Monster monster[] = new Monster[20];
 	private TileManager tileManager = new TileManager(this);
-	public TileManager tilemanager = new TileManager(this);
 	private Player player = new Player(this);
 	
 //	public void setPlayer(Player player) {
@@ -260,7 +259,7 @@ public class GamePanel extends StackPane {
 	        
 	        else {
 	        	
-	        tilemanager.draw(gc); 
+	        tileManager.draw(gc); 
 	        player.draw(gc);
 	      //  heart.draw(gc);
 	     

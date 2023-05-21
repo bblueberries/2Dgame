@@ -174,7 +174,7 @@ public class Player extends Entity implements Drawable, Updatable{
     	this.setyPos(random.nextInt(40)+5);
     	while(!checkSpawn){
         	int spawnTile = gp.getTileManager().getMapTileNum()[this.getxPos()][this.getyPos()];
-        	if(gp.tilemanager.getTile()[spawnTile].isCollision()) {
+        	if(gp.getTileManager().getTile()[spawnTile].isCollision()) {
         		checkSpawn = false;
         		this.setxPos(random.nextInt(40)+5);
             	this.setyPos(random.nextInt(40)+5);

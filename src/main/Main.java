@@ -6,7 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 public class Main extends Application {
-
+	 private GamePanel gamePanel;
+	 private StackPane root ;
+	 private Scene scene ;
 	public static void main(String[] args) {
 		Application.launch(args);
 	}
@@ -15,10 +17,10 @@ public class Main extends Application {
 		  primaryStage.setTitle("2D game");
 		  primaryStage.setResizable(false);
 
-		  GamePanel gamePanel = new GamePanel();
+		  gamePanel = new GamePanel();
 
-		   StackPane root = new StackPane(gamePanel);
-		   Scene scene = new Scene(root);
+		   root = new StackPane(gamePanel);
+		   scene = new Scene(root);
 		   System.setProperty("prism.forceGPU", "true");
 		   primaryStage.setScene(scene);
 		   primaryStage.show();

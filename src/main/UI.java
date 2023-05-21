@@ -74,7 +74,7 @@ public class UI {
 			drawMonsterLeft(gp.getMonsterAlive((Monster[]) gp.getMonster()));
 		}
 	}
-	public void drawEndingText()
+	private void drawEndingText()
 	{
 		
 		Font font;
@@ -116,7 +116,7 @@ public class UI {
 		gc.fillText(text, x, y);
 	}
 	
-	public void drawTitleScreen()
+	private void drawTitleScreen()
 	{
 		
 			drawTitleHeader();
@@ -124,7 +124,7 @@ public class UI {
 			drawTitleOption();
 		
 	}	
-	public void drawTitleHeader() {
+	private void drawTitleHeader() {
 		//Draw Game's name
 		Font font = Font.font("Courier New",FontWeight.BOLD,70);
 		gc.setFont(font);
@@ -138,7 +138,7 @@ public class UI {
 		gc.setFill(Color.WHITE);
 		gc.fillText(text, x, y);
 	}
-	public void drawTitleImage()
+	private void drawTitleImage()
 	{
 		//set x,y for monster lean next to player image
 		int x = (int)gp.getTileSize()*5-15;
@@ -156,7 +156,7 @@ public class UI {
 		y += gp.getTileSize();
 		gc.drawImage(monsImage, x,y, monSize,monSize);
 	}
-	public void drawTitleOption() {
+	private void drawTitleOption() {
 		//x,y from title image
 		int x = (int)gp.getTileSize()*5-15;
 		int y = (int) (gp.getTileSize()*3);
@@ -192,7 +192,7 @@ public class UI {
 			gc.fillText("‣", x-gp.getTileSize()/2, y+2);
 		}
 	}
-	public void drawMonsterLeft(int monsterLeft) {
+	private void drawMonsterLeft(int monsterLeft) {
 		//set top right corner
 		int x = gp.getTileSize()*9 +10;
 		int y = gp.getTileSize()*1;
@@ -202,7 +202,7 @@ public class UI {
 		String text = "Monsters Left :"+Integer.toString(monsterLeft);
 		gc.fillText(text, x, y);
 	}
-	public void drawOptionScreen()
+	private void drawOptionScreen()
     {	
 		//set size of option screen
 		int optionScreenW = gp.getTileSize()*8;
@@ -219,7 +219,7 @@ public class UI {
     	case 3:drawEndGameOption(x,y);break;
     	}
     }
-	public void drawOption (int x,int y) {
+	private void drawOption (int x,int y) {
 		
 		int textX;
 		int textY;
@@ -276,7 +276,7 @@ public class UI {
 		
 		
 	}
-	public void drawControl(int x,int y) {
+	private void drawControl(int x,int y) {
 		
 		Font font = Font.font("Courier New",FontWeight.BOLD,30);
 		gc.setFont(font);
@@ -332,7 +332,7 @@ public class UI {
 		gc.fillText(text, textX, textY);
 		////////////////
 	}
-	public void drawInfo(int x,int y) {
+	private void drawInfo(int x,int y) {
 		//Draw info text
 		Font font = Font.font("Courier New",FontWeight.LIGHT,15);
 		gc.setFont(font);
@@ -358,7 +358,7 @@ public class UI {
 		gc.fillText(text, textX, textY);
 
 	}
-	public void drawEndGameOption(int x,int y) {
+	private void drawEndGameOption(int x,int y) {
 		
 		Font font =Font.font("Courier New",FontWeight.LIGHT,20);
 		gc.setFont(font);
@@ -408,7 +408,7 @@ public class UI {
 	
 	}
 	
-	public void drawScreen(int x,int y,int width,int height){
+	private void drawScreen(int x,int y,int width,int height){
 			
 		Color color = Color.rgb(0,0,0,0.8);
 
@@ -422,7 +422,7 @@ public class UI {
 		
 	}
 	
-	public void drawAdviceWindow()
+	private void drawAdviceWindow()
 	{
 		int x = gp.getTileSize()*2;
 		int y = gp.getTileSize()*3/2;
@@ -475,13 +475,13 @@ public class UI {
 		gc.fillText(text.getText(),textX,textY );
 	}
 	
-	public int getCenteredX(String text,Font font)
+	private int getCenteredX(String text,Font font)
 	{
 		double textWidth  = measureTextLength(text,font);
 		double centerX = gp.getScreenWidth()/2 -textWidth/2;
 		return (int) centerX;
 	}
-	 public double measureTextLength(String text, Font font) {
+	 private double measureTextLength(String text, Font font) {
 		Text textNode = new Text(text);
 	 	textNode.setFont(font);
 	 	return textNode.getBoundsInLocal().getWidth();

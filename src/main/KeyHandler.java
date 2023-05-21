@@ -57,14 +57,14 @@ public class KeyHandler{
 		    		backPauseState();
 		    	}
 		    }
-	public void backPauseState() {
+	private void backPauseState() {
 		if(getKeyPressed(KeyCode.ESCAPE)) 
 		{
 			gp.getUi().setOptionNum(1);
 			gp.getUi().setOptionState(0);
 		}
 	}
-	public void togglePauseState() {
+	private void togglePauseState() {
 		if(getKeyPressed(KeyCode.ESCAPE))
     	{	
 			gp.getUi().setOptionNum(1);
@@ -72,7 +72,7 @@ public class KeyHandler{
 			else if(gp.getGameState() == GamePanel.pauseState) {gp.setGameState(GamePanel.playingState);}
     	}
 	}
-	public void  acknowledgeGameAdvicePlayingState() {
+	private void  acknowledgeGameAdvicePlayingState() {
 		if(gp.getGameState() == GamePanel.playingState)
 		{	
 			if(gp.getFirstTimeStart())
@@ -84,7 +84,7 @@ public class KeyHandler{
 			}
 		}
 	}
-	public void backToTitleEndingState() {
+	private void backToTitleEndingState() {
 		//back to title after ending
 		if(gp.getGameState() == GamePanel.endingState)
 		{
@@ -105,7 +105,7 @@ public class KeyHandler{
 		  		//select option in EndGame's option
 				scrollExitPauseState();
 	  }
-	public void scrollExitPauseState() {
+	private void scrollExitPauseState() {
 		//choose option Y/N in Exit option
 		if(gp.getUi().getOptionState() == 3)
 		{
@@ -121,7 +121,7 @@ public class KeyHandler{
 				}
 		}
 	}
-	public void scrollOptionPauseState() {
+	private void scrollOptionPauseState() {
 		//choose option in Option screen
 		if(gp.getUi().getOptionState() == 0)
 		{
@@ -164,7 +164,7 @@ public class KeyHandler{
 			}
 		}
 	}
-	public void pressYesExitOption() {
+	private void pressYesExitOption() {
 			if(gp.getUi().getOptionNum() == 1)
 			{
 				//set default,change song
@@ -176,14 +176,14 @@ public class KeyHandler{
 				gp.setGameState(GamePanel.titleState);
 			}
 		}	
-	public void pressNoExitOption() {
+	private void pressNoExitOption() {
 		if(gp.getUi().getOptionNum() == 2)
 		{	
 			gp.getUi().setOptionState(0);
 			gp.getUi().setOptionNum(1);
 		}
 	}
-	public void pressOption() {
+	private void pressOption() {
 		//confirm each option -> change state to that option
 		if(getKeyPressed(KeyCode.SPACE)) 
 		{ 
@@ -191,7 +191,7 @@ public class KeyHandler{
 				gp.getUi().setOptionNum(1);
 		}
 	}
-	public void pressBackOption() {
+	private void pressBackOption() {
 		
 			if(getKeyPressed(KeyCode.SPACE)) 
 				{
@@ -215,7 +215,7 @@ public class KeyHandler{
 	    	exitWarningLoadGame();
 			}
 	
-	public void pressOptionTitleScreen() {
+	private void pressOptionTitleScreen() {
 		if(getKeyPressed(KeyCode.SPACE))
 		{
 			switch(gp.getUi().getTitleNum())
@@ -226,7 +226,7 @@ public class KeyHandler{
 			}
 		}
 	}
-	public void scrollOptionTitleScreen() {
+	private void scrollOptionTitleScreen() {
 		//scrolling option in title screen (W/S)
 		if(getKeyPressed(KeyCode.S))
 		{
@@ -243,7 +243,7 @@ public class KeyHandler{
 			
 		}
 	}
-	public void exitWarningLoadGame() {
+	private void exitWarningLoadGame() {
 		//back to title screen from loading warning Screen
 		if(gp.getUi().getTitleState() == 1)
 		{
@@ -255,7 +255,7 @@ public class KeyHandler{
 			}
 		}
 	}
-	public void createNewGame() {
+	private void createNewGame() {
 		//Create new Game
 		gp.startNewGameLoop();
 		gp.stopMusic(gp.getTitleSound());
@@ -263,7 +263,7 @@ public class KeyHandler{
 		gp.setFirstTimeStart(true);
 		gp.setGameState(GamePanel.playingState);		
 	}
-	public void loadGame() {
+	private void loadGame() {
 		
 		//FirstTimeStart (never New Game)
 		if(gp.getFirstTimeStart())

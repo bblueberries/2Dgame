@@ -7,7 +7,7 @@ public class CollisionChecker {
 	
 	// Constructor
 	public CollisionChecker(GamePanel gp) {
-		this.setGp(gp);
+		this.gp = gp;
 	}
 	
 	// Check whether entity can move through the tile.
@@ -275,9 +275,5 @@ public class CollisionChecker {
 		} else {
 			return false;
 		}
-	}
-
-	public void setGp(GamePanel gp) {
-		this.gp = gp;
 	}
 }

@@ -35,6 +35,7 @@ public class Monster extends Entity implements Drawable, Updatable{
         setSpeed(4);
         setDiaSpeed ((int) (getSpeed()/Math.sqrt(2.0)));
         setDirection("down");
+        setDirCounter(59);
     }
 	
 	// Add picture to the ArrayList of images of monster.

@@ -16,7 +16,7 @@ public class KeyHandler{
 	
 	public KeyHandler(GamePanel gp)
 	{	//set game panel
-		this.gp=gp;
+		this.gp = gp;
 	}
 	
 	public boolean getKeyPressed(KeyCode keycode) {
@@ -73,7 +73,7 @@ public class KeyHandler{
 	}
 	public void  acknowledgeGameAdvicePlayingState() {
 		if(gp.getGameState() == GamePanel.playingState)
-		{
+		{	
 			if(gp.getFirstTimeStart())
 			{
 				if(getKeyPressed(KeyCode.SPACE))
@@ -84,6 +84,7 @@ public class KeyHandler{
 		}
 	}
 	public void backToTitleEndingState() {
+		//back to title after ending
 		if(gp.getGameState() == GamePanel.endingState)
 		{
 			if(getKeyPressed(KeyCode.ESCAPE))
@@ -104,6 +105,7 @@ public class KeyHandler{
 				scrollExitPauseState();
 	  }
 	public void scrollExitPauseState() {
+		//choose option Y/N in Exit option
 		if(gp.getUi().getState() == 3)
 		{
 			if(getKeyPressed(KeyCode.S) && gp.getUi().getOptionNum() < 2)
@@ -119,6 +121,7 @@ public class KeyHandler{
 		}
 	}
 	public void scrollOptionPauseState() {
+		//choose option in Option screen
 		if(gp.getUi().getState() == 0)
 		{
 			if(getKeyPressed(KeyCode.S) && gp.getUi().getOptionNum()<4)
@@ -163,6 +166,7 @@ public class KeyHandler{
 	public void pressYesExitOption() {
 			if(gp.getUi().getOptionNum() == 1)
 			{
+				//set default,change song
 				gp.getUi().setTitleNum(0);
 				gp.getUi().setOptionNum(1);
 				gp.getUi().setState(0);
@@ -179,6 +183,7 @@ public class KeyHandler{
 		}
 	}
 	public void pressOption() {
+		//confirm each option -> change state to that option
 		if(getKeyPressed(KeyCode.SPACE)) 
 		{ 
 				gp.getUi().setState(gp.getUi().getOptionNum());
@@ -206,7 +211,7 @@ public class KeyHandler{
 				pressOptionTitleScreen();
 				}
 	    	//In Warning Screen
-	    	exitWarningScreen();
+	    	exitWarningLoadGame();
 			}
 	
 	public void pressOptionTitleScreen() {
@@ -214,13 +219,14 @@ public class KeyHandler{
 		{
 			switch(gp.getUi().getTitleNum())
 			{
-			case 0: createNewGame();gp.playMusic(gp.getBgSound());break; //Play
-			case 1: loadGame();break; //
+			case 0: createNewGame();gp.playMusic(gp.getBgSound());break; //new Game
+			case 1: loadGame();break; //load game
 			case 2:	System.exit(0);break; //Exit
 			}
 		}
 	}
 	public void scrollOptionTitleScreen() {
+		//scrolling option in title screen (W/S)
 		if(getKeyPressed(KeyCode.S))
 		{
 			gp.getUi().setTitleNum((gp.getUi().getTitleNum()+1)%3);
@@ -236,7 +242,8 @@ public class KeyHandler{
 			
 		}
 	}
-	public void exitWarningScreen() {
+	public void exitWarningLoadGame() {
+		//back to title screen from loading warning Screen
 		if(gp.getUi().getTitleState() == 1)
 		{
    		 	if(getKeyPressed(KeyCode.ESCAPE))
@@ -276,7 +283,7 @@ public class KeyHandler{
 	}
 	public String updatePlayerDirection() {
 		    
-		    		//Set player direction to walk
+		    		//Set player direction to walk from key press
 		    		if (getKeyPressed(KeyCode.D) && getKeyPressed(KeyCode.W)) {
 		    			return "right and up";
 		                

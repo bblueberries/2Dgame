@@ -5,7 +5,7 @@ import javafx.scene.media.MediaPlayer;
 
 public class Sound {
     private MediaPlayer mediaPlayer;
-    private String soundPath[] = new String[30];
+    private String soundPath[] ;
 
     // Dict for using sound
     // **NOTE SE means Sound Effect
@@ -17,6 +17,7 @@ public class Sound {
     // 5 : title BG Song
     public Sound(int i) 
     {
+    	soundPath = new String[30];
     	this.soundPath[0] = "/sound/themesong2.mp3";
     	this.soundPath[1] = "/sound/hitmonster.mp3";
     	this.soundPath[2] = "/sound/wining.mp3";

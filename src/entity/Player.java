@@ -221,7 +221,7 @@ public class Player extends Entity {
 
     	
     		//set direction to walk
-	       setDirection(gp.getKeyHandler().playerUpdate()); 
+	       setDirection(gp.getKeyHandler().updatePlayerDirection()); 
 	        
 	        //set isCollide
 	        setCollide(false);

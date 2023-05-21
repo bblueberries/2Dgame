@@ -8,17 +8,22 @@ public class Sound {
     private String soundPath[] = new String[30];
 
     // Dict for using sound
-    // 0 : bg sound
-    // 1 : hitmonster
-    // 2 : wining gamestate
-    // 3 : select option using W,S
-    public Sound(int i) {
+    // **NOTE SE means Sound Effect
+    // 0 : BG Song
+    // 1 : HitMonster SE
+    // 2 : wining SE
+    // 3 : select option using W,S SE
+    // 4 : wining SE2
+    // 5 : title BG Song
+    public Sound(int i) 
+    {
     	this.soundPath[0] = "/sound/themesong2.mp3";
     	this.soundPath[1] = "/sound/hitmonster.mp3";
     	this.soundPath[2] = "/sound/wining.mp3";
     	this.soundPath[3] = "/sound/selectsound.mp3";
     	this.soundPath[4] = "/sound/ezsound.mp3";
     	this.soundPath[5] = "/sound/titlesong.mp3";
+    	
     	Media media = new Media(getClass().getResource(this.soundPath[i]).toString());
         mediaPlayer = new MediaPlayer(media);
     }
@@ -39,6 +44,7 @@ public class Sound {
     {
     	mediaPlayer.setVolume(volume);
     }
+    
     public String getSoundPath(int i) {
     	return this.soundPath[i];
     }

@@ -8,6 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 import main.GamePanel;
+
 public class TileManager {
     private GamePanel gp;
     private Tile[] tile;
@@ -20,11 +21,24 @@ public class TileManager {
         tile = new Tile[20];
         getTileImage();
         mapTileNum = new int[gp.getMaxWorldCol()][gp.getMaxWorldRow()];
-        loadMap("/maps/maptest.txt");
+        loadMap("/maps/map.txt");
     }
 
     public void getTileImage() {
         try {
+        	//set tile for use later
+        	//List index of tile
+        	//0 : normal ground
+        	//1 : tree1
+        	//2 : tree2
+        	//3 : mossy ground
+        	//4 : foot path
+        	//5 : foot path2
+        	//6 : corrupt area (didn't use)
+        	//7 : half foot path (didn't use)
+        	//8 : mystery crystal in the middle of crater
+        	//9 : crater ground
+        	
             tile[0] = new Tile();
             tile[0].setImage(new Image(getClass().getResourceAsStream("/tiles/tile00.png")));  
             
@@ -57,17 +71,6 @@ public class TileManager {
             tile[9] = new Tile();
             tile[9].setImage(new Image(getClass().getResourceAsStream("/tiles/tile09.png"))); 
 
-            tile[10] = new Tile();
-            tile[10].setImage(new Image(getClass().getResourceAsStream("/tiles/edge0.png")));  
-            
-            tile[11] = new Tile();
-            tile[11].setImage(new Image(getClass().getResourceAsStream("/tiles/edge1.png")));  
-            
-            tile[12] = new Tile();
-            tile[12].setImage(new Image(getClass().getResourceAsStream("/tiles/edge2.png")));  
-
-            tile[13] = new Tile();
-            tile[13].setImage(new Image(getClass().getResourceAsStream("/tiles/edge3.png")));  
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,6 +79,7 @@ public class TileManager {
 
     public void loadMap(String filePath) {
         try {
+        	//read file and convert to array mapTileNum
             InputStream is = getClass().getResourceAsStream(filePath);
             BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
@@ -93,33 +97,30 @@ public class TileManager {
     }
 
     public void draw(GraphicsContext gc) {
+    	//loop in mapTileNum 
+    	//which each value in array represent index of tile[] above
+    	
         for (int row = 0; row < gp.getMaxWorldRow(); row++) {
             for (int col = 0; col < gp.getMaxWorldCol(); col++) 
             {	
-            	int drawY = row*gp.getTileSize();
-        		int drawX = col*gp.getTileSize();
+            	int drawY = row * gp.getTileSize();
+        		int drawX = col * gp.getTileSize();
             	this.screenY=drawY + gp.getPlayer().getScreenY() - gp.getPlayer().getPosition()[1];
             	this.screenX=drawX + gp.getPlayer().getScreenX() - gp.getPlayer().getPosition()[0];
             	
+            	//preventing out of bound
             	if( drawX + gp.getTileSize() > gp.getPlayer().getPosition()[0] - gp.getPlayer().getScreenX()&&
             		drawX - gp.getTileSize() < gp.getPlayer().getPosition()[0] + gp.getPlayer().getScreenX()&&
             		drawY + gp.getTileSize() > gp.getPlayer().getPosition()[1] - gp.getPlayer().getScreenY()&&
             		drawY - gp.getTileSize() < gp.getPlayer().getPosition()[1] + gp.getPlayer().getScreenY()
             			)
             	{
+            	//draw tile's image depend on value in mapTileNum
                 gc.drawImage(tile[mapTileNum[col][row]].getImage(), screenX, screenY, gp.getTileSize(), gp.getTileSize());
             	}
             }
         }
     }
-
-	public GamePanel getGp() {
-		return gp;
-	}
-
-	public void setGp(GamePanel gp) {
-		this.gp = gp;
-	}
 
 	public Tile[] getTile() {
 		return tile;

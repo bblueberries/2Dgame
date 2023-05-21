@@ -3,6 +3,7 @@ package tile;
 import javafx.scene.image.Image;
 
 public class Tile {
+	
 	private Image image;
 	private boolean collision =false;
 	

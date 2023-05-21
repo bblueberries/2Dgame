@@ -37,8 +37,6 @@ public class GamePanel extends StackPane {
    //Time for run FPS
 	 private final long frameTimeNano;
 	
-	 
-	 
 	private Canvas canvas;
     private GraphicsContext gc;
     private AnimationTimer gameLoop;
@@ -49,7 +47,6 @@ public class GamePanel extends StackPane {
     private Sound selectSound = new Sound(3);
     private Sound ezSound = new Sound(4);
     private Sound titleSound = new Sound(5);
-    
     
     
 	private KeyHandler keyHandler	= new KeyHandler(this);
@@ -166,8 +163,10 @@ public class GamePanel extends StackPane {
 		  playMusic(getTitleSound()); 
 	
 	  }
+	  // start new game loop
 	  public void startNewGameLoop() 
 	  {
+		 //reset variable
 		 resetGame();
 		 if(gameLoop != null)
 		 {
@@ -177,6 +176,7 @@ public class GamePanel extends StackPane {
 	    	  private long lastUpdate = 0;
 	          @Override
 	          public void handle(long now) {
+	        	  //if time time pass more that framTimeNano(time to draw 1 frame) then draw/update
 	              if (now - lastUpdate >= frameTimeNano) {
 	                  update();
 	                  draw();
@@ -198,22 +198,24 @@ public class GamePanel extends StackPane {
 	    	//PLAYING
 	    	if(getGameState()==playingState)
 	    	{
+	    		//update player
 	    		player.update();
 	    		
 	    		if(getMonsterAlive(monster) != currentMonster) {
-	    			
+	    			//if amount of monster change play sound effect
 	    			playSE(hitSound);
     				currentMonster = getMonsterAlive(monster);
 	    		}
 	    		if(getMonsterAlive(monster)==0)
 	    		{
+	    			//if no monster left end game,play sound effect
 	    			getUi().setGameFinished(true);
 	    			stopMusic(bgSound);
 	    			playSE(ezSound);
 	    			setGameState(endingState);
 	    		}
 
-	    		
+	    		//update all monsters
 	    		for(int i=0;i<monster.length;i++) {
 	    			if(monster[i] != null) {
 	    				monster[i].update();
@@ -223,7 +225,7 @@ public class GamePanel extends StackPane {
 	    	//PAUSE
 	    	if(getGameState() ==pauseState )
 	    	{
-	    		
+	    		//no update in pauseState so everything are pause
 	    	}
 	    	
 	    }
@@ -233,9 +235,10 @@ public class GamePanel extends StackPane {
 
 
 	    private void draw() {
+	    	//clear
 	        gc.clearRect(0, 0, screenWidth, screenHeight);
 	        
-	        //title Screen
+	        //draw title Screen
 	        if(getGameState()==titleState )
 	        {
 	        	if(isFirstTimeStartWarning())

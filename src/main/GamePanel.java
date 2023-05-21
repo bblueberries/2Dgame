@@ -76,10 +76,6 @@ public class GamePanel extends StackPane {
 	private TileManager tileManager = new TileManager(this);
 	private Player player = new Player(this);
 	
-//	public void setPlayer(Player player) {
-//		this.player = player;
-//	}
-	
 	
 	public GamePanel()
 	{
@@ -160,31 +156,23 @@ public class GamePanel extends StackPane {
 		  monster = new Monster[20];
 		  maxMons = random.nextInt(5)+5;
 		  genMonster(maxMons);
-		  setCurrentMonster( this.getMaxMons());
+		  setCurrentMonster(this.getMaxMons());
 		  
 		  getUi().setOptionState(0);
 		  getUi().setOptionNum(1);
 		  getUi().setTitleNum(0);
 		  getUi().setTitleState(0);
-//		  System.out.println(maxMons +" "+ getCurrentMonster()+" "+getMonsterAlive(monster));
-		  
 		  setGameState(GamePanel.titleState);
 		  playMusic(getTitleSound()); 
 	
 	  }
 	  public void startNewGameLoop() 
 	  {
-//		 Random random = new Random();
-//		 maxMons = random.nextInt(5)+5;
-		
-//		 genMonster(7);
 		 resetGame();
 		 if(gameLoop != null)
 		 {
 			 gameLoop.stop();
 		 }
-		// playMusic(bgSound);
-
 	      gameLoop = new AnimationTimer() {
 	    	  private long lastUpdate = 0;
 	          @Override
@@ -203,14 +191,13 @@ public class GamePanel extends StackPane {
 	      }
 	  	
 	
-
+	  	// Update your game logic here
 	    private void update() {
-	        // Update your game logic here
+	        
 	    	
 	    	//PLAYING
 	    	if(getGameState()==playingState)
 	    	{
-//	    		System.out.println(currentMonster);
 	    		player.update();
 	    		
 	    		if(getMonsterAlive(monster) != currentMonster) {
@@ -261,7 +248,6 @@ public class GamePanel extends StackPane {
 	        	
 	        tileManager.draw(gc); 
 	        player.draw(gc);
-	      //  heart.draw(gc);
 	     
 	        	for(int i=0;i<monster.length;i++) {
 	        		if(monster[i] != null) {
@@ -271,7 +257,7 @@ public class GamePanel extends StackPane {
 	        
     		}
 	        
-	        //Drawing mons left
+	        //Drawing how many monster is left
 	        if(getGameState()==playingState)
 	        {
 	        	getUi().draw(gc);
@@ -294,7 +280,7 @@ public class GamePanel extends StackPane {
 	    
 	    
 
-
+	    // Count how many monster is alive
 	    public int getMonsterAlive(Monster[] monster) {
 	    	int monsterCounter=0;
 	    	for(Monster x:monster)
@@ -314,7 +300,6 @@ public class GamePanel extends StackPane {
 		}
 
 		// For bg sound
-
 		public void playMusic(Sound sound) {
 			sound.play();
 			sound.loop();

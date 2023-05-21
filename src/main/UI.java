@@ -32,110 +32,140 @@ public class UI {
 		{
 			if(gameFinished)
 			{
-				DrawEndingText();
+				drawEndingText();
 			}
 		}
 		else if(gp.getGameState()==GamePanel.titleState)
 		{
-			DrawTitleScreen();
+			drawTitleScreen();
 		}
 		else if(gp.getGameState()==GamePanel.pauseState)
 		{
-			DrawOptionScreen();
+			drawOptionScreen();
 		}
 		else if(gp.getGameState()==GamePanel.playingState)
 		{
+			//if first time draw advice window
 			if(gp.getFirstTimeStart())
 			{
 				DrawAdviceWindow();
 			}
-			DrawMonsterLeft(gp.getMonsterAlive((Monster[]) gp.getMonster()));
+			drawMonsterLeft(gp.getMonsterAlive((Monster[]) gp.getMonster()));
 		}
 	}
-	public void DrawEndingText()
+	public void drawEndingText()
 	{
 		int x= gp.getTileSize();
 		int y= gp.getScreenHeight()/2 - gp.getTileSize()*2;
-		gc.setFont(Font.font("Courier New",FontWeight.BOLD,80));
+		Font font;
+		//shading
+		font =Font.font("Courier New",FontWeight.BOLD,80);
+		gc.setFont(font);
 		gc.setFill(Color.BLACK);
-		String text="CONGRATUATION!";
+		String text="CONGRATULATION!";
 		gc.fillText(text, x, y);
 		
+		//text
 		x= gp.getTileSize()+5;
 		y= gp.getScreenHeight()/2 - gp.getTileSize()*2 +5;
-		gc.setFont(Font.font("Courier New",FontWeight.BOLD,80));
+		font=Font.font("Courier New",FontWeight.BOLD,80);
+		gc.setFont(font);
 		gc.setFill(Color.GOLD);
-		text="CONGRATUATION!";
+		text="CONGRATULATION!";
 		gc.fillText(text, x, y);
 		
+		//shading
 		x+= gp.getTileSize();
 		y+=gp.getTileSize() -20;
-		gc.setFont(Font.font("Courier New",FontWeight.BOLD,25));
+		font = Font.font("Courier New",FontWeight.BOLD,25);
+		gc.setFont(font);
 		gc.setFill(Color.BLACK);
 		text="PRESS ESC TO GO BACK TO TITLE SCREEN..";
 		gc.fillText(text, x, y);
 		
+		//text
 		x+= 2;
 		y+= 2;
-		gc.setFont(Font.font("Courier New",FontWeight.BOLD,25));
+		font=Font.font("Courier New",FontWeight.BOLD,25);
+		gc.setFont(font);
 		gc.setFill(Color.LEMONCHIFFON);
 		text="PRESS ESC TO GO BACK TO TITLE SCREEN..";
 		gc.fillText(text, x, y);
 	}
-	public void DrawTitleScreen()
+	
+	public void drawTitleScreen()
 	{
-			gc.setFont(Font.font("Courier New",FontWeight.BOLD,70));
-			String text ="THE GHOST BUSTER"; 
-			int x = gp.getTileSize()-5;
-			int y =(int) (gp.getTileSize()*1.7);
-			gc.setFill(Color.BLUEVIOLET);
-			gc.fillText(text, gp.getTileSize()+3, gp.getTileSize()*1.7+3);
-			gc.setFill(Color.WHITE);
-			gc.fillText(text, gp.getTileSize(), gp.getTileSize()*1.7);
-			
-			
-			
-			
-			x = (int)gp.getTileSize()*5-15;
-			y =(int) (gp.getTileSize()*3);
-			Image monsImage = new Image(getClass().getResourceAsStream("/monster/mons_down_1.png"));
-			Image playerImage = new Image(getClass().getResourceAsStream("/player/ranger4.png"));
-			gc.drawImage(gp.getPlayer().getImages().get(3), x,y, gp.getTileSize()*4,gp.getTileSize()*4);
-			gc.drawImage(monsImage, x+gp.getTileSize()*2+20,y+gp.getTileSize(), gp.getTileSize()*3,gp.getTileSize()*3);
-			
-			gc.setFont(Font.font("Courier New",FontWeight.SEMI_BOLD,40));
-			gc.setFill(Color.WHITE);
-			
-			text ="NEW GAME"; 
-			x= gp.getTileSize();
-			y+=gp.getTileSize()*6-20;
-			gc.fillText(text, x, y);
-			if(titleNum==0) {
-				gc.fillText("‣", x-gp.getTileSize()/2, y+2);
-				
-			}
-			
-			
-			text ="LOAD GAME"; 
-			x=gp.getTileSize();
-			y+=gp.getTileSize()+10;
-			gc.fillText(text,x, y);
-			if(titleNum==1) {
-				gc.fillText("‣", x-gp.getTileSize()/2, y+2);
-			}
-			
-			
-			text ="QUIT"; 
-			x=gp.getTileSize();
-			y+=gp.getTileSize()+10;
-			gc.fillText(text, x, y);
-			if(titleNum==2) {
-				gc.fillText("‣", x-gp.getTileSize()/2, y+2);
-			}
-			
-			
+		
+			drawTitleHeader();
+			drawTitleImage();
+			drawTitleOption();
+		
 	}	
-	public void DrawMonsterLeft(int monsterLeft) {
+	public void drawTitleHeader() {
+		//Draw Game's name
+		Font font =Font.font("Courier New",FontWeight.BOLD,70);
+		gc.setFont(font);
+		String text ="THE GHOST BUSTER"; 
+		int x = getCenteredX(text,font);
+		int y =(int) (gp.getTileSize()*1.7);
+		//shading
+		gc.setFill(Color.BLUEVIOLET);
+		gc.fillText(text,x+3, y+3);
+		//game name
+		gc.setFill(Color.WHITE);
+		gc.fillText(text, x, y);
+	}
+	public void drawTitleImage()
+	{
+		//set x,y for monster lean next to player image
+		int x = (int)gp.getTileSize()*5-15;
+		int y =(int) (gp.getTileSize()*3);
+		int playerSize =  gp.getTileSize()*4;
+		int monSize = gp.getTileSize()*3;
+		
+		Image monsImage = new Image(getClass().getResourceAsStream("/monster/mons_down_1.png"));
+		Image playerImage = new Image(getClass().getResourceAsStream("/player/ranger4.png"));
+		
+		gc.drawImage(playerImage, x,y,playerSize,playerSize);
+		//set monster image next to player image
+		x+=gp.getTileSize()*2+20;
+		y+=gp.getTileSize();
+		gc.drawImage(monsImage, x,y, monSize,monSize);
+	}
+	public void drawTitleOption() {
+		//x,y from title image
+		int x = (int)gp.getTileSize()*5-15;
+		int y =(int) (gp.getTileSize()*3);
+		
+		Font font = Font.font("Courier New",FontWeight.SEMI_BOLD,40);
+		gc.setFont(font);
+		gc.setFill(Color.WHITE);
+		
+		String text ="NEW GAME"; 
+		x= gp.getTileSize();
+		y+=gp.getTileSize()*6-20;
+		gc.fillText(text, x, y);
+		if(titleNum==0) {
+			gc.fillText("‣", x-gp.getTileSize()/2, y+2);
+		}
+		
+		text ="LOAD GAME"; 
+		x=gp.getTileSize();
+		y+=gp.getTileSize()+10;
+		gc.fillText(text,x, y);
+		if(titleNum==1) {
+			gc.fillText("‣", x-gp.getTileSize()/2, y+2);
+		}
+		
+		text ="QUIT"; 
+		x=gp.getTileSize();
+		y+=gp.getTileSize()+10;
+		gc.fillText(text, x, y);
+		if(titleNum==2) {
+			gc.fillText("‣", x-gp.getTileSize()/2, y+2);
+		}
+	}
+	public void drawMonsterLeft(int monsterLeft) {
 		int x= gp.getTileSize()*9 +10;
 		int y= gp.getTileSize()*1;
 		gc.setFont(Font.font("Courier New",FontWeight.NORMAL,30));
@@ -143,7 +173,7 @@ public class UI {
 		String text= "Monsters Left :"+Integer.toString(monsterLeft);
 		gc.fillText(text, x, y);
 	}
-	public void DrawOptionScreen()
+	public void drawOptionScreen()
     {
 		int OptionScreenW=gp.getTileSize()*8;
 		int OptionScreenH=gp.getTileSize()*8;
@@ -162,12 +192,7 @@ public class UI {
 		
 		int textX;
 		int textY;
-//		setState(0);
-//		setOptionNum(1);
-		
-		
-	
-		
+
 		Text header = new Text("OPTION");
 		Font font = Font.font("Courier New",FontWeight.BOLD,40);
 		Color textColor = Color.WHITE;
@@ -201,8 +226,7 @@ public class UI {
 		gc.fillText(text, textX, textY);
 		if(optionNum==3) {gc.fillText("▸", textX-gp.getTileSize()/2, textY+4);
 		}
-		
-		
+	
 		//back
 		gc.setFont(Font.font("Courier New",FontWeight.BOLD,30));
 		text = "BACK";
@@ -260,6 +284,7 @@ public class UI {
 		gc.setFont(Font.font("Courier New",FontWeight.MEDIUM,25));
 		text = "                  W/S";
 		gc.fillText(text, textX, textY);
+		
 	}
 	public void Info(int X,int Y) {
 		
@@ -395,6 +420,18 @@ public class UI {
 		gc.setFont(font);
 		gc.setFill(textColor);
 		gc.fillText(text.getText(),textX,textY );
+	}
+	
+	public int getCenteredX(String text,Font font)
+	{
+		double textWidth  = measureTextLength(text,font);
+		double centerX = gp.getScreenWidth()/2 -textWidth/2;
+		return (int) centerX;
+	}
+	 public double measureTextLength(String text, Font font) {
+		Text textNode = new Text(text);
+	 	textNode.setFont(font);
+	 	return textNode.getBoundsInLocal().getWidth();
 	}
 	public int getTitleNum() {
 		return titleNum;

@@ -18,7 +18,7 @@ The rule is simple, just like a Pac-Man game that requires collecting all the do
     <img src="https://github.com/bblueberries/2Dgame/assets/123661716/c7459305-da37-40fc-8d54-37ec5238d5dc" alt="playing scene"/>
     </td>
      <td>ending scene
-    <img src=" https://github.com/bblueberries/2Dgame/assets/123661716/8885eaec-8025-4453-bf57-a96e3321f901" alt="ending scene"/>
+    <img src="https://github.com/bblueberries/2Dgame/assets/123661716/8885eaec-8025-4453-bf57-a96e3321f901" alt="ending scene"/>
     </td>
   </tr>
    <tr>
